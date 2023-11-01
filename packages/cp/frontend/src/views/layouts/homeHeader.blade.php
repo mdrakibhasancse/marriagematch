@@ -20,7 +20,7 @@
                                         <ul class="nav nav-pills" id="mainNav">
                                             <li class="dropdown">
                                                 <a class="dropdown-item" href="{{ url('/') }}">
-                                                    {{__('Home')}}
+                                                  {{ translate('home') }}
                                                 </a>
                                             </li>
 
@@ -29,7 +29,7 @@
                                             <li class="dropdown">
                                                 <a class="dropdown-item" 
                                                 href="{{ $menu->link }}">
-                                                    {{ $menu->name}}
+                                                     {{ translate($menu->name) }}
                                                 </a>
                                             </li>
                                             @else
@@ -43,7 +43,9 @@
                                                     @foreach ($menu->latestPages() as $page)
                                                     @if($page->link)
                                                     <li>
-                                                        <a class="dropdown-item" href="{{ $page->link }}">{{ $page->name }}</a>
+                                                        <a class="dropdown-item" href="{{ $page->link }}">
+                                                              {{ translate($page->name) }}
+                                                        </a>
                                                     </li>
 
                                                     @else
@@ -69,14 +71,14 @@
                                                 
 
                                                 <ul class="dropdown-menu">
-                                                     <li><a class="dropdown-item" href="{{ route('userrole.dashboard')}}">My Dashboard</a></li>
+                                                     <li><a class="dropdown-item" href="{{ route('userrole.dashboard')}}">{{ translate('my_dashboard') }}</a></li>
                                                      
                                                     @if(Auth::user()->hasRole('admin') or Auth::user()->hasRole('user_manage')or Auth::user()->hasRole('story_&_blog_manage') or Auth::user()->hasRole('menu_&_page_manage'))
-                                                    <li><a class="dropdown-item" href="{{ route('admin.dashboard')}}">Admin Dashboard</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('admin.dashboard')}}">{{ translate('admin_dashboard') }}</a></li>
                                                     @endif
                                                     <li>
                                                         <a href="javascript:void" class="dropdown-item" onclick="$('#logout-form').submit();">
-                                                            Logout
+                                                            {{ translate('logout') }}
                                                         </a>
                                                     </li>
 
@@ -88,12 +90,12 @@
                                             @else
                                             <li class="dropdown">
                                                 <a class="dropdown-item" href="{{ route('login') }}">
-                                                    Login
+                                                   {{ translate('login') }}
                                                 </a>
                                             </li>
                                             <li class="dropdown">
                                                 <a class="dropdown-item" href="{{ route('register') }}">
-                                                    Register
+                                                   {{ translate('register') }}
                                                 </a>
                                             </li>
                                             @endif

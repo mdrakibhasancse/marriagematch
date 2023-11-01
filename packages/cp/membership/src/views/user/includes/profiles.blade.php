@@ -15,6 +15,7 @@
               @include('membership::user.includes.userProfileCard')
             @endforeach
         </div>
+        <div>{{$users->render()}}</div>
       
     </div>
 </div>

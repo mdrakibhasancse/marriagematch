@@ -2,17 +2,17 @@
 	<div class="container">
 		<div class="row py-5">
 			<div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-				<h4 class="text-5 mb-3 text-color-light">Useful Links</h4>
+				<h4 class="text-5 mb-3 text-color-light">{{ translate('useful_links') }}</h4>
 				<ul class="list list-unstyled mb-0">
-					<li class="mb-1"><a class="text-4 text-color-light" href="{{ route('allPackages')}}">Packages</a></li>
+					<li class="mb-1"><a class="text-4 text-color-light" href="{{ route('allPackages')}}">{{ translate('our_packages') }}</a></li>
 				
-					<li class="mb-1"><a class="text-4 text-color-light"  href="{{ route('allStories')}}">Success Story</a></li>
-					<li class="mb-1"><a class="text-4 text-color-light" href="https://marriagematchbd.com/blog">Blog</a></li>
-					<li class="mb-1"><a class="text-4 text-color-light"  href="{{ route('allTestimonials')}}">Testimonial</a></li>
+					<li class="mb-1"><a class="text-4 text-color-light"  href="{{ route('allStories')}}">{{ translate('success_story') }}</a></li>
+					<li class="mb-1"><a class="text-4 text-color-light" href="{{asset('/')}}blog">{{ translate('blog') }}</a></li>
+					<li class="mb-1"><a class="text-4 text-color-light"  href="{{ route('allTestimonials')}}">{{ translate('testimonial') }}</a></li>
 				</ul>
 			</div>
 			<div class="col-md-6 col-lg-4 mb-4 mb-md-0">
-				<h5 class="text-5 mb-3 text-color-light">CONTACT US</h5>
+				<h5 class="text-5 mb-3 text-color-light">{{ translate('contact_us') }}</h5>
 				<ul class="list list-icons list-icons-lg">
 					<li class="mb-1"><i class="far fa-dot-circle text-color-light"></i><p class="m-0 text-color-light">{{$ws->contact_address}}</p></li>
 					<li class="mb-1"><i class="fab fa-whatsapp text-color-light"></i><p class="m-0"><a class="text-color-light" href="tel:{{$ws->footer_contact}}">{{$ws->footer_contact}}</a></p></li>
@@ -21,41 +21,42 @@
 			</div>
 
 			<div class="col-md-6 col-lg-3">
-				<h5 class="text-5 mb-3 text-color-light">Support</h5>
+				<h5 class="text-5 mb-3 text-color-light">{{ translate('support') }}</h5>
 				<ul class="list list-unstyled mb-0">
-				<li class="mb-1"><a class="text-4 text-color-light" href="https://marriagematchbd.com/page/12/user-manual">User Manual</a></li>
-				<li class="mb-1"><a class="text-4 text-color-light"  href="https://marriagematchbd.com/page/9/about-us">About Us</a></li>
-				<li class="mb-1"><a class="text-4 text-color-light" href="https://marriagematchbd.com/page/10/privacy-policy">Privacy Policies</a></li>
-				<li class="mb-1"><a class="text-4 text-color-light"  href="https://marriagematchbd.com/page/11/terms-regulation">Terms and Conditions</a></li>
-				<li class="mb-1"><a class="text-4 text-color-light" href="">Payment Option</a></li>
-				<li class="mb-1"><a class="text-4 text-color-light"  href="https://marriagematchbd.com/page/2/contact-us">Contact</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light" href="{{asset('/')}}page/12/user-manual">{{ translate('user_manual') }}</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/9/about-us">{{ translate('about_us') }}</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light" href="{{asset('/')}}page/10/privacy-policy">{{ translate('privacy_policies') }}</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/11/terms-regulation">{{ translate('terms_and_conditions') }}s</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light" href="">{{ translate('payment_option') }}</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/2/contact-us">{{ translate('contact_us') }}</a></li>
 				
 				</ul>
 			</div>
 
 			
 			<div class="col-md-6 col-lg-2">
-				<h5 class="text-5 mb-3 text-color-light">FOLLOW US</h5>
+				<h5 class="text-5 mb-3 text-color-light">{{ translate('follow_us') }}</h5>
 				<ul class="header-social-icons social-icons">
 					<li class="social-icons-instagram">
-					<a href="https://www.instagram.com/marriagematchbd/?hl=en" class="no-footer-css" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-				</li>
-				<li class="social-icons-linkedin mx-2">
-					<a href="https://bd.linkedin.com/in/marriage-match-bd-97bb711b9" class="no-footer-css" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
-				</li>
-				<li class="social-icons-facebook">
-					<a href="https://www.facebook.com/MarriageMatchBdCom/" class="no-footer-css" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-				</li>
+						<a href="https://www.instagram.com/marriagematchbd/?hl=en" class="no-footer-css" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+					</li>
+					<li class="social-icons-linkedin mx-2">
+						<a href="{{$ws->linkedin_url}}" class="no-footer-css" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+					</li>
+					<li class="social-icons-facebook">
+						<a href="{{$ws->fb_url}}" class="no-footer-css" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+					</li>
 
-				<li class="social-icons-youtube">
-					<a href="https://www.youtube.com/channel/UCm4OXVKHNztjFKHkakOc9pw" class="no-footer-css" target="_blank" title="Youtube"><i class="fab fa-youtube"></i></a>
-				</li>
+					<li class="social-icons-youtube">
+						<a href="{{$ws->youtube_url}}" class="no-footer-css" target="_blank" title="Youtube"><i class="fab fa-youtube"></i></a>
+					</li>
 				</ul>
-
+				<br>
+			
 			</div>
 			
 					
-		</div>
+		</div>	
 	</div>
 	
 
@@ -65,7 +66,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="text-center">
-							<p class="text-white">
+							<p class="text-white py-1">
 
 								&copy; Copyright {{ date('Y')}} | Marriage Match BD | Developed By : <a class="text-white" href="https://a2sys.co/" title="a2sys">a2sys</a>
 
@@ -82,3 +83,5 @@
 		</div>
 	</div>
 </footer>
+
+

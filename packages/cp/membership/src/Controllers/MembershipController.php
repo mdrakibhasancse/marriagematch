@@ -1047,9 +1047,6 @@ class MembershipController extends Controller
                 $q->where('checked', 1);
                 $q->where('gender', Auth::user()->altGender());
             })->latest()->paginate(4);
-
-
-
             return view('membership::user.my', $data);
         } elseif ($type == 'visitors') {
             $data['users'] = Auth::user()->visitorUsers()->paginate(4);

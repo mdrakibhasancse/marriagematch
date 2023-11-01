@@ -21,7 +21,7 @@
                                      
                                         <li class="dropdown">
                                             <a class="dropdown-item" href="{{ url('/') }}">
-                                               Home
+                                                  {{ translate('home') }}
                                             </a>
                                         </li>
                                     
@@ -33,7 +33,7 @@
                                         <li class="dropdown">
                                             <a class="dropdown-item" 
                                             href="{{ $menu->link }}">
-                                                {{ $menu->name}}
+                                                {{ translate($menu->name) }}
                                             </a>
                                         </li>
                                         @else
@@ -47,7 +47,10 @@
                                                 @foreach ($menu->latestPages() as $page)
                                                 @if($page->link)
                                                 <li>
-                                                    <a class="dropdown-item" href="{{ $page->link }}">{{ $page->name }}</a>
+                                                    <a class="dropdown-item" href="{{ $page->link }}">
+                                                        {{-- {{ $page->name }} --}}
+                                                          {{ translate($page->name) }}
+                                                    </a>
                                                 </li>
 
                                                 @else
@@ -73,7 +76,7 @@
                                         
                                             <ul class="dropdown-menu">
 
-                                                <li><a class="dropdown-item" href="{{ route('userrole.dashboard')}}">My Dashboard</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('userrole.dashboard')}}">{{ translate('my_dashboard') }}</a></li>
 
                                                 @if(Auth::user()->hasRole('admin') or Auth::user()->hasRole('user_manage') or Auth::user()->hasRole('story_&_blog_manage') or Auth::user()->hasRole('menu_&_page_manage') )
                                                 

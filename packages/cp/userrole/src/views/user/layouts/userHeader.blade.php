@@ -23,12 +23,12 @@
 
           @if(Auth::user()->hasRole('admin') or Auth::user()->hasRole('user_manage'))
           <a href="{{route('admin.dashboard')}}" class="dropdown-item">
-            <i class="fas fa-user mr-2"></i>Admin Dashboard
+            <i class="fas fa-user mr-2"></i>{{ translate('admin_dashboard') }}
           </a>
           @endif
 
           <a href="{{ route('userrole.dashboard')}}" class="dropdown-item">
-            <i class="fas fa-user mr-2"></i>My Dashboard
+            <i class="fas fa-user mr-2"></i>{{ translate('my_dashboard') }}
           </a>
 
           
@@ -37,7 +37,7 @@
           <form action="{{ route('logout')}}" method="post">
             @csrf
             <button class="dropdown-item">
-              <i class="fas fa-sign-out-alt mr-2"></i> Logout
+              <i class="fas fa-sign-out-alt mr-2"></i>  {{ translate('logout') }}
             </button>
           </form>
           
