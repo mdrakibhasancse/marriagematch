@@ -1,0 +1,133 @@
+<?php
+
+namespace Cp\Frontend\Controllers;
+
+
+use App\Http\Controllers\Controller;
+use Cp\BlogPost\Models\BlogCategory;
+use Cp\BlogPost\Models\BlogPost;
+use Cp\Frontend\Models\ContactUs;
+use Cp\Menupage\Models\Page;
+use Cp\Slider\Models\Slider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Agent;
+use Cp\Membership\Models\MembershipPackage;
+use Cp\SuccessStory\Models\SuccessStory;
+use Cp\Admin\Models\Language;
+use Cp\Admin\Models\LanguageTranslation;
+
+class FrontendController extends Controller
+{
+    public function welcome()
+    {
+
+        $data['stories'] = SuccessStory::latest()->whereActive(true)->whereFeatured(true)->where('story_type', 'story')->take(4)->get();
+
+        $data['testimonials'] = SuccessStory::latest()->whereActive(true)->whereFeatured(true)->where('story_type', 'testimonial')->take(4)->get();
+        $data['packages'] = MembershipPackage::latest()->whereActive(true)->whereFeatured(true)->take(4)->get();
+
+        // dd($data['packages']);
+
+        
+        return view('frontend::welcome.welcome', $data);
+
+        if (Agent::isMobile()) {
+            return view('frontend::mobile.welcome');
+        } else {
+            return view('frontend::welcome.welcome');
+        }
+    }
+
+
+
+    public function blog()
+    {
+        $data['latest_posts'] = BlogPost::whereActive(true)->whereStatus('published')->take(4)->latest()->get();
+
+        $data['cats'] = $cats = BlogCategory::whereActive(true)->orderBy('name')->get();
+
+
+        $data['recent_posts'] = BlogPost::latest()->whereActive(true)->whereStatus('published')
+            ->latest()->take(6)->get();
+
+        $data['featured_posts'] = BlogPost::latest()->whereActive(true)->whereStatus('published')->where('featured_slider', 1)->take(3)->get();
+
+        return view('frontend::welcome.blog', $data);
+    }
+
+
+    public function singlePost($id, $slug)
+    {
+        BlogPost::find($id)->increment('view_count');
+        $post = BlogPost::with('files')->find($id);
+        $postCategories = $post->blogCategories->pluck('id');
+        $postIds = DB::table('blog_category_posts')->whereIn('blog_category_id', $postCategories)->take(8)->pluck('blog_post_id');
+        $data['relatedPosts'] = BlogPost::find($postIds);
+        $data['post'] = $post;
+
+        return view('frontend::welcome.singlePost', $data);
+    }
+
+
+
+
+    public function lazyloadContent(Request $request)
+    {
+        $data['front_sliders'] = Slider::whereActive(true)->take(5)->get();
+        $carouselContainer = view('frontend::welcome.includes.carouselContent', $data)->render();
+
+        $homepageContainer = view('frontend::welcome.includes.homepageContent', $data)->render();
+
+        return response()->json([
+            'carouselContainer' => $carouselContainer,
+            'homepageContainer' => $homepageContainer
+        ]);
+    }
+
+
+    public function page($id)
+    {
+        $data['page'] = Page::whereActive(true)->find($id);
+        return view('frontend::welcome.page', $data);
+    }
+
+
+    public function contactUs(Request $request)
+    {
+
+
+        $request->validate([
+            'full_name' => 'required',
+            'email'     => 'required',
+            'subject'   => 'required',
+            'number'    => 'required',
+            'message'   => 'required',
+        ]);
+
+        $contactUs = new ContactUs();
+        $contactUs->full_name  = $request->full_name;
+        $contactUs->email      = $request->email;
+        $contactUs->subject    = $request->subject;
+        $contactUs->number     = $request->number;
+        $contactUs->message    = $request->message;
+        $contactUs->addedBy_id = Auth::id();
+        $contactUs->save();
+
+
+        toast('Success', 'success');
+        return redirect()->back();
+    }
+
+
+    public function languageUpdateStatus(Language $language){
+
+        request()->session()->put('locale', $language->language_code);
+        $translate = 'Language Changed successfully';
+        $success = 'success';
+        // toast($translate, $success);
+        return back();
+
+    }
+}
