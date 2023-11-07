@@ -44,7 +44,7 @@
                                                     @if($page->link)
                                                     <li>
                                                         <a class="dropdown-item" href="{{ $page->link }}">
-                                                              {{ translate($page->name) }}
+                                                              {{ $page->name }}
                                                         </a>
                                                     </li>
 

@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'blog'
     ]);
 
-    Route::get('/blog-post/{id}/{slug}', [
+    Route::get('/blog-post/{id}', [
         'uses' => 'Cp\Frontend\Controllers\FrontendController@singlePost',
         'as' => 'singlePost'
     ]);

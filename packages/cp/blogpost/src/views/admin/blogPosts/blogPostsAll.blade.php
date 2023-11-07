@@ -59,6 +59,7 @@
                 <tbody>
                   <?php $i = (($bolgPosts->currentPage() - 1) * $bolgPosts->perPage() + 1); ?>
                   @foreach($bolgPosts as $post)
+                  {{-- @dd( $post->description ) --}}
                   <tr>
                     <td style="width: 10px">{{$i++}}</td>
                     <td style="width: 80px">

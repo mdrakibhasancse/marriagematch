@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 order-2 order-md-1 align-self-center p-static">
-                    <h1 class="text-dark"><strong>{{ translate($page->name) }}</strong></h1>
+                    <h1 class="text-dark"><strong>{{ Str::ucfirst($page->name) }}</strong></h1>
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
         <div class="row py-4">
             <div class="col-lg-12">
                 @foreach ($page->pageItems as $item)
-                <p class="lead mb-0 text-4 text-justify-center">{!! $item->description !!}</p>
+                <p class="lead mb-0 text-4 text-justify-center">{!!  $item->description !!}</p>
                 @endforeach			
 							
             </div>
@@ -104,7 +104,6 @@
 
 </div>
 @endsection
-
 
 
 

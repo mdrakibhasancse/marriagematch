@@ -353,6 +353,12 @@ function translate($key, $lang = null, $addslashes = false)
     return $addslashes ? addslashes(trim($translations_en[$lang_key])) : trim($translations_en[$lang_key]);
 }
 
+function blog_slug($text)
+{
+  $slug = Str::slug($text);
+  return $slug;
+}
+
 
 
 // public static function hasHeader($key)

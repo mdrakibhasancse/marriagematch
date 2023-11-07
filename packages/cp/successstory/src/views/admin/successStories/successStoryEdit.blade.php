@@ -46,15 +46,38 @@
                     <div class="col-sm-7">
                         <div class="card card-default" style="margin-bottom: 5px;">
                             <div class="card-body">
+                                @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
                                 <div class="form-group">
-                                    <label for="name">Title</label>
-                                  <input type="text" name="title" value="{{old('title') ? : $story->title }}" class="form-control" placeholder="Enter title">
+                                    <label for="name">Title {{$language->title}}</label>
+                                  <input type="text" name="title[{{$language->language_code}}]" value="{{ $story->localeTitle($language->language_code) }}" class="form-control" placeholder="Enter title {{$language->title}}">
                                     @error('title')
                                     <span style="color:red">{{ $message }}</span>
                                     @enderror
                                 </div>
 
 
+
+
+                                <div class="form-group">
+                                  <label for="">Excerpt {{$language->title}}</label>
+                                  <textarea name="excerpt[{{$language->language_code}}]" id="excerpt" class="form-control" rows="3" placeholder="Enter Excerpt {{$language->excerpt}}">{{ $story->localeExcerpt($language->language_code)  }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Description {{$language->title}}</label>
+                                    <textarea name="description[{{$language->language_code}}]"
+                                    @if($story->editor)
+                                        class="summernote form-control"
+                                        @else
+                                        class="summernote- form-control"
+                                        @endif
+                                       rows="5">{{ $story->localeDescription($language->language_code)  }}</textarea>
+                                </div>
+
+                              @endforeach
+
+
+                                
                                 <div class="form-group">
                                   <label for="male_user_id">Male User Email</label>
                                   <input type="email" name="male_user_id" value="" class="form-control" placeholder="Male User Email">
@@ -66,23 +89,6 @@
                                   <input type="email" name="female_user_id" value="" class="form-control" placeholder="Female User Email">
                                 </div>
 
-
-
-                                <div class="form-group">
-                                  <label for="">Excerpt</label>
-                                  <textarea name="excerpt" id="excerpt" class="form-control" rows="3" placeholder="Enter Excerpt">{{old('excerpt') ? : $story->excerpt }}</textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="">Description</label>
-                                    <textarea name="description"
-                                    @if($story->editor)
-                                        id="summernote"
-                                        @else
-                                        id="summernote-"
-                                        @endif
-                                        class="form-control" rows="5">{{ $story->description }}</textarea>
-                                </div>
 
                               
                                 <div class="form-group">

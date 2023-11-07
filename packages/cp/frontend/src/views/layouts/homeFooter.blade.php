@@ -23,10 +23,10 @@
 			<div class="col-md-6 col-lg-3">
 				<h5 class="text-5 mb-3 text-color-light">{{ translate('support') }}</h5>
 				<ul class="list list-unstyled mb-0">
-				<li class="mb-1"><a class="text-4 text-color-light" href="{{asset('/')}}page/12/user-manual">{{ translate('user_manual') }}</a></li>
-				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/9/about-us">{{ translate('about_us') }}</a></li>
-				<li class="mb-1"><a class="text-4 text-color-light" href="{{asset('/')}}page/10/privacy-policy">{{ translate('privacy_policies') }}</a></li>
-				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/11/terms-regulation">{{ translate('terms_and_conditions') }}s</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light" href="{{asset('/')}}page/6/user-manual">{{ translate('user_manual') }}</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/3/about-us">{{ translate('about_us') }}</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light" href="{{asset('/')}}page/4/privacy-policy">{{ translate('privacy_policies') }}</a></li>
+				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/5/terms-regulation">{{ translate('terms_and_conditions') }}</a></li>
 				<li class="mb-1"><a class="text-4 text-color-light" href="">{{ translate('payment_option') }}</a></li>
 				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/2/contact-us">{{ translate('contact_us') }}</a></li>
 				

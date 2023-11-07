@@ -5,6 +5,8 @@ namespace Cp\BlogPost\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Session;
+use Config;
 
 class BlogCategory extends Model
 {
@@ -17,11 +19,24 @@ class BlogCategory extends Model
 
     public function latestFirstPost()
     {
-        return $this->posts()->whereActive(true)->whereStatus('published')->latest()->first();
+
+        if(Session::has('locale')){
+            $locale = Session::get('locale',Config::get('app.locale'));
+        }
+        else{
+            $locale = env('DEFAULT_LANGUAGE');
+        }
+        return $this->posts()->whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->latest()->first();
     }
 
     public function latest2Posts()
     {
-        return $this->posts()->whereActive(true)->whereStatus('published')->latest()->skip(1)->take(2)->get();
+        if(Session::has('locale')){
+            $locale = Session::get('locale',Config::get('app.locale'));
+        }
+        else{
+            $locale = env('DEFAULT_LANGUAGE');
+        }
+        return $this->posts()->whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->latest()->skip(1)->take(2)->get();
     }
 }

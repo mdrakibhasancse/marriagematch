@@ -17,19 +17,24 @@ use Cp\Membership\Models\MembershipPackage;
 use Cp\SuccessStory\Models\SuccessStory;
 use Cp\Admin\Models\Language;
 use Cp\Admin\Models\LanguageTranslation;
+use Session;
+use Config;
 
 class FrontendController extends Controller
 {
     public function welcome()
     {
 
-        $data['stories'] = SuccessStory::latest()->whereActive(true)->whereFeatured(true)->where('story_type', 'story')->take(4)->get();
+        if(Session::has('locale')){
+            $locale = Session::get('locale',Config::get('app.locale'));
+        }
+        else{
+            $locale = env('DEFAULT_LANGUAGE');
+        }
+        $data['stories'] = SuccessStory::whereLocale('title', $locale)->whereActive(true)->whereFeatured(true)->where('story_type', 'story')->latest()->take(4)->get();
 
-        $data['testimonials'] = SuccessStory::latest()->whereActive(true)->whereFeatured(true)->where('story_type', 'testimonial')->take(4)->get();
+        $data['testimonials'] = SuccessStory::whereLocale('title', $locale)->whereActive(true)->whereFeatured(true)->where('story_type', 'testimonial')->latest()->take(4)->get();
         $data['packages'] = MembershipPackage::latest()->whereActive(true)->whereFeatured(true)->take(4)->get();
-
-        // dd($data['packages']);
-
         
         return view('frontend::welcome.welcome', $data);
 
@@ -44,28 +49,47 @@ class FrontendController extends Controller
 
     public function blog()
     {
-        $data['latest_posts'] = BlogPost::whereActive(true)->whereStatus('published')->take(4)->latest()->get();
+
+        if(Session::has('locale')){
+            $locale = Session::get('locale',Config::get('app.locale'));
+        }
+        else{
+            $locale = env('DEFAULT_LANGUAGE');
+        }
+
+
+        $data['latest_posts'] = BlogPost::whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->take(4)->latest()->get();
 
         $data['cats'] = $cats = BlogCategory::whereActive(true)->orderBy('name')->get();
 
+        $data['recent_posts'] = BlogPost::latest()->whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->latest()->take(6)->get();
 
-        $data['recent_posts'] = BlogPost::latest()->whereActive(true)->whereStatus('published')
-            ->latest()->take(6)->get();
+        $data['featured_posts'] = BlogPost::latest()->whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->where('featured_slider', 1)->take(3)->get();
 
-        $data['featured_posts'] = BlogPost::latest()->whereActive(true)->whereStatus('published')->where('featured_slider', 1)->take(3)->get();
+        $data['popular_posts'] =  BlogPost::orderBy('view_count', 'DESC')->whereActive(true)->whereStatus('published')->whereLocale('title', $locale)->take(6)->get();
+       
 
         return view('frontend::welcome.blog', $data);
     }
 
 
-    public function singlePost($id, $slug)
+    public function singlePost($id)
     {
+        if(Session::has('locale')){
+            $locale = Session::get('locale',Config::get('app.locale'));
+        }
+        else{
+            $locale = env('DEFAULT_LANGUAGE');
+        }
         BlogPost::find($id)->increment('view_count');
         $post = BlogPost::with('files')->find($id);
         $postCategories = $post->blogCategories->pluck('id');
         $postIds = DB::table('blog_category_posts')->whereIn('blog_category_id', $postCategories)->take(8)->pluck('blog_post_id');
-        $data['relatedPosts'] = BlogPost::find($postIds);
+
+        $data['relatedPosts'] = BlogPost::whereLocale('title', $locale)->find($postIds);
         $data['post'] = $post;
+
+        $data['popular_posts'] =  BlogPost::orderBy('view_count', 'DESC')->whereActive(true)->whereStatus('published')->whereLocale('title', $locale)->take(6)->get();
 
         return view('frontend::welcome.singlePost', $data);
     }

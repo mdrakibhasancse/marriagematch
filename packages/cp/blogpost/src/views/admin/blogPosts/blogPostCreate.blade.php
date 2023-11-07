@@ -39,24 +39,25 @@
                     <div class="col-sm-7">
                         <div class="card card-default" style="margin-bottom: 5px;">
                             <div class="card-body">
+                                 @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
                                 <div class="form-group">
-                                    <label for="name">Title</label>
-                                  <input type="text" name="title" value="{{old('title')}}" class="form-control" placeholder="Enter title">
+                                  <label for="title">Title {{$language->title}}</label>
+                                  <input type="text" name="title[{{$language->language_code}}]" value="" class="form-control" placeholder="Enter title {{$language->title}}">
                                     @error('title')
                                     <span style="color:red">{{ $message }}</span>
                                     @enderror
                                 </div>
 
-
                                 <div class="form-group">
-                                  <label for="">Excerpt</label>
-                                  <textarea name="excerpt" id="excerpt" class="form-control" rows="3" placeholder="Enter Excerpt">{{old('excerpt')}}</textarea>
+                                  <label for="">Excerpt {{$language->title}}</label>
+                                  <textarea name="excerpt[{{$language->language_code}}]" id="excerpt" class="form-control" rows="3" placeholder="Enter Excerpt {{$language->title}}">{{old('excerpt')}}</textarea>
                                 </div>
 
                                 <div class="form-group">
-                                  <label for="">Description</label>
-                                  <textarea name="description" id="summernote" class="form-control" rows="5" placeholder="Enter Description">{{old('description')}}</textarea>
+                                  <label for="">Description {{$language->title}}</label>
+                                  <textarea name="description[{{$language->language_code}}]" class="summernote form-control"  rows="5" placeholder="Enter Description {{$language->title}}">{{old('description')}}</textarea>
                                 </div>
+                              @endforeach
 
                                 <div class="form-group">
                                   <label>Tags (For Search)</label>

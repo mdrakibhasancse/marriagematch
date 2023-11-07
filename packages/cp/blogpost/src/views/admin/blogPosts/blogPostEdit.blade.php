@@ -42,30 +42,35 @@
                     <div class="col-sm-7">
                         <div class="card card-default" style="margin-bottom: 5px;">
                             <div class="card-body">
+                                  @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
                                 <div class="form-group">
-                                    <label for="name">Title</label>
-                                  <input type="text" name="title" value="{{old('title') ? : $blogPost->title }}" class="form-control" placeholder="Enter title">
+                                    <label for="name">Title {{$language->title}}</label>
+                                  <input type="text" name="title[{{$language->language_code}}]" value="{{ $blogPost->localeTitle($language->language_code) }}" class="form-control" placeholder="Enter title {{$language->title}}">
                                     @error('title')
                                     <span style="color:red">{{ $message }}</span>
                                     @enderror
                                 </div>
 
 
+
+
                                 <div class="form-group">
-                                  <label for="">Excerpt</label>
-                                  <textarea name="excerpt" id="excerpt" class="form-control" rows="3" placeholder="Enter Excerpt">{{old('excerpt') ? : $blogPost->excerpt }}</textarea>
+                                  <label for="">Excerpt {{$language->title}}</label>
+                                  <textarea name="excerpt[{{$language->language_code}}]" id="excerpt" class="form-control" rows="3" placeholder="Enter Excerpt {{$language->excerpt}}">{{ $blogPost->localeExcerpt($language->language_code)  }}</textarea>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="">Description</label>
-                                    <textarea name="description"
+                                    <label for="">Description {{$language->title}}</label>
+                                    <textarea name="description[{{$language->language_code}}]"
                                     @if($blogPost->editor)
-                                        id="summernote"
+                                        class="summernote form-control"
                                         @else
-                                        id="summernote-"
+                                        class="summernote- form-control"
                                         @endif
-                                        class="form-control" rows="5">{{ $blogPost->description }}</textarea>
+                                       rows="5">{{ $blogPost->localeDescription($language->language_code)  }}</textarea>
                                 </div>
+
+                              @endforeach
 
                                 <div class="form-group">
                                   <label>Tags (For Search)</label>

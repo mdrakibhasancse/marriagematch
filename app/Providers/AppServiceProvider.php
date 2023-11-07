@@ -10,6 +10,8 @@ use Cp\WebsiteSetting\Models\WebsiteSetting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Session;
+use Config;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +28,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        
+
         View::composer('*', function ($view) {
+
             $seconds = 86400; //24 hours
 
             $headerMenus = cache()->remember('headerMenus', $seconds, function () {
@@ -39,12 +45,6 @@ class AppServiceProvider extends ServiceProvider
             });
             View::share('footerMenus', $footerMenus);
 
-
-
-            $popular_posts =  cache()->remember('popular_posts', $seconds, function () {
-                return BlogPost::orderBy('view_count', 'DESC')->whereActive(true)->whereStatus('published')->take(6)->get();
-            });
-            View::share('popular_posts', $popular_posts);
 
             $homePage =  cache()->remember('homePage', $seconds, function () {
                 return Page::whereActive(true)->where('id', 1)->first();

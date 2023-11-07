@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Psy\Output\OutputPager;
+use Illuminate\Support\Facades\Validator;
 
 class AdminMenupageController extends Controller
 {
@@ -25,6 +26,8 @@ class AdminMenupageController extends Controller
 
     public function menuStore(Request $request)
     {
+
+        
         menuSubmenu('menupage', 'menusAll');
         $request->validate([
             'name' => 'string|required',
@@ -111,7 +114,7 @@ class AdminMenupageController extends Controller
 
     public function pageStore(Request $request)
     {
-
+       
         menuSubmenu('menupage', 'pagesAll');
 
         $request->validate([
@@ -119,10 +122,10 @@ class AdminMenupageController extends Controller
         ]);
 
 
-        $page             = new Page();
-        $page->name       = $request->name;
-        $page->link       = $request->link ?: null;
-        $page->excerpt    = $request->excerpt;
+        $page = new Page();
+        $page->name = $request->name;
+        $page->excerpt = $request->excerpt;
+        $page->link  = $request->link ?: null;
         $page->addedby_id = Auth::id();
         $page->save();
         $page->menus()->attach($request->menus_id, ['addedby_id' => Auth::id()]);
@@ -146,9 +149,9 @@ class AdminMenupageController extends Controller
     public function pageUpdate(Request $request, Page $page)
     {
         menuSubmenu('menupage', 'pagesAll');
-        $request->validate([
-            'name' => 'string|required',
-        ]);
+        // $request->validate([
+        //     'name' => 'string|required',
+        // ]);
 
         $page->name        = $request->name;
         $page->excerpt     = $request->excerpt;
@@ -203,16 +206,18 @@ class AdminMenupageController extends Controller
 
     public function pageItemStore(Request $request)
     {
-
+        // dd(json_encode($request->description), $request->description, $request->all());
+   
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
+            // 'description.*' => 'required',
         ]);
+        $description = $request->description;
 
         $pageItem = new PageItem();
         $pageItem->page_id     = $request->page_id;
         $pageItem->name        = $request->name;
-        $pageItem->description = $request->description;
+        $pageItem->description = $description;
         $pageItem->editor = $request->editor ?? 0;
         $pageItem->active = $request->active ?? 0;
         $pageItem->addedby_id = Auth::id();
@@ -237,10 +242,10 @@ class AdminMenupageController extends Controller
 
 
 
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        // ]);
 
         $pageItem->page_id     = $request->page_id;
         $pageItem->name        = $request->name;

@@ -109,19 +109,38 @@ class AdminBlogPostController extends Controller
     {
         menuSubmenu('blogPost', 'blogPostsAll');
         $data['bolgPosts'] = $bolgPosts = BlogPost::latest()->paginate(30);
+    //    dd( $data['bolgPosts']);
+     
         return view('blogpost::admin.blogPosts.blogPostsAll', $data);
     }
 
 
-    // public function productShow(Product $product)
-    // {
-    //     menuSubmenu('blogPost', 'blogPostsAll');
-    //     $data['product'] =  $product;
-    //     return view('product::admin.products.productShow', $data);
-    // }
+   
 
     public function  blogPostCreate()
     {
+
+        // $string = 'dfsfskd';
+        
+        //     if (ctype_alnum($string))
+        //         dd("Yes");
+        //     else
+        //         dd("no");
+ 
+
+
+    //    $posts = BlogPost::get();
+    //    foreach ($posts as $post) {
+    //       $post->title = $post->oldtitle;
+    //       $post->oldtitle = null;
+    //       $post->excerpt = $post->oldexcerpt;
+    //       $post->oldexcerpt = null;
+    //       $post->description = $post->olddescription;
+    //       $post->olddescription = null;
+    //       $post->save();
+    //    }
+    //    return back();
+         
         menuSubmenu('blogPost', 'blogPostsAll');
         $data['categories'] = BlogCategory::latest()->get();
         $data['medias'] = Media::latest()->paginate(20);
@@ -133,15 +152,17 @@ class AdminBlogPostController extends Controller
 
     public function blogPostStore(Request $request)
     {
+
+    //    dd($request->all());
         menuSubmenu('blogPost', 'blogPostsAll');
 
-        $this->validate($request, [
-            'title' => 'required|string',
-            'excerpt' => 'nullable|string',
-            'description' => 'nullable|string',
-            'tags' => 'nullable',
-            'feature_image' => 'nullable|image|mimes:jpeg,webp,jpg,png',
-        ]);
+        // $this->validate($request, [
+        //     'title' => 'required|string',
+        //     'excerpt' => 'nullable|string',
+        //     'description' => 'nullable|string',
+        //     'tags' => 'nullable',
+        //     'feature_image' => 'nullable|image|mimes:jpeg,webp,jpg,png',
+        // ]);
 
         if ($request->tags) {
             foreach ($request->tags as $tag) {
@@ -158,7 +179,6 @@ class AdminBlogPostController extends Controller
 
         $blogPost = new BlogPost();
         $blogPost->title = $request->title;
-        $blogPost->slug = Str::slug($request->title);
         $blogPost->excerpt = $request->excerpt;
         $blogPost->description = $request->description;
         $blogPost->active = $request->active ?? 0;
@@ -227,6 +247,7 @@ class AdminBlogPostController extends Controller
 
     public function blogPostEdit(BlogPost $blogPost)
     {
+   
         menuSubmenu('blogPost', 'blogPostsAll');
         $data['blogPost'] =  $blogPost;
         $data['categories'] = BlogCategory::latest()->get();
@@ -238,14 +259,16 @@ class AdminBlogPostController extends Controller
 
     public function blogPostUpdate(Request $request, BlogPost $blogPost)
     {
+
+        // dd($request->all());
         menuSubmenu('blogPost', 'blogPostsAll');
-        $this->validate($request, [
-            'title' => 'required|string',
-            'excerpt' => 'nullable|string',
-            'description' => 'nullable|string',
-            'tags' => 'nullable',
-            'feature_image' => 'nullable|image|mimes:jpeg,webp,jpg,png',
-        ]);
+        // $this->validate($request, [
+        //     'title' => 'required|string',
+        //     'excerpt' => 'nullable|string',
+        //     'description' => 'nullable|string',
+        //     'tags' => 'nullable',
+        //     'feature_image' => 'nullable|image|mimes:jpeg,webp,jpg,png',
+        // ]);
 
         if ($request->tags) {
             foreach ($request->tags as $tag) {
@@ -261,7 +284,6 @@ class AdminBlogPostController extends Controller
         }
 
         $blogPost->title = $request->title;
-        $blogPost->slug = Str::slug($request->title);
         $blogPost->excerpt = $request->excerpt;
         $blogPost->description = $request->description;
         $blogPost->active = $request->active ?? 0;

@@ -39,21 +39,25 @@
             <div class="card card-widget mb-0">
               <div class="card-body w3-gray">
                 <div class="card card-widget mb-0 text-dark">
+
+                  
+
                   <div class="card-body">
-                    <div class="card-body">
+                    @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
                         <div class="form-group">
-                            <label for="">Page Name</label>
-                            <input type="text" name="name" class="form-control" value="{{old('name')}}" placeholder="Enter Page Name">
+                            <label for="">Page Name {{$language->title}}</label>
+                            <input type="text" name="name[{{$language->language_code}}]" class="form-control" value="{{old('name')}}" placeholder="Enter Page Name {{$language->title}}">
                             @error('name')
                             <span style="color:red">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="">Page Excerpt</label>
-                            <input type="text" name="excerpt" class="form-control" value="{{old('excerpt')}}" placeholder="Enter Page Excerpt">
+                            <label for="">Page Excerpt {{$language->title}}</label>
+                            <input type="text" name="excerpt[{{$language->language_code}}]" class="form-control" value="{{old('excerpt')}}" placeholder="Enter Page Excerpt {{$language->title}}">
                             
                         </div>
+                      @endforeach
 
                         <div class="form-group">
                             <label for="">Page Link</label>
@@ -86,7 +90,7 @@
                             </div>
                                                 
                         </div>
-                    </div>
+                 
                   </div>
                 </div>
               </div>

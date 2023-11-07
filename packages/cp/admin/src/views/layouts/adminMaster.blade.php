@@ -115,7 +115,7 @@
 <script>
     $(function () {
         // Summernote
-        $('#summernote').summernote({
+        $('.summernote').summernote({
             height: 200,
             tabsize: 2,
             codemirror: {

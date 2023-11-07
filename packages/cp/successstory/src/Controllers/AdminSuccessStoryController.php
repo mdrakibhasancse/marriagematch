@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 
 class AdminSuccessStoryController extends Controller
@@ -47,19 +48,34 @@ class AdminSuccessStoryController extends Controller
 
     public function successStoryStore(Request $request)
     {
+
+        // dd($request->all());
         menuSubmenu('story', 'storiesAll');
 
-        $this->validate($request, [
-            'title' => 'required|string',
-            'story_type' => 'required',
-            'excerpt' => 'nullable|string',
-            'description' => 'nullable|string',
-            'tags' => 'nullable',
-            'feature_image' => 'nullable|image|mimes:jpeg,webp,jpg,png',
-        ]);
+        // $this->validate($request, [
+        //     'title' => 'required|string',
+        //     'story_type' => 'required',
+        //     'excerpt' => 'nullable|string',
+        //     'description' => 'nullable|string',
+        //     'tags' => 'nullable',
+        //     'feature_image' => 'nullable|image|mimes:jpeg,webp,jpg,png',
+        // ]);
 
-
-
+        // $data = [ 'data' => $request->all() ];
+        // $validator = Validator::make($data, [
+        //     'data.*.title' => 'required|string',
+        //     'data.*.excerpt' => 'nullable|string',
+        //     'data.*.description' => 'nullable|string',
+        // ]);
+       
+        //  if ($validator->fails()) {
+        //     toast('Please, fill-up all the fields correctly and try again', 'error');
+        //     return back()
+        //         ->with('warning', 'Please, fill-up all the fields correctly and try again')
+        //         ->withInput()
+        //         ->withErrors($validator);
+        // }
+         
 
         $story = new SuccessStory();
         $story->title = $request->title;
@@ -110,14 +126,16 @@ class AdminSuccessStoryController extends Controller
 
     public function successStoryUpdate(Request $request, SuccessStory $story)
     {
+
+      
         menuSubmenu('story', 'storiesAll');
-        $this->validate($request, [
-            'title' => 'required|string',
-            'story_type' => 'required',
-            'excerpt' => 'nullable|string',
-            'description' => 'nullable|string',
-            'feature_image' => 'nullable|image|mimes:jpeg,webp,jpg,png',
-        ]);
+        // $this->validate($request, [
+        //     'title' => 'required|string',
+        //     'story_type' => 'required',
+        //     'excerpt' => 'nullable|string',
+        //     'description' => 'nullable|string',
+        //     'feature_image' => 'nullable|image|mimes:jpeg,webp,jpg,png',
+        // ]);
 
 
         $story->title = $request->title;

@@ -150,19 +150,21 @@
                                             <span style="color:red">{{ $message }}</span>
                                                 @enderror
                                         </div>
+                                        @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
                                         <div class="form-group">
-                                            <label for="">Description</label>
-                                            <textarea name="description"
+                                            <label for="">Description {{$language->title}}</label>
+                                            <textarea name="description[{{$language->language_code}}]"
                                             @if($pageItem->editor)
-                                                id="summernote"
+                                                class="summernote form-control"
                                                 @else
-                                                id="summernote-"
+                                                class="summernote- form-control"
                                                 @endif
-                                                class="form-control" rows="5">{{ $pageItem->description }}</textarea>
+                                                 rows="5">{{ $pageItem->localeDescription($language->language_code)  }}</textarea>
                                             @error('description')
                                             <span style="color:red">{{ $message }}</span>
-                                                @enderror
+                                           @enderror
                                         </div>
+                                        @endforeach
 
 
                                         <div class="checkbox">

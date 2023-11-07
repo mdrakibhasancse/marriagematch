@@ -49,7 +49,7 @@
                                                 <li>
                                                     <a class="dropdown-item" href="{{ $page->link }}">
                                                         {{-- {{ $page->name }} --}}
-                                                          {{ translate($page->name) }}
+                                                          {{ $page->name }}
                                                     </a>
                                                 </li>
 
@@ -80,11 +80,11 @@
 
                                                 @if(Auth::user()->hasRole('admin') or Auth::user()->hasRole('user_manage') or Auth::user()->hasRole('story_&_blog_manage') or Auth::user()->hasRole('menu_&_page_manage') )
                                                 
-                                                <li><a class="dropdown-item" href="{{ route('admin.dashboard')}}">Admin Dashboard</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('admin.dashboard')}}">{{ translate('admin_dashboard') }}</a></li>
                                                 @endif
                                                 <li>
                                                    <a href="javascript:void" class="dropdown-item" onclick="$('#logout-form').submit();">
-                                                            Logout
+                                                           {{ translate('logout') }}
                                                     </a>
                                                 </li>
 
@@ -107,14 +107,15 @@
                                         @endif
 
                                           {{-- language --}}
-                                                @php
-                                                    if(Session::has('locale')){
-                                                        $locale = Session::get('locale', Config::get('app.locale'));
-                                                    }
-                                                    else{
-                                                        $locale = env('DEFAULT_LANGUAGE');
-                                                    }
-                                                @endphp
+                                        @php
+                                            if(Session::has('locale')){
+                                              $locale = Session::get('locale',Config::get('app.locale'));
+
+                                            }
+                                            else{
+                                                $locale = env('DEFAULT_LANGUAGE');
+                                            }
+                                        @endphp
 
                                             <li class="dropdown">
                                                 <a class="dropdown-item dropdown-toggle" href="javascript:void(0)">

@@ -145,13 +145,16 @@
                                             <span style="color:red">{{ $message }}</span>
                                             @enderror
                                         </div>
+
+                                        @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
                                         <div class="form-group">
-                                            <label for="">Description</label>
-                                            <textarea name="description" id="summernote" class="form-control" rows="5">{{old('description')}}</textarea>
+                                            <label for="">Description {{$language->title}}</label>
+                                            <textarea name="description[{{$language->language_code}}]" class="summernote form-control"  rows="5"></textarea>
                                             @error('description')
                                             <span style="color:red">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                        @endforeach
 
 
                                         <div class="checkbox">
