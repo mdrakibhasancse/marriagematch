@@ -96,12 +96,12 @@
                                         @else
                                         <li class="dropdown">
                                             <a class="dropdown-item" href="{{ route('login') }}">
-                                                Login
+                                             {{ translate('login') }}
                                             </a>
                                         </li>
                                         <li class="dropdown">
                                             <a class="dropdown-item" href="{{ route('register') }}">
-                                                Register
+                                                {{ translate('register') }}
                                             </a>
                                         </li>
                                         @endif

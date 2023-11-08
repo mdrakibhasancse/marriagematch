@@ -53,19 +53,15 @@ class AdminSuccessStoryController extends Controller
         menuSubmenu('story', 'storiesAll');
 
         // $this->validate($request, [
-        //     'title' => 'required|string',
-        //     'story_type' => 'required',
-        //     'excerpt' => 'nullable|string',
-        //     'description' => 'nullable|string',
-        //     'tags' => 'nullable',
-        //     'feature_image' => 'nullable|image|mimes:jpeg,webp,jpg,png',
+        //     "title"    => "required|array",
+        //     "title.*"  => "required|string",
         // ]);
 
         // $data = [ 'data' => $request->all() ];
         // $validator = Validator::make($data, [
-        //     'data.*.title' => 'required|string',
-        //     'data.*.excerpt' => 'nullable|string',
-        //     'data.*.description' => 'nullable|string',
+        //     'title' => 'required|json|array',
+        //     'excerpt' => 'required|json|array',
+        //     'description' => 'required|json|array',
         // ]);
        
         //  if ($validator->fails()) {

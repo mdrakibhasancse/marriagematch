@@ -187,7 +187,7 @@ class AdminController extends Controller
 
 
     public function languageTranslatoins(Language $language){
-        $lang_keys = LanguageTranslation::where('lang', $language->language_code)->paginate(500);
+        $lang_keys = LanguageTranslation::where('lang', 'en')->paginate(500);
         return view('admin::translations.translation_view',compact('lang_keys' ,'language'));
     }
 
@@ -198,6 +198,7 @@ class AdminController extends Controller
         $language = Language::findOrFail($request->id);
         foreach ($request->values as $key => $value) { 
             $translation = LanguageTranslation::where('lang_key', $key)->where('lang', $language->language_code)->latest()->first();
+          
             if($translation == null){
                 $translation = new LanguageTranslation;
                 $translation->lang = $language->language_code;

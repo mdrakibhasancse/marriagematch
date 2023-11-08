@@ -150,7 +150,14 @@
 										<div class="mb-3">
 											<p class="text-4 mb-0 text-justify">
 
-												মেরিজ মেচ বিডি একটি বাংলাদেশি ম্যাট্রিমোনিয়াল সাইট, যা বিবাহিত ব্যক্তিদের সমন্বয় করার জন্য প্রতিষ্ঠিত হয়েছে। এই সাইটে বিবাহের জন্য নিবন্ধন করে থাকা প্রোফাইল হয়ে থাকে সদস্যদের। এই প্রোফাইলগুলি মূলত লোকালি সংগঠিত এবং বাংলাদেশের বিভিন্ন অঞ্চল থেকে সংগৃহীত হয়। <br> <br>
+												@php
+												$aboutUs =  Cp\Menupage\Models\Page::whereActive(true)->where('id', 3)->first();
+												@endphp
+
+											    @if(isset($aboutUs))
+                                                      @foreach ($aboutUs->pageItems as $item){!! $item->description !!}@endforeach
+												@endif
+												{{-- মেরিজ মেচ বিডি একটি বাংলাদেশি ম্যাট্রিমোনিয়াল সাইট, যা বিবাহিত ব্যক্তিদের সমন্বয় করার জন্য প্রতিষ্ঠিত হয়েছে। এই সাইটে বিবাহের জন্য নিবন্ধন করে থাকা প্রোফাইল হয়ে থাকে সদস্যদের। এই প্রোফাইলগুলি মূলত লোকালি সংগঠিত এবং বাংলাদেশের বিভিন্ন অঞ্চল থেকে সংগৃহীত হয়। <br> <br>
 
 												মেরিজ মেচ বিডি একটি একত্রিকরণ প্ল্যাটফর্ম, যা প্রতিষ্ঠানগুলির জন্য বৈবাহিক ম্যাচিং সেবা প্রদান করে। এই সাইটে আপনি নিজের প্রোফাইল তৈরি করতে পারবেন এবং অন্যদের প্রোফাইলগুলি অনুসন্ধান করে একজন সঙ্গী খুঁজতে পারবেন। এই সাইটে প্রদান করা তথ্য সাহায্যে আপনি সঙ্গী প্রার্থীদের সাথে যোগাযোগ করতে পারবেন এবং পছন্দমত সঙ্গীকে বাস্তব জীবনে মিলাতে পারবেন। <br> <br>
 
@@ -158,7 +165,7 @@
 
 												মেরিজ মেচ বিডি পরিচালনা করার জন্য আমাদের দক্ষ এবং পেশাদার দল আছে, যারা প্রতিটি সদস্যকে সম্পূর্ণ পছন্দ এবং সংগঠনীয় প্রযুক্তি ব্যবহার করে সঠিক সঙ্গী খুঁজে পাওয়ার জন্য সহায়তা করে। আমাদের মূল উদ্দেশ্য হলো আপনাকে সাহায্য করা এবং আপনার সঙ্গী খুঁজে পাওয়ার প্রক্রিয়াটিকে সুবিধাজনক এবং সুসংগঠিত করা। 
 
-												আশা করি আপনি এখানে আপনার সঙ্গী খুঁজতে সফল হবেন এবং আপনার বাস্তব জীবনে বিবাহের আনন্দ উপভোগ করবেন। যদি আপনার কোন প্রশ্ন বা অভিযোগ থাকে, আপনি সরাসরি আমাদের সাথে যোগাযোগ করতে পারেন। ধন্যবাদ আমাদের সাইটটি ব্যবহার করার জন্য।
+												আশা করি আপনি এখানে আপনার সঙ্গী খুঁজতে সফল হবেন এবং আপনার বাস্তব জীবনে বিবাহের আনন্দ উপভোগ করবেন। যদি আপনার কোন প্রশ্ন বা অভিযোগ থাকে, আপনি সরাসরি আমাদের সাথে যোগাযোগ করতে পারেন। ধন্যবাদ আমাদের সাইটটি ব্যবহার করার জন্য। --}}
 
 												{{-- Marriage match bd is a Bangladeshi matrimony website with the project of offering high-quality matrimonial services at affordable charges to marriage seekers. Marriage match bd is a matchmaking platform committed to assisting men and women find out their soul mates. If you are looking for a bride or groom in a specific community, you have reached the proper wedding/matrimony portal. Marriage match bd has eligible singles from a huge community from throughout Bangladesh that will help you find the best matches. Marriage Match bd is also an outstanding place for marriage seekers who have particular options about their life partners. You can seek a bride and groom by religion, caste, city, education, hobbies, and many such choices. Sign-up without spending a dime to get access to limitless Bangladeshi brides and grooms. Choose your life partner from tens of thousands of matrimonial profiles and pictures of eligible singles. --}}
 											</p>
@@ -166,7 +173,7 @@
 									</div>
 								</div>
 
-								<div class="row mt-3 mb-5">
+								{{-- <div class="row mt-3 mb-5">
 									<div class="col-md-4 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="800">
 										<h3 class="font-weight-bold text-4 mb-2">Why Choose Marriage Match BD?</h3>
 										<p>Marriage Match BD has helped thousands of singles find their match. As one of the leading matrimonial sites, we are one of the largest and most trusted sites around. Not many other sites can offer you a membership database of over thousand members with the promise of introducing you to single men and women across the world.</p>
@@ -194,7 +201,7 @@
 										<h3 class="font-weight-bold text-4 mb-2">Safety & Support</h3>
 										<p>It can be rough out there in the wild. Here, you benefit from our internal review protocols, high-level encryption, and an entire community of fellow seekers who help weed out the haters. For more than 15 years, we've been helping people find love and form powerful, long-lasting partnerships.</p>
 									</div>
-								</div>
+								</div> --}}
 
 							</div>
 						</div>

@@ -770,21 +770,12 @@ class AdminMembershipController extends Controller
     public function ordersAll(Request $request)
     {
 
-        // menuSubmenu('orders', 'ordersAll');
-        // if ($request->user_id) {
-        //     $data['orders'] = MembershipPackageOrder::where('user_id', $request->user_id)->paginate(100);
-        // } else {
-        //     $data['orders'] = MembershipPackageOrder::latest()->paginate(100);
-        // }
-
-        // return view('membership::admin.orders.ordersAll', $data);
-
-
-
+        
         $type = $request->type;
         menuSubmenu('orders', 'ordersAll' . $type);
-        if ($request->id) {
-            $$data['orders'] = MembershipPackageOrder::where('user_id', $request->user_id)->paginate(10);
+        if ($request->user_id) {
+            $data['user'] = User::where('id', $request->user_id)->first();
+            $data['orders'] = MembershipPackageOrder::where('user_id', $request->user_id)->paginate(10);
         } else {
 
             if ($type == 'ordersAll') {
@@ -802,6 +793,7 @@ class AdminMembershipController extends Controller
               
             } 
         }
+
         return view('membership::admin.orders.ordersAll', $data);
     }
 
@@ -918,8 +910,6 @@ class AdminMembershipController extends Controller
     public function userInfoUpdate(Request $request, User $user)
     {
 
-    
-
         $validation = Validator::make(
             $request->all(),
             [
@@ -927,7 +917,7 @@ class AdminMembershipController extends Controller
                 'mobile'    => 'required|unique:users,mobile,' . $user->id,
                 'email'     => 'required|email|unique:users,email,' . $user->id,
                 'gender' => ['required', 'string'],
-                'profession' => ['required', 'string'],
+                'profession' => 'required|string',
                 'day' => 'required',
                 'month' => 'required',
                 'year' => 'required',
@@ -965,37 +955,36 @@ class AdminMembershipController extends Controller
     }
 
 
-    public function userSettingProfilePicChange(Request $request, User $user)
+
+
+     public function userSettingProfilePicChange(Request $request, User $user)
     {
-        $request->merge([
-            'mobile' => $request->valid_mobile,
+        $validation = Validator::make($request->all(),
+            ['profile_picture' => 'required|image|mimes:jpeg,bmp,png,gif,jpg|dimensions:min_width=160,min_height=160'
         ]);
+        if($validation->fails())
+        {
+            if($request->ajax())
+            {
+              return Response()->json(View('membership::admin.users.ajax.userProfilePic', ['user' => $user])
+                ->render());
+            }
 
-        $validation = Validator::make(
-            $request->all(),
-            [
-                'img_name' => 'required|image|mimes:jpeg,bmp,png,gif,jpg|dimensions:min_width=400,min_height=500'
-            ]
-        );
-
-        if ($validation->fails()) {
-
+           
             return redirect()->back()
-                ->withErrors($validation)
-                ->withInput()
-                ->with('error', 'image must be at least 400px width and 500px height');
+            ->withErrors($validation)
+            ->withInput()
+            ->with('error', 'image must be at least 160px width and 160px height');
         }
 
-
-
-        if ($request->hasFile('img_name')) {
-
+        if($request->hasFile('profile_picture'))
+        {
             $f = 'photo/' . $user->img_name;
             if (Storage::disk('public')->exists($f)) {
                 Storage::disk('public')->delete($f);
             }
 
-            $cp = $request->file('img_name');
+            $cp = $request->file('profile_picture');
             $extension = strtolower($cp->getClientOriginalExtension());
 
 
@@ -1007,11 +996,21 @@ class AdminMembershipController extends Controller
 
             $user->img_name = $randomFileName;
             $user->save();
-        }
 
-        toast('User profile successfully activated', 'success');
-        return redirect()->back();
+
+
+            if($request->ajax())
+            {
+          
+              return Response()->json(View('membership::admin.partials.userProfilePic', ['user' => $user])
+                ->render());
+          }
+      }
+      return back();
     }
+
+
+
 
 
     public function marriageInfoPost(Request $request, User $user)
@@ -1022,7 +1021,7 @@ class AdminMembershipController extends Controller
             [
                 'marital_status' => 'required',
                 'religion_id' => 'required',
-                'profession' => 'required',
+                // 'profession' => 'required',
                 'education_level' => 'required|string|min:2|max:50',
                 'height' => 'required',
                 'skin_color' => 'required',
@@ -1069,7 +1068,7 @@ class AdminMembershipController extends Controller
         $mi->religion_id = $request->religion_id ?: null;
         $mi->cast_id = $request->cast_id ?: null;
         $mi->education_level = $request->education_level ?: null;
-        $mi->profession = $request->profession ?: null;
+        // $mi->profession = $request->profession ?: null;
         $mi->height = $request->height ?: null;
         $mi->skin_color = $request->skin_color ?: null;
         $mi->body_build = $request->body_build ?: null;

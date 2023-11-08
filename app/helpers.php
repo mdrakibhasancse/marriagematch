@@ -334,9 +334,13 @@ function translate($key, $lang = null, $addslashes = false)
     $translation_locale = Cache::rememberForever("translations-{$lang}", function () use ($lang) {
         return LanguageTranslation::where('lang', $lang)->pluck('lang_value', 'lang_key')->toArray();
     });
+
+    
     if (isset($translation_locale[$lang_key])) {
         return $addslashes ? addslashes(trim($translation_locale[$lang_key])) : trim($translation_locale[$lang_key]);
     }
+
+    
 
     // return default lang if session lang not found
     $translations_default = Cache::rememberForever('translations-' . env('DEFAULT_LANGUAGE', 'en'), function () {

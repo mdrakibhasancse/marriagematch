@@ -1,6 +1,6 @@
 @extends('admin::layouts.adminMaster')
 @section('title')
-    | Orders ({{request()->type}})
+    | Orders ({{request()->type ?? $user->name}})
 @endsection
 
 @push('css')
@@ -13,12 +13,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-               <h1>Orders ({{request()->type}})</h1>
+               <h1>Orders ({{request()->type ?? $user->name}})</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-              <li class="breadcrumb-item active">Orders ({{request()->type}})</li>
+              <li class="breadcrumb-item active">Orders ({{request()->type ?? $user->name}})</li>
             </ol>
           </div>
         </div>
@@ -31,7 +31,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Orders ({{request()->type}})</h3>
+          <h3 class="card-title">Orders ({{request()->type ?? $user->name}})</h3>
 
           <div class="card-tools">
 

@@ -22,22 +22,24 @@
                         <div class="box-content box-content-border-0 shadow-lg">
                             {{-- <i class="icon-featured far fa-user"></i> --}}
                             <img class="icon-featured" src="{{ route('imagecache', [ 'template'=>'ppmd','filename' => $package->fi()]) }}" alt="">
-                                <h4 class="card-title text-color-primary mt-2 mb-2 text-5 font-weight-bold">{{ $package->title}}</h4>
-                            <h4 class="card-title mt-2 mb-2 text-5 font-weight-bold">{{ $package->final_price}} BDT</h4>
-                            <h4 class="card-title mt-2 mb-4 text-5 font-weight-bold">Duration: {{ $package->duration}} (Days)</h4>
+                                <h4 class="card-title text-color-primary mt-2 mb-2 text-5 font-weight-bold">
+                                    {{ translate($package->title) }}
+                                </h4>
+                            <h4 class="card-title mt-2 mb-2 text-5 font-weight-bold"> {{translate($package->final_price)}} {{translate('bdt')}}</h4>
+                            <h4 class="card-title mt-2 mb-4 text-5 font-weight-bold">{{translate('duration')}} ({{translate($package->duration)}} {{translate('day')}})</h4>
                                 
                             <div class="text-start">
                                 <ul class="list list-icons list-icons-md px-2 text-2 ">
                                     <li class="text-3-5 mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
                                         <span>
                                         <i class="fa fa-check-circle" style="color: #00934D;"></i>
-                                        <span>{{$package->daily_proposal_sent}} Proposals (Day)</span>
+                                        <span>{{translate($package->daily_proposal_sent)}} {{translate('proposals')}} ({{translate('day')}})</span>
                                         </span>
                                     </li>
                                     <li class="text-3-5  mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
                                         <span>
                                             <i class="fa fa-check-circle" style="color: #00934D"></i> 
-                                            <span >{{$package->total_proposal_sent}} Total Proposals </span>
+                                            <span >{{translate('total_proposals')}} {{translate($package->total_proposal_sent)}} </span>
 
                                         </span>
                                     
@@ -46,51 +48,68 @@
                                     <li class="text-3-5 mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
                                     <span>
                                         <i class="fa fa-check-circle" style="color: #00934D"></i> 
-                                        <span class="mt-1">View Daily {{$package->daily_contact_limit}} Contact</span>
+                                        <span class="mt-1">{{translate('view_daily')}} {{translate($package->daily_contact_limit)}} 
+                                          {{-- {{translate('contact')}} --}}
+                                        </span>
                                     </span>
                                     </li>
                                     <li class="text-3-5 mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
                                         <span>
                                             <i class="fa fa-check-circle" style="color: #00934D"></i> 
-                                            <span >View Total {{$package->total_contact_limit}} Contact</span>
+                                            <span >
+                                                  {{translate('view_total')}} {{translate($package->total_contact_limit)}} 
+                                                   {{-- {{translate('contact')}} --}}
+                                            </span>
                                         </span>
                                     </li>
 
                                     <li class="text-3-5 mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
                                         <span>
                                             <i class="fa fa-check-circle" style="color: #00934D"></i> 
-                                            <span >View Daily Cv Collect {{$package->daily_cv_collect_limit}}</span>
+                                            <span >
+                                                {{translate('cv_collect')}}
+                                                {{translate($package->daily_cv_collect_limit)}}
+                                            </span>
                                         </span>
                                     </li>
 
                                     <li class="text-3-5 mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
                                         <span>
                                             <i class="fa fa-check-circle" style="color: #00934D"></i> 
-                                            <span >View Total Cv Collect {{$package->total_cv_collect_limit}}</span>
+                                            <span >  
+                                                {{translate('view_total_cv_collect')}} {{translate($package->total_cv_collect_limit)}}
+                                            </span>
                                         </span>
                                     </li>
 
                                     <li class="text-3-5 mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
                                         <span>
                                             <i class="fa fa-check-circle" style="color: #00934D"></i> 
-                                            <span >View Daily Matched Profile {{$package->daily_matched_profile_sent}}</span>
+                                            <span >{{translate('daily')}} {{translate('matched_profile')}} {{translate($package->daily_matched_profile_sent)}}</span>
                                         </span>
                                     </li>
 
                                     <li class="text-3-5 mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
                                         <span>
                                             <i class="fa fa-check-circle" style="color: #00934D"></i> 
-                                            <span >View Total Matched Profile {{$package->total_matched_profile_sent}}</span>
+                                            <span >{{translate('total')}} {{translate('matched_profile')}} 
+
+                                                {{translate($package->total_matched_profile_sent)}}
+                                            
+                                            </span>
                                         </span>
                                     </li>
 
-                                       <li class="text-3-5 mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
+                                    {{-- <li class="text-3-5 mb-1" style="padding-left: 4px !important; background:#f8f8f8;">
                                         <span>
                                             <i class="fa fa-check-circle" style="color: #00934D"></i> 
-                                            <span>Package Description:
-                                             {{$package->description}}</span>
+                                            <span>{{translate('package_description')}}:
+
+                                             {{translate($package->description)}}
+                                            
+                                            </span>
                                         </span>
-                                    </li>
+                                    </li> --}}
                                      <p class="card-text text-justify text-4" style="padding-left: 4px !important; background:#f8f8f8;"></p>
                                 </ul>
 
@@ -98,7 +117,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox"  name="agree" id="Checkbox" checked>
                                         <label class="form-check-label" for="Checkbox">
-                                           <a href="https://marriagematchbd.com/page/11/terms-regulation" class="w3-text-gray text-decoration-none">I agree the terms and conditions</a>
+                                           <a href="{{asset('/')}}page/11/terms-regulation" class="w3-text-gray text-decoration-none">{{translate('i_agree_the_terms_and_conditions')}}</a>
                                         </label>
                                     </div>
                                 </div>
@@ -117,7 +136,7 @@
                                     </button>
                                     <br>
                                     @if($pendingOrder != null)
-                                        <a href="{{ route('membership.myOrderDeatils',$pendingOrder->id)}}">You have pending order! please this manage order.</a>
+                                        <a href="{{ route('membership.myOrderDeatils',$pendingOrder->id)}}">{{ translate('you_have_pending_order') }}</a>
                                     @endif
                                 </div>
                             </form>

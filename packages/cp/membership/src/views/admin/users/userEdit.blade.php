@@ -8,8 +8,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
 
-<link href="{{asset('assets/cropperjs-master/dist/cropper.min.css')}}" rel='stylesheet' type='text/css'>
-<link href="{{asset('css/profileCreate.css')}}" rel="stylesheet" />
+<link href="{{ asset('css/cropper.min.css') }}" rel='stylesheet' type='text/css'>
+<link href="{{ asset('css/userProfile.css') }}" rel="stylesheet" />
 
 @endpush
 
@@ -51,80 +51,54 @@
 
                     <div class="row">
                         <div class="col-sm-3">
-                          <div class="card card-widget">
-                              <div class="card-header with-border">
-                                  <h3 class="card-title">Upload Profile Picture </h3>
-                                  <div class="card-tools pull-right">
+                           <div class="card card-widget">
+                            <div class="card-body" style="min-height: 292px;">
+                                <div class="fb-profile">
 
-                                  </div>
-                              </div>
-                              <div class="card-body w3-padding-large" style="min-height: 320px;">
-                                  <div class="fb-profile">
-                                      <div class="row">
-                                          <div class="col-sm-12">
-                                              <div class="profile-image">
-                                                  @includeif('membership::admin.users.form.profileFeatureImg')
-                                              </div>
+                                    <div class="profile-image">
+                                        {{-- <img align="left" class="fb-image-profile w3-animate-zoom img-thumbnail"
+                                        src="{{ route('imagecache', ['template' => 'pplg', 'filename' => $user->fi()]) }}"
+                                        alt="Profile image example" /> --}}
 
-                                              <div class="crop-profilepic-container">
-                                                  <img style="display: none;" class="img-fluid w-100 mb-3"
-                                                      id="crop-profilepic" src="">
-                                              </div>
+                                         @includeif('membership::admin.partials.userProfilePic')
+                                      
+                                    </div>
 
 
-
-                                          </div>
-
-                                          <div class="col-sm-12">
-
-                                          
-                                              <a id="btn-profilepic" class="btn-profilepic"
-                                                  title="Change Profile Picture">
+                                    <div class="crop-profilepic-container">
+                                        <img style="display: none;" class="img-responsive" id="crop-profilepic" src="">
+                                    </div>
 
 
-                                                  <span class="fa-stack fa-lg ">
-                                                      <i class="fa fa-square-o fa-stack-2x "></i>
-                                                      <i
-                                                          class="fa fa-camera w3-text-white w3-hover-shadow w3-hover-deep-orange w3-round w3-card-4 w3-blue fa-stack-1x "></i>
-                                                  </span>
-
-                                              </a>
+                                    <a id="btn-profilepic" class="btn-profilepic" title="Change Profile Picture">
 
 
-                                              <form method="post"
-                                                  enctype="multipart/form-data"
-                                                  action="{{ route('admin.userSettingProfilePicChange',$user->id)}}">
+                                        <span class="fa-stack fa-lg" style="height:45px; imprtant">
+                                            <i class="fa fa-square-o fa-stack-2x "></i>
+                                            <i
+                                                class="fa fa-camera w3-text-white w3-hover-shadow w3-hover-deep-orange w3-round w3-card-4 w3-blue fa-stack-1x "></i>
+                                        </span>
 
-                                                   {{ csrf_field() }}
+                                    </a>
 
-                                                    <input class="form-control" type="file" id="my_profilepic"
-                                                      name="img_name" style="display: none;" />
-                                              
-                                               
+                                    <form id="form_profilepic_upload" style="" method="post" enctype="multipart/form-data"
+                                        action="{{ route('admin.userSettingProfilePicChange',$user->id)}}">
+                                        {{ csrf_field() }}
+                                        <input class="form-control" type="file" id="my_profilepic" name="profile_picture"
+                                            style="display: none" />
 
-                                                    <button type="reset"
-                                                      class="w3-card-2 btn-profilepic-cancel w3-btn w3-round w3-gray btn-xs"><i
-                                                          class="fa fa-times fa-2x w3-text-white"></i>
-                                                    </button>
-
-                                                    <button type="submit"
-                                                      class="w3-card-2 btn-profilepic-submit w3-btn w3-round w3-green btn-xs"><i
-                                                          class="fa fa-check-square fa-2x w3-text-white"></i>
-                                                    </button>
-
-                                              </form>
-
-
-                                          </div>
-                                      </div>
+                                        <button type="reset"
+                                            class="btn-card-4 btn-profilepic-cancel w3-btn w3-round w3-white btn-xs"><i
+                                                class="fa fa-times fa-2x w3-text-red"></i></button>
+                                        <button type="submit"
+                                            class="btn-card-4 btn-profilepic-submit w3-btn w3-round w3-white btn-xs"><i
+                                                class="fa fa-check-square fa-2x w3-text-green"></i></button>
+                                    </form>
 
 
-                                  </div>
-
-
-
-                              </div>
-                          </div>
+                                </div>
+                            </div>
+                        </div>
                         </div>
 
 
@@ -134,7 +108,7 @@
                                   <h3 class="card-title">Set Temporary Pass</h3>
                               </div>
 
-                              <div class="card-body " style="min-height: 320px;">
+                              <div class="card-body" style="min-height: 250px;">
 
                                   <div class="section-area">
 
@@ -343,6 +317,8 @@
 
                                   
                                     <form action="{{ route('admin.pacakgeUpdateForAdmin',$user->id)}}" method="post">
+
+                                         {{-- @dd($user->profile->package_id); --}}
                                         @csrf
                                        <div class="row">
                                         <div class="form-group col-md-6">
@@ -353,6 +329,8 @@
                                                 {{-- @php
                                                     $profile = $user->profile->package_id;
                                                 @endphp --}}
+
+                                               
                                                 <option value="{{ $item->id }}" {{ $user->profile->package_id == $item->id ? 'selected' : ' ' }}>{{$item->title}}</option>
                                             @endforeach
                                             </select>
@@ -572,9 +550,16 @@
 
 
 @push('js')
-<script src="{{asset('assets/cropperjs-master/dist/cropper.js')}}"></script>
-<script src="{{asset('js/profileCreate.js')}}"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('//cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
+<script src="{{ asset('js/cropper.js') }}"></script>
+<script src="{{ asset('js/userProfile.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.btn-profilepic-cancel').hide();
+        $('.btn-profilepic-submit').hide();
+    });
+</script>
+
 <script>
     function getIp(callback) {
         var ip = $(".ip").val();

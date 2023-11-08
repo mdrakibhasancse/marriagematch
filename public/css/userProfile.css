@@ -88,20 +88,11 @@
     }
 .btn-profilepic
 {
-  /*position: absolute;*/
-  /*bottom: 50px;*/
-  /*left: 60px;*/
+  position: absolute;
+  bottom: 50px;
+  left: 18px;
   z-index: 100;
   cursor: pointer;
-}
-
-.btn-profilepic-delete{
-    /*position: absolute;*/
-    /*bottom: 40px;*/
-    left: 20px;
-
-    z-index: 12;
-    cursor: pointer;
 }
 
 .btn-cover-cancel{
@@ -121,28 +112,27 @@
 }
 
 .btn-profilepic-cancel{
-    /*position: absolute;*/
-    /*bottom: 40px;*/
-    /*left: 20px;*/
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
     display: none;
     z-index: 12;
 }
 
 .btn-profilepic-submit{
-    /*position: absolute;*/
-    /*bottom: 40px;*/
-    /*left: 150px;*/
+    position: absolute;
+    bottom: 40px;
+    left: 150px;
     display: none;
     z-index: 12;
 }
 
 .crop-profilepic-container{
   /*position: absolute;*/
-  /*bottom: 10px;*/
-  /*left: 10px;*/
-  /*max-height: 200px !important;*/
-  /*max-width: 200px !important;*/
-  margin-bottom: 10px;
+  bottom: 10px;
+  left: 10px;
+  max-height: 200px !important;
+  max-width: 200px !important;
 }
 
 
