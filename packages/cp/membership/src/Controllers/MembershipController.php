@@ -139,6 +139,7 @@ class MembershipController extends Controller
     public function newProfileForStore(Request $request)
     {
 
+      
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3|max:20',
             'religion_id' => 'required',
@@ -214,7 +215,7 @@ class MembershipController extends Controller
 
     public function newProfileNextStepStore(Request $request)
     {
-
+        // dd($request->all());
         $user = Auth::user();
         $validation = Validator::make(
             $request->all(),
@@ -222,6 +223,7 @@ class MembershipController extends Controller
                 'marital_status' => 'required',
                 'education_level' => 'required|string|min:2|max:50',
                 'height' => 'required',
+                'religion_id' => 'required',
                 'skin_color' => 'required',
                 'body_build' => 'required',
                 'weight' => 'required',
@@ -237,10 +239,10 @@ class MembershipController extends Controller
                 'citizenship' => 'nullable',
                 'photo_hide' => 'nullable',
                 'will_job_after_marriage' => 'nullable',
-                'profile_pic' => 'nullable|file|image|mimes:jpg,bmp,png,jpeg,gif',
-                'extra_photo_first' => 'nullable|file|image|mimes:jpg,bmp,png,jpeg,gif',
-                'extra_photo_second' => 'nullable|file|image|mimes:jpg,bmp,png,jpeg,gif',
-                'extra_photo_third' => 'nullable|file|image|mimes:jpg,bmp,png,jpeg,gif',
+                'profile_pic' => 'nullable|image|mimes:jpg,bmp,png,jpeg,gif,webp',
+                'extra_pic_first' => 'nullable|image|mimes:jpg,bmp,png,jpeg,gif,webp',
+                'extra_pic_second' => 'nullable|image|mimes:jpg,bmp,png,jpeg,gif,webp',
+                'extra_pic_third' => 'nullable|image|mimes:jpg,bmp,png,jpeg,gif,webp',
                 'father_name' => 'required',
                 'father_occupation' => 'required',
                 'mother_name' => 'required',
@@ -262,6 +264,9 @@ class MembershipController extends Controller
         $mi = Auth::user()->profile;
         $mi->marital_status = $request->marital_status ?: null;
         $mi->education_level = $request->education_level ?: null;
+        $mi->religion_id = $request->religion_id ?: $mi->religion_id;
+        $mi->cast_id = $request->cast_id ?: $mi->cast_id;
+        $mi->marital_status = $request->marital_status ?: null;
         $mi->profession = $request->profession ?: Auth::user()->profession;
         $mi->height = $request->height ?: null;
         $mi->skin_color = $request->skin_color ?: null;
@@ -314,7 +319,7 @@ class MembershipController extends Controller
 
 
 
-        if ($ep1 = $request->extra_photo_first) {
+        if ($ep1 = $request->extra_pic_first) {
 
             $extension = strtolower($ep1->getClientOriginalExtension());
             $randomEp1Name = $user->id . '_pic_' . date('Y_m_d_his') . '_' . rand(10000000, 99999999) . '.' . $extension;
@@ -333,7 +338,7 @@ class MembershipController extends Controller
 
 
 
-        if ($ep2 = $request->extra_photo_second) {
+        if ($ep2 = $request->extra_pic_second) {
 
             $extension = strtolower($ep2->getClientOriginalExtension());
             $randomEp2Name = $user->id . '_pic_' . date('Y_m_d_his') . '_' . rand(10000000, 99999999) . '.' . $extension;
@@ -352,7 +357,7 @@ class MembershipController extends Controller
 
 
 
-        if ($ep3 = $request->extra_photo_third) {
+        if ($ep3 = $request->extra_pic_third) {
             $extension = strtolower($ep3->getClientOriginalExtension());
             $randomEp3Name = $user->id . '_pic_' . date('Y_m_d_his') . '_' . rand(10000000, 99999999) . '.' . $extension;
             Storage::disk('public')->put('photo/' . $randomEp3Name, File::get($ep3));

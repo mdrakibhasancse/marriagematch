@@ -6,7 +6,8 @@
       <th>Date</th>
       <th>Contact</th>
       <th>Profession</th>
-      <th width="10" class="px-0">Image</th>
+      <th width="10">Changed</th>
+      <th width="10">Live</th>
       <th>Profile</th>
       <th>Final Submit</th>
 
@@ -32,15 +33,34 @@
         <p class="m-0 p-0"> {{$user->name}}</p>
         <p class="m-0 p-0">{{$user->email}}</p>
         <p class="m-0 p-0"> {{$user->mobile}}</p>
+         <p class="m-0 p-0"> {{$user->mobile}}</p>
+       
+        @if(($user->profile && $user->profile->submit_by_user) && (!$user->profile->checked))
+            <span class="badge badge-primary">Pending
+        </span>
+        @endif
+
+         @if(($user->profile && $user->profile->checked))
+            <span class="badge badge-primary">Active
+        </span>
+        @endif
+          
       
       </td>
       <td>
         <p class="m-0 p-0"> {{$user->myProfession()}}</p>
         <p class="m-0 p-0">{{$user->myGender()}}</p>
         <p class="m-0 p-0"> {{$user->age()}}</p>
+       
       </td>
-      
-      <td width="10" class="px-1 py-0"><img  src="{{ route('imagecache', ['template' => 'ppmd', 'filename' => $user->fi()]) }}" alt="user"></td>
+    
+      @if($user->profile)
+      <td width="10" class="px-1 py-0"><img class=""  src="{{ route('imagecache', ['template' => 'ppmd', 'filename' => $user->profile->fi()]) }}" alt="user"></td>
+      @else
+        <td width="10" class="px-1 py-0"><img class=""  src="{{ route('imagecache', ['template' => 'ppmd', 'filename' => $user->fi()]) }}" alt="user"></td>
+      @endif
+
+      <td width="10" class="px-1 py-0"><img class="w3-border"  src="{{ route('imagecache', ['template' => 'ppmd', 'filename' => $user->fi()]) }}" alt="user"></td>
       {{-- membership part start --}}
       
       <td>{!!$user->profile && $user->profile->religion_id ? '<span class="badge badge-primary">Yes</span>' : '<span class="badge badge-danger">No</span>'!!}</td>
@@ -48,6 +68,8 @@
       <td>
           @if($user->profile)
             {!!$user->profile->submit_by_user == 1 ? '<span class="badge badge-primary">Yes</span>' : '<span class="badge badge-danger">No</span>'!!}
+          @else
+          <span class="badge badge-danger">No</span>
           @endif
       </td>
       {{-- membership part end --}}

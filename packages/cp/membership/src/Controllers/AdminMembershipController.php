@@ -909,7 +909,7 @@ class AdminMembershipController extends Controller
 
     public function userInfoUpdate(Request $request, User $user)
     {
-
+    //    dd($request->all());
         $validation = Validator::make(
             $request->all(),
             [
@@ -1024,9 +1024,9 @@ class AdminMembershipController extends Controller
                 // 'profession' => 'required',
                 'education_level' => 'required|string|min:2|max:50',
                 'height' => 'required',
-                'skin_color' => 'required',
-                'body_build' => 'required',
-                'weight' => 'required',
+                'skin_color' => 'nullable',
+                'body_build' => 'nullable',
+                'weight' => 'nullable',
                 'language_one' => 'required',
                 'language_two' => 'nullable',
                 'language_three' => 'nullable',
@@ -1034,8 +1034,8 @@ class AdminMembershipController extends Controller
                 'birth_city' => 'required|string|min:2|max:50',
                 'present_country' => 'required',
                 'present_city' => 'required|string|min:2|max:50',
-                'present_address' => 'required|string|min:2|max:800',
-                'permanent_address' => 'required|string|min:2|max:800',
+                'present_address' => 'nullable|string|min:2|max:800',
+                'permanent_address' => 'nullable|string|min:2|max:800',
                 'citizenship' => 'nullable',
                 'photo_hide' => 'nullable',
                 'profile_pic' => 'nullable|file|image|mimes:jpg,bmp,png,jpeg,gif',

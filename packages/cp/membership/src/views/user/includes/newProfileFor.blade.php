@@ -16,7 +16,7 @@
     <div class="card shadow-lg card-default">
         <div class="card-body">
 
-         <p class="p-0 m-0 text-md text-center ">{{ translate('profile_for') }} {{ $profile_for }}</p>
+         <p class="p-0 m-0 text-md text-center ">{{ translate('profile_for') }} ({{  translate($profile_for) }})</p>
          <br>
          <form method="post" action="{{ route('user.newProfileForStore') }}" id="user-create-form">
 

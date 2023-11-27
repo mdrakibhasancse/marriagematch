@@ -164,7 +164,7 @@
 
             <div class="form-group input-group-sm">
                 <label for="weight">ওজনঃ
-                    <span style="color:red">*</span>
+                    {{-- <span style="color:red">*</span> --}}
                 </label>
 
                 <select style="width:100%;" class="form-control form-control-sm @error('weight') is-invalid @enderror" id="weight" placeholder="Weight" name="weight" required>
@@ -181,7 +181,7 @@
 
             <div class="form-group input-group-sm">
                 <label for="body_build">স্বাস্থের অবস্থাঃ
-                    <span style="color:red">*</span>
+                    {{-- <span style="color:red">*</span> --}}
                 </label>
                 <select style="width:100%;" class="form-control form-control-sm @error('body_build') is-invalid @enderror" id="body_build" name="body_build" required>           
                     <option value="" >select body build</option>
@@ -197,7 +197,7 @@
 
             <div class="form-group input-group-sm">
                 <label for="skin_color">গায়ের রঙঃ
-                    <span style="color:red">*</span>
+                    {{-- <span style="color:red">*</span> --}}
                 </label>
                 <select style="width:100%;" class="form-control form-control-sm @error('skin_color') is-invalid @enderror" id="skin_color" name="skin_color" required>        
                     <option >select skin color</option>
@@ -333,7 +333,7 @@
 
             <div class="form-group input-group-sm {{ $errors->has('present_address') ? ' has-error' : '' }} ">
                 <label for="present_address">বর্তমান ঠিকানাঃ 
-                     <span style="color:red">*</span>
+                     {{-- <span style="color:red">*</span> --}}
                 </label>
                 <textarea class="form-control form-control-sm @error('present_address') is-invalid @enderror" rows="2" id="present_address"
                 name="present_address" placeholder="Present Address" required>@if($user->profile){{  $user->profile->present_address }}@endif</textarea>
@@ -344,7 +344,7 @@
 
             <div class="form-group input-group-sm">
             <label for="permanent_address">স্থায়ী ঠিকানাঃ 
-                 <span style="color:red">*</span>
+                 {{-- <span style="color:red">*</span> --}}
             </label>
                 <textarea class="form-control form-control-sm @error('permanent_address') is-invalid @enderror" rows="2" id="permanent_address"
                 name="permanent_address" placeholder="Permanent Address" required>@if($user->profile){{ $user->profile->permanent_address }}@endif</textarea>

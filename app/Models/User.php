@@ -89,9 +89,9 @@ class User extends Authenticatable
         if ($this->profile) {
 
             if ($this->profile->gender == 'female') {
-                return $this->img_name ?: 'profileMale.jpg';
-            } else {
                 return $this->img_name ?: 'profileFemale.jpg';
+            } else {
+                return $this->img_name ?: 'profileMale.jpg';
             }
         }
 

@@ -46,6 +46,13 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'languageUpdateStatus'
     ]);
 
+
+
+    Route::get('/NilofaMarriageMedia', [
+        'uses' => 'Cp\Frontend\Controllers\FrontendController@NilofaMarriageMedia',
+        'as' => 'NilofaMarriageMedia'
+    ]);
+
 });
 
 

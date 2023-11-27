@@ -23,7 +23,7 @@
       </div><!-- /.container-fluid -->
     </section>
 
- <section class="content">
+<section class="content">
             <div class="card">
                 <div class="card-header bg-info">
                     <div class="card-title">Website Setting</div>

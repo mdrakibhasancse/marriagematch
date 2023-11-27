@@ -13,7 +13,14 @@ class UserProfile extends Model
 
     public function fi()
     {
-        return $this->profile_pic ?: 'profile.jpg';
+        // dd($this->profile_pic);
+        if ($this->gender == 'male') {
+          return $this->profile_pic ? : 'profileMale.jpg';
+        } elseif ($this->gender == 'female') {
+         return $this->profile_pic ? : 'profileFemale.jpg';
+        }else{
+             return 'profileMale.jpg';
+        }
     }
 
 

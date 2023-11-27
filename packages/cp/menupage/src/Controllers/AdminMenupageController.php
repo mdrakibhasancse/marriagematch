@@ -117,9 +117,9 @@ class AdminMenupageController extends Controller
        
         menuSubmenu('menupage', 'pagesAll');
 
-        $request->validate([
-            'name' => 'string|required',
-        ]);
+        // $request->validate([
+        //     'name' => 'string|required',
+        // ]);
 
 
         $page = new Page();

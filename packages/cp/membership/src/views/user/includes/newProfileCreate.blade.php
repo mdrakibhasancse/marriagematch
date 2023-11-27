@@ -45,19 +45,19 @@
 
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="profile_for" class="form-check-input" value="me" checked>{{ translate('for_yourself') }}
+                            <input type="radio" name="profile_for" class="form-check-input" value="for_yourself" checked>{{ translate('for_yourself') }}
                         </label>
                         </div>
 
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="profile_for" class="form-check-input" value="brother" >{{ translate('for_brother') }}
+                            <input type="radio" name="profile_for" class="form-check-input" value="for_brother" >{{ translate('for_brother') }}
                         </label>
                         </div>
 
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="profile_for" class="form-check-input" value="sister" >{{ translate('for_sister') }}
+                            <input type="radio" name="profile_for" class="form-check-input" value="for_sister" >{{ translate('for_sister') }}
                         </label>
                         </div>
 
@@ -65,7 +65,7 @@
 
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="profile_for" class="form-check-input" value="nephew" >{{ translate('for_nephew') }}
+                            <input type="radio" name="profile_for" class="form-check-input" value="for_nephew" >{{ translate('for_nephew') }}
                         </label>
                         </div>
 
@@ -77,33 +77,33 @@
 
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="profile_for" class="form-check-input" value="son" >{{ translate('for_son') }}
+                            <input type="radio" name="profile_for" class="form-check-input" value="for_son" >{{ translate('for_son') }}
                         </label>
                         </div>
 
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="profile_for" class="form-check-input" value="daughter" >  {{ translate('for_daughter') }}
+                            <input type="radio" name="profile_for" class="form-check-input" value="for_daughter" >  {{ translate('for_daughter') }}
                         </label>
                         </div>
 
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="profile_for" class="form-check-input" value="friend" >
+                            <input type="radio" name="profile_for" class="form-check-input" value="for_a_friend" >
                         {{ translate('for_a_friend') }}'
                         </label>
                         </div>
 
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="profile_for" class="form-check-input" value="cousin" >
+                            <input type="radio" name="profile_for" class="form-check-input" value="for_cousins" >
                               {{ translate('for_cousins') }}
                         </label>
                         </div>
 
                         <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="profile_for" class="form-check-input" value="other" >{{ translate('for_others') }}
+                            <input type="radio" name="profile_for" class="form-check-input" value="for_others" >{{ translate('for_others') }}
                         </label>
                         </div>
                         @csrf

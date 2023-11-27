@@ -19,6 +19,28 @@
       </li>  
 
       <li class="nav-item">
+        <a href="{{ route('admin.usersAll',['pendingUsers']) }}" class="nav-link {{ session('lsbsm') == 'usersAllpendingUsers' ? ' active ' : '' }}">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Pending Users</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="{{ route('admin.usersAll',['activeUsers']) }}" class="nav-link {{ session('lsbsm') == 'usersAllactiveUsers' ? ' active ' : '' }}">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Active Users</p>
+        </a>
+      </li>
+
+
+      <li class="nav-item">
+        <a href="{{ route('admin.usersAll',['inactiveUsers']) }}" class="nav-link {{ session('lsbsm') == 'usersAllinactiveUsers' ? ' active ' : '' }}">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Inactive Users</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a href="{{ route('admin.usersAll',['usersToday']) }}" class="nav-link {{ session('lsbsm') == 'usersAllusersToday' ? ' active ' : '' }}">
           <i class="far fa-circle nav-icon"></i>
           <p>Users Today</p>
@@ -47,20 +69,7 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a href="{{ route('admin.usersAll',['activeUsers']) }}" class="nav-link {{ session('lsbsm') == 'usersAllactiveUsers' ? ' active ' : '' }}">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Active Users</p>
-        </a>
-      </li>
-
-
-      <li class="nav-item">
-        <a href="{{ route('admin.usersAll',['inactiveUsers']) }}" class="nav-link {{ session('lsbsm') == 'usersAllinactiveUsers' ? ' active ' : '' }}">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Inactive Users</p>
-        </a>
-      </li>
+    
        
       
       <li class="nav-item">

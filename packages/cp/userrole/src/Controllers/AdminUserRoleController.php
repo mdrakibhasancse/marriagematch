@@ -116,8 +116,22 @@ class AdminUserRoleController extends Controller
                         'page' => $page,
                     ]);
                 }
-            } elseif ($type == 'activeUsers') {
-                $data['users'] = User::latest()->whereActive(true)->paginate(100);
+            }elseif ($type == 'pendingUsers') {
+                $data['users'] = User::whereHas('profile', function ($q) {
+                    $q->where('submit_by_user', 1);
+                    $q->where('checked', 0);
+                })->paginate(100);
+                if (request()->ajax()) {
+                    $page = View('userrole::admin.users.searchData', ['users' => $data['users']])->render();
+                    return response()->json([
+                        'success' => true,
+                        'page' => $page,
+                    ]);
+                }
+            }elseif ($type == 'activeUsers') {
+                $data['users'] = User::whereHas('profile', function ($q) {
+                    $q->where('checked', 1);
+                })->paginate(100);
                 if (request()->ajax()) {
                     $page = View('userrole::admin.users.searchData', ['users' => $data['users']])->render();
                     return response()->json([
@@ -126,7 +140,9 @@ class AdminUserRoleController extends Controller
                     ]);
                 }
             } elseif ($type == 'inactiveUsers') {
-                $data['users'] = User::latest()->whereActive(false)->paginate(100);
+                $data['users'] = User::whereHas('profile', function ($q) {
+                    $q->where('checked', 0);
+                })->paginate(100);
                 if (request()->ajax()) {
                     $page = View('userrole::admin.users.searchData', ['users' => $data['users']])->render();
                     return response()->json([
@@ -193,13 +209,24 @@ class AdminUserRoleController extends Controller
                         $q->where('payment_status', 'paid');
                     });
                 }
+                if ($type == 'pendingUsers') {
+                    $qqq->whereHas('profile', function ($q) {
+                        $q->where('submit_by_user', 1);
+                        $q->where('checked', 0);
+                    });
+                }
+
                 if ($type == 'activeUsers') {
-                    $qqq->whereActive(true);
+                    $qqq->whereHas('profile', function ($q) {
+                        $q->where('checked', 1);
+                    });
                 }
 
 
                 if ($type == 'inactiveUsers') {
-                    $qqq->whereActive(false);
+                    $qqq->whereHas('profile', function ($q) {
+                        $q->where('checked', 0);
+                    });
                 }
 
 

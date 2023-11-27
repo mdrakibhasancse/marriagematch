@@ -289,12 +289,12 @@
                                         <button 
                                         @if(!auth()->user()->can('user-delete'))
                                             type="button"
-                                            class="w3-btn w3-round w3-blue "
+                                            class="w3-btn w3-round w3-blue btn-sm"
                                                 disabled
                                         @else
 
                                         type="submit"
-                                            class="w3-btn w3-round w3-blue "
+                                            class="w3-btn w3-round w3-blue btn-sm"
                                                 
                                         @endif
                                             >Submit

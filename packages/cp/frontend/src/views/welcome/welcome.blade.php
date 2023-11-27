@@ -267,19 +267,21 @@
 						<div class="card-deck ">
 							<div class="row">
                                 <div class="col-md-6 mb-4">
-									<div class="card shadow" style="min-height: 204px;">
-										<div class="card-body d-flex align-items-center justify-content-center">
-										<a href="{{ route('userrole.dashboard')}}" class="btn text-white" style="background: #FD017C">{{ translate('click_the_button_for_online_payment') }}</a>
+									<div class="card shadow" style="min-height: 220px;">
+										<div class="card-body- d-flex align-items-center justify-content-center">
+											<iframe width="545" height="220px" src="https://www.youtube.com/embed/bTKqkO_2ASM?si=gCf-nqkdSot9wrMZ?modestbranding=1&rel=0&fs=0&disablekb=1&showinfo=0&autoplay=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-6">
-                                   <div class="card shadow" style="min-height: 204px;">
+                                   <div class="card shadow" style="min-height: 220px;">
 										<div class="card-body d-flex align-items-center justify-content-center">
 										<a href="{{ route('userrole.dashboard')}}">
 											<img width="360" src="{{ route('imagecache', ['template' => 'original', 'filename' => 'sslecommerce.png']) }}" alt="sslecommerce">
 										</a>
 										</div>
+										<a href="{{ route('userrole.dashboard')}}" class="btn text-white" style="background: #FD017C">{{ translate('click_the_button_for_online_payment') }}</a>
+										
 								    </div>
 								</div>
 								

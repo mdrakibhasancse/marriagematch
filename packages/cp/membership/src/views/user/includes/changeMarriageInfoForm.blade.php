@@ -62,6 +62,41 @@
         
     </div>
 
+
+    <div class="form-group input-group-sm">
+        <label for="religion_id">{{ translate('religion') }} 
+            <span style="color:red">*</span>
+        </label>
+        <select name="religion_id"  class="form-control religion-select @error('religion_id') is-invalid @enderror" required>
+            <option value="">{{ translate('religion') }} </option>
+           @foreach ($religions as $religion)
+             <option value="{{ $religion->id }}" {{ $profile->religion_id == $religion->id  ? 'selected' : ''}}>{{ $religion->name }}</option>
+            @endforeach
+        </select>
+        @error('religion_id')
+            <span style="color:red">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <div class="form-group input-group-sm">
+        <label for="cast_id">{{ translate('cast') }} 
+        </label>
+        <select id="cast_id" class="cast-select form-control" name="cast_id">
+            <option value="">{{ translate('cast') }} </option>
+               @if($rid = $profile->religion_id)
+                @foreach($casts->where('religion_id', $rid) as $cast)
+                <option value="{{ $cast->id }}"
+                {{ $profile->cast_id == $cast->id ? 'selected' : ' '}}>
+                {{ $cast->name ?? '' }}
+                </option>
+                @endforeach
+            @endif
+        </select>
+    
+    </div>
+
+    
+
     <hr class="w3-border">
 
 
@@ -353,7 +388,7 @@
             {{-- অতিরিক্ত ছবি ১ম (ইমেজ ফাইল): --}}
              {{ translate('extra_photo_first') }}
         </label>
-        <input type="file" name="extra_photo_first" class="form-control" placeholder="{{ translate('extra_photo_first') }}" {{$profile->extra_pic_first ? '' : 'required'}} id="extra_photo_first">
+        <input type="file" name="extra_pic_first" class="form-control" placeholder="{{ translate('extra_photo_first') }}" {{$profile->extra_pic_first ? '' : 'required'}} id="extra_photo_first">
         {{-- @error('extra_photo_first')
             <span style="color: red">{{ $message }}</span>
         @enderror --}}
@@ -367,17 +402,19 @@
     @endif
 
 
-    <div class="form-group">
-        <label for="extra_photo_second">
-            {{-- অতিরিক্ত ছবি ২য় (ইমেজ ফাইল): --}}
-               {{ translate('extra_photo_second') }}
+
+     <div class="form-group">
+        <label for="extra_pic_second">
+           {{-- অতিরিক্ত ছবি ২য় (ইমেজ ফাইল): --}}
+             {{ translate('extra_photo_second') }}
         </label>
-        <input type="file" name="extra_photo_second" class="form-control" placeholder="{{ translate('extra_photo_second') }}" {{$profile->extra_photo_second ? '' : 'required'}} id="extra_photo_second">
-        {{-- @error('extra_photo_second')
+        <input type="file" name="extra_pic_second" class="form-control" placeholder="{{ translate('extra_photo_second') }}" {{$profile->extra_pic_second ? '' : 'required'}} id="extra_pic_second">
+        {{-- @error('extra_photo_first')
             <span style="color: red">{{ $message }}</span>
         @enderror --}}
-
     </div>
+
+
 
      @if($profile and $profile->extra_pic_second)
        <img width="40" class="mb-3" src="{{ asset('storage/photo/'.$profile->extra_pic_second) }}" alt=""> 
@@ -393,7 +430,7 @@
             {{-- অতিরিক্ত ছবি ৩য় (ইমেজ ফাইল): --}}
             {{ translate('extra_photo_third') }}
         </label>
-        <input type="file" name="extra_photo_third" class="form-control" placeholder="{{ translate('extra_photo_third') }}" {{$profile->extra_pic_third ? '' : 'required'}} id="extra_photo_third">
+        <input type="file" name="extra_pic_third" class="form-control" placeholder="{{ translate('extra_photo_third') }}" {{$profile->extra_pic_third ? '' : 'required'}} id="extra_photo_third">
         {{-- @error('extra_photo_third')
             <span style="color: red">{{ $message }}</span>
         @enderror --}}

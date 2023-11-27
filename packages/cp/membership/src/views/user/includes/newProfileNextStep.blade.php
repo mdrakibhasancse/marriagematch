@@ -35,16 +35,20 @@
                 <!-- /.card-tools -->
               </div>
               <!-- /.card-header -->
+
+           
+
               <div class="card-body w3-light-gray">
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                      
-                        <div class="card card-primary collapsed-card">
+                        {{-- <div class="card card-primary collapsed-card">
                             <div class="card-header" data-card-widget="collapse">
                                 <h3 class="card-title">
-                                    {{-- বিবাহ সম্পর্কিত তথ্য  --}}
+                                    বিবাহ সম্পর্কিত তথ্য 
                                     {{ translate('marriage_information') }}
                                 </h3>
+
                                    &nbsp<span class="btn-review-profile">
                                     @if ($profile && $profile->checked == 1)
                                             ({{ translate('approved') }})
@@ -59,20 +63,53 @@
                                 </div>
                                 <!-- /.card-tools -->
                             </div>
+
+                            
+
+
+
+
                             <!-- /.card-header -->
                             <div class="card-body">
                                  @includeIf('membership::user.includes.changeMarriageInfoForm')
                             </div>
-                        <!-- /.card-body -->
-                        </div>
+                         <!-- /.card-body -->
+                        </div> --}}
+
+                            <div class="card card-primary card-default">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        {{-- বিবাহ সম্পর্কিত তথ্য  --}}
+                                        {{ translate('marriage_information') }}
+                                          &nbsp<span class="btn-review-profile">
+                                        @if ($profile && $profile->checked == 1)
+                                                ({{ translate('approved') }})
+                                        @elseif($profile && $profile->checked == 0 )
+                                            ({{ translate('pending') }})
+                                        
+                                        @endif
+                                     </h3>
+                                  
+
+                                    <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                    </button>
+                                    </div>
+                                    <!-- /.card-tools -->
+                            </div>
+                                <!-- /.card-header -->
+                                <div class="card-body" style="display: block;">
+                                     @includeIf('membership::user.includes.changeMarriageInfoForm')
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+
                            <div class="card card-primary collapsed-card">
                             <div class="card-header" data-card-widget="collapse">
                                 <h3 class="card-title">
                                     {{-- শিক্ষাবিষয়ক তথ্য --}}
                                     {{ translate('educational_information') }}
-                                </h3>
-
-                                  &nbsp<span class="btn-review-education">
+                                    &nbsp<span class="btn-review-education">
                                     @if ($profile && $profile->education_info_checked  == 1)
                                             ({{ translate('approved') }})
                                    
@@ -81,9 +118,13 @@
                                           ({{ translate('pending') }})
 
                                     @endif
+                                </h3>
+
+                                  
                             </span>
                                 <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-plus"></i>
                                 </button>
                                 </div>
                                 <!-- /.card-tools -->
@@ -106,9 +147,8 @@
                             <div class="card-header" data-card-widget="collapse">
                                 <h3 class="card-title">
                                     {{-- আত্মীয় সম্পর্কিত তথ্য --}}
-                                        {{ translate('relatives_informations') }}
-                                </h3>
-                                &nbsp<span class="btn-review-relative">
+                                    {{ translate('relatives_informations') }}
+                                        &nbsp<span class="btn-review-relative">
                                     @if ($profile && $profile->family_info_checked == 1)
                                          ({{ translate('approved') }})
 
@@ -117,9 +157,12 @@
                                            ({{ translate('pending') }})
 
                                     @endif
+                                </h3>
+                                
                                 </span>
                                 <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-plus"></i>
                                 </button>
                                 </div>
                                 <!-- /.card-tools -->
@@ -145,8 +188,7 @@
                                 <h3 class="card-title">
                                     {{-- পাত্র/পাত্রী সম্পর্কিত তথ্য --}}
                                      {{ translate('information_about_husband_wife') }}
-                                </h3>
-                                &nbsp<span class="btn-review-partner">
+                                     &nbsp<span class="btn-review-partner">
                                     @if ($profile && $profile->partner_info_checked == 1)
                                       ({{ translate('approved') }})
 
@@ -155,9 +197,12 @@
                                         ({{ translate('pending') }})
 
                                     @endif
+                                </h3>
+                                
                                 </span>
                                 <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-plus"></i>
                                 </button>
                                 </div>
                                 <!-- /.card-tools -->
@@ -189,7 +234,8 @@
                              
                                 <a href="{{ route('user.informationUpdate')}}" class=
                                 "btn btn-primary 
-                                    {{(($profile 
+                                    {{(($profile && ($profile->marital_status && $profile->education_level && $profile->religion_id && $profile->height && $profile->language_one && $profile->present_country && $profile->present_city && 
+                                    $profile->birth_country && $profile->birth_city && $profile->father_name && $profile->mother_name && $profile->father_occupation && $profile->mother_occupation)
                                     && (Auth::user()->userRelativeRecords->count() > 0) 
                                     && (Auth::user()->userEducationRecords->count() > 0) 
                                     && (Auth::user()->partnerPreference and Auth::user()->partnerPreference->religion_id)) ? "" : "disabled")
@@ -301,44 +347,43 @@
 
     <script>
 
+    $(document).ready(function() {
 
-            $(document).ready(function() {
+        var religions =  <?php echo json_encode($religions); ?>;
+        var casts =  <?php echo json_encode($casts); ?>;
 
-                var religions =  <?php echo json_encode($religions); ?>;
-                var casts =  <?php echo json_encode($casts); ?>;
+        $(document).on("change", ".religion-select", function(e){
+        e.preventDefault();
 
-                $(document).on("change", ".religion-select", function(e){
-                e.preventDefault();
+            var that = $( this );
+            var q = that.val();
 
-                    var that = $( this );
-                    var q = that.val();
+            that.closest('.card-default').find(".cast-select").empty().append($('<option>',{
+                value: '',
+                text: 'Select Cast'
+            }));
 
-                    that.closest('.card-default').find(".cast-select").empty().append($('<option>',{
-                        value: '',
-                        text: 'Select Cast'
-                    }));
+        
 
-                
-
-                    $.each(casts, function (i, item) {
-                        if(item.religion_id == q)
-                        {
-                        that.closest('.card-default').find(".cast-select").append("<option value='"+ item.id +"'>"+ item.name +"</option>");
-                        }
-                    });
-
-                
-
-                });
-
-
-
-
-
-
+            $.each(casts, function (i, item) {
+                if(item.religion_id == q)
+                {
+                that.closest('.card-default').find(".cast-select").append("<option value='"+ item.id +"'>"+ item.name +"</option>");
+                }
             });
 
-    </script>
+        
+
+        });
+
+
+
+
+
+
+    });
+
+</script>
 @endpush
 
 

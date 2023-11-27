@@ -5,7 +5,8 @@
                 <div class="header-column">
                     <div class="header-row">
                         <div class="header-logo">
-                            <a class="text-decoration-none" href="{{url('/')}}">
+                            <a class="text-decoration-none" 
+                               href="{{ asset('/NilofaMarriageMedia') }}">
                                 <img alt="mmbd" width="80" height="80" data-sticky-width="82" data-sticky-height="40" src="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->logo()]) }}">
                                 <span class="text-7" style="font-family: lobster;color: #b48c4f;"  class="">Marriage Match BD</span>
                             </a>

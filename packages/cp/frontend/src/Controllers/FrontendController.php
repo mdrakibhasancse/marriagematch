@@ -154,4 +154,11 @@ class FrontendController extends Controller
         return back();
 
     }
+
+
+
+    public function NilofaMarriageMedia(){
+        $data['page'] = Page::whereActive(true)->where('id' , 7)->first();
+        return view('frontend::welcome.NilofaMarriageMedia',$data);
+    }
 }

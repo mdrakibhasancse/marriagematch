@@ -19,7 +19,41 @@ class AdminController extends Controller
     public function dashboard()
      {
         menuSubmenu('dashboard', 'dashboard');
-        return view('admin::dashboard.dashboard');
+        $pendingUsers = User::whereHas('profile', function ($q) {
+            $q->where('submit_by_user', 1);
+            $q->where('checked', 0);
+        })->count();
+
+        $activeUsers = User::whereHas('profile', function ($q) {
+            $q->where('checked', 1);
+        })->count();
+
+        $inactiveUsers = User::whereHas('profile', function ($q) {
+            $q->where('checked', 0);
+        })->count();
+
+        $thisMontUsers = User::latest()->where('created_at', '>', now()->subDays(30))->count();
+
+        $todaytUsers = User::latest()->where('created_at', '>', now()->toDateString())->count();
+
+        $paidUsers = User::latest()->whereHas('packageOrders', function ($q) {
+            $q->where('payment_status', 'paid');
+        })->count();
+
+        $freeUsers = User::whereHas('profile', function ($q) {
+            $q->where('user_id', '!=', null);
+            $q->where('package_id', null);
+        })->orWhereDoesntHave('profile')->count();
+
+        return view('admin::dashboard.dashboard',([
+            'pendingUsers' => $pendingUsers,
+            'activeUsers' => $activeUsers,
+            'inactiveUsers' => $inactiveUsers,
+            'todaytUsers' => $todaytUsers,
+            'thisMontUsers' => $thisMontUsers,
+            'paidUsers' => $paidUsers,
+            'freeUsers' => $freeUsers,
+        ]));
      } 
 
     public function languages(){
