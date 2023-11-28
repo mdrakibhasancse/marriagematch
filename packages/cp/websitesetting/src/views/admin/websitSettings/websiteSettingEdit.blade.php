@@ -46,7 +46,7 @@
                                                 <label for="google_search_console" class="control-label"> Google Search Console
                                                     Code
                                                 </label>
-                                                <textarea name="google_search_console" class="form-control textarea" rows="2" id="google_search_console" placeholder="Job ws instraction">{{ old('google_search_console') ?: $ws->google_search_console ?? '' }}</textarea>
+                                                <textarea name="google_search_console" class="form-control textarea" rows="3" id="google_search_console" placeholder="Job ws instraction">{{ old('google_search_console') ?: $ws->google_search_console ?? '' }}</textarea>
                                             </div>
 
 
@@ -54,27 +54,27 @@
                                             <div class="form-group ">
                                                 <label for="google_analytics_code" class="control-label"> Google Analytics
                                                     (Tracking) Code </label>
-                                                <textarea name="google_analytics_code" class="form-control" rows="2" id="google_analytics_code" placeholder="Google Analytics Code (Tracking Code)">{{ old('google_analytics_code') ?: $ws->google_analytics_code ?? '' }}</textarea>
+                                                <textarea name="google_analytics_code" class="form-control" rows="3" id="google_analytics_code" placeholder="Google Analytics Code (Tracking Code)">{{ old('google_analytics_code') ?: $ws->google_analytics_code ?? '' }}</textarea>
 
                                             </div>
 
                                             <div class="form-group ">
                                                 <label for="facebook_pixel_code" class="control-label"> Facebook (Pixel) Code
                                                 </label>
-                                                <textarea name="facebook_pixel_code" class="form-control" rows="2" id="facebook_pixel_code" placeholder="Facebook Pixel Code (Tracking Code)">{{ old('facebook_pixel_code') ?: $ws->facebook_pixel_code ?? '' }}</textarea>
+                                                <textarea name="facebook_pixel_code" class="form-control" rows="3" id="facebook_pixel_code" placeholder="Facebook Pixel Code (Tracking Code)">{{ old('facebook_pixel_code') ?: $ws->facebook_pixel_code ?? '' }}</textarea>
                                             </div>
 
 
                                             <div class="form-group ">
                                                 <label for="footer_address" class="control-label"> Footer Address </label>
-                                                <textarea name="footer_address" class="form-control" rows="2" id="footer_address" placeholder="Enter footer address">{{ old('footer_address') ?: $ws->footer_address ?? '' }}</textarea>
+                                                <textarea name="footer_address" class="form-control" rows="3" id="footer_address" placeholder="Enter footer address">{{ old('footer_address') ?: $ws->footer_address ?? '' }}</textarea>
 
                                             </div>
 
                                             <div class="form-group ">
                                                 <label for="footer_contact" class="control-label"> Footer Contact
                                                 </label>
-                                                <textarea name="footer_contact" class="form-control" rows="2" id="footer_contact" placeholder="Enter Footer contact">{{ old('footer_contact') ?: $ws->footer_contact ?? '' }}</textarea>
+                                                <textarea name="footer_contact" class="form-control" rows="3" id="footer_contact" placeholder="Enter Footer contact">{{ old('footer_contact') ?: $ws->footer_contact ?? '' }}</textarea>
                                             </div>
 
                                             <div class="form-group ">
@@ -104,6 +104,11 @@
                                             <div class="form-group ">
                                                 <label for="meta_author" class="  control-label">Meta Author for Website</label>
                                                 <input type="text" name="meta_author" class="form-control" value="{{ old('meta_author') ?: $ws->meta_author ?? '' }}" id="meta_author" placeholder="Meta Author for SEO of website" autocomplete="off">
+                                            </div>
+
+                                            <div class="form-group ">
+                                                <label for="meta_author" class="  control-label">Meta Title</label>
+                                                <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title') ?: $ws->meta_title ?? '' }}" id="meta_author" placeholder="Meta Title" autocomplete="off">
                                             </div>
 
                                             <div class="form-group ">

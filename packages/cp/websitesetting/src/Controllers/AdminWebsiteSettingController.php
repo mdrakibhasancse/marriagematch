@@ -32,6 +32,7 @@ class AdminWebsiteSettingController extends Controller
         $ws->google_analytics_code = $request->google_analytics_code;
         $ws->facebook_pixel_code = $request->facebook_pixel_code;
         $ws->meta_author = $request->meta_author;
+        $ws->meta_title = $request->meta_title;
         $ws->meta_description = $request->meta_description;
         $ws->footer_copyright = $request->footer_copyright;
         $ws->fb_url = $request->fb_url;

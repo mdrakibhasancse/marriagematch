@@ -3,18 +3,22 @@
 	<head>
 
 		<!-- Basic -->
-    <title>@yield('title')</title>
+		<meta charset="utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- Mobile Metas -->
-		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+        <title>@yield('title')</title>
+
+    
+        @yield('meta_tag')
 
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->favicon()]) }}" type="image/x-icon" />
 		<link rel="apple-touch-icon" href="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->favicon()]) }}">
         <link rel="icon" href="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->favicon()]) }}" type="image/x-icon">
+
+		   <!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
   
 		<!-- Web Fonts  -->
 		<link id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">

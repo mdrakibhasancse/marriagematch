@@ -1,6 +1,12 @@
 @extends('frontend::layouts.NilofaMarraigeMaster')
 @section('title', $ws->website_title)
 
+@section('meta_tags')
+   <meta name="author" content="{{ $ws->meta_author }}">
+   <meta name="title" content="{{ $ws->meta_title }}"> 
+   <meta name="description" content="{{ $ws->meta_description }}">
+@endsection
+
 @section('content')
     <section class="page-header page-header-modern bg-color-light-scale-1 page-header-sm">
         <div class="container">
@@ -18,8 +24,7 @@
                 <div class="col-lg-12">
                     @foreach ($page->pageItems as $item)
                     <p class="lead mb-0 text-4 text-justify-center">{!!  $item->description !!}</p>
-                    @endforeach			
-                                
+                    @endforeach	    
                 </div>
             </div>
         </div>

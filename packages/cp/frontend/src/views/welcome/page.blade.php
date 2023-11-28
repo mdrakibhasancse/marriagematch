@@ -1,6 +1,12 @@
 @extends('frontend::layouts.frontendMaster')
 @section('title',$page->name)
 
+@section('meta_tag')
+    <meta name="author" content="{{ $ws->meta_author }}">
+    <meta name="title" content="{{ $page->name }} | {{ $ws->meta_title }}">
+	<meta name="description" content="{{ $page->excerpt }} | {{ $ws->meta_description }}">
+@endsection
+
 @section('content')
 
 <div role="main" class="main">

@@ -6,16 +6,14 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-		<title>Marriage Match BD</title>	
+		<title>{{$ws->website_title}}</title>	
 
-		<meta name="keywords" content="HTML5 Template" />
-		<meta name="description" content="MMBD">
-		<meta name="author" content="MMBD.com">
+		<meta name="author" content="{{ $ws->meta_author }}">
+		<meta name="title" content="{{ $ws->meta_title }}">
+		<meta name="description" content="{{ $ws->meta_description }}">
 
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-		<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-
+	    {{-- @dd($ws->meta_description); --}}
+		
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->favicon()]) }}" type="image/x-icon" />
 		<link rel="apple-touch-icon" href="{{ route('imagecache', ['template' => 'original', 'filename' => $ws->favicon()]) }}">
@@ -126,6 +124,51 @@
 				</div>
 
 
+				{{-- <section class="call-to-action call-to-action-default with-button-arrow call-to-action-in-footer">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-9 col-lg-9">
+								<div class="call-to-action-content">
+									<h3>Porto is <strong class="font-weight-extra-bold">everything</strong> you need to create a <strong class="font-weight-extra-bold">website!</strong></h3>
+									<p class="mb-0">The Best HTML Site Template on ThemeForest</p>
+								</div>
+							</div>
+							<div class="col-sm-3 col-lg-3">
+								<div class="call-to-action-btn">
+									<a href="http://themeforest.net/item/porto-responsive-html5-template/4106987" target="_blank" class="btn btn-modern text-2 btn-primary">Buy Now</a><span class="arrow hlb d-none d-md-block appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft" style="left: 110%; top: -40px; animation-delay: 100ms;"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section> --}}
+
+				{{-- <section class="call-to-action with-borders with-button-arrow mb-5">
+					<div class="col-12">
+						<div class="call-to-action-content text-center">
+							<h3 class="">Porto is <strong class="font-weight-extra-bold">everything</strong> you need to create a <strong class="font-weight-extra-bold">website!</strong></h3>
+							<a href="{{ asset('/NilofaMarriageMedia') }}" target="_blank" 
+							class="btn text-2 text-white" style="background-color: #FD017C;">Nilofa Marrige Media</a>
+						</div>
+					</div>
+				
+				</section> --}}
+
+
+				<section class="call-to-action with-borders button-centered mb-5">
+					<div class="col-12">
+						<div class="call-to-action-content">
+							<h3>MarrigeMatchBd.Com পরিচালিত হচ্ছে Nilofa Marriage Media দ্বারা.</h3>
+							
+							
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="call-to-action-btn">
+							<a href="{{ asset('/NilofaMarriageMedia') }}" target="_blank" 
+							class="btn text-2 text-white" style="background-color: #FD017C;">Nilofa Marrige Media</a>
+						</div>
+					</div>
+				</section>
 				
 
 				@includeIf('successstory::frontend.story.stories')
