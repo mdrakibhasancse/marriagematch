@@ -60,7 +60,7 @@
                       data-ajax-delay="200"
                       style="">
                       </select>
-                      @error('warehouse_id')
+                      @error('user_id')
                       <span style="color: red">{{ $message }}</span>
                       @enderror
                     </div>

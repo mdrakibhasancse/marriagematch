@@ -164,7 +164,7 @@
 					</div>
 					<div class="col-12">
 						<div class="call-to-action-btn">
-							<a href="{{ asset('/NilofaMarriageMedia') }}" target="_blank" 
+							<a href="https://nilofamarriagemedia.com/" target="_blank" 
 							class="btn text-2 text-white" style="background-color: #FD017C;">Nilofa Marrige Media</a>
 						</div>
 					</div>
