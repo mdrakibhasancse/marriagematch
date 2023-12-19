@@ -4,6 +4,7 @@ namespace Cp\Membership\Controllers;
 
 
 use App\Models\User;
+use App\Models\RegisterMobile;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,9 +43,6 @@ class AdminMembershipController extends Controller
     public function messageUsers(User $user)
     {
         $msgUsers = $user->messageContacts();
-
-
-
         return view('membership::admin.users.messageUsers', compact('msgUsers', 'user'));
     }
 
@@ -1633,5 +1631,17 @@ class AdminMembershipController extends Controller
         }
 
         return back();
+    }
+
+
+    public function registerMobile(){
+        menuSubmenu('users', 'registerMobiles');
+        $data['registerMobiles']  = RegisterMobile::where('user_id', null)->latest()->paginate(100);
+        return view('membership::admin.users.registerMobiles', $data);
+    }
+
+    public function registerMobileDelete(RegisterMobile $mobile){
+        $mobile->delete();
+        return back()->with('success', "Successfully deleted");
     }
 }

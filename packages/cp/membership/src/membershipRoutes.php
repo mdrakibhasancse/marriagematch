@@ -644,4 +644,16 @@ Route::group(['middleware' => ['web', 'auth', 'role:admin|user_manage'], 'prefix
         'uses' => 'Cp\Membership\Controllers\AdminMembershipController@createCvPictureProfileStore',
         'as' => 'admin.createCvPictureProfileStore'
     ]);
+
+
+    Route::get('resgister/mobile', [
+        'uses' => 'Cp\Membership\Controllers\AdminMembershipController@registerMobile',
+        'as' => 'admin.registerMobile'
+    ]);
+
+     Route::get('resgister/mobile/delete/{mobile}', [
+        'uses' => 'Cp\Membership\Controllers\AdminMembershipController@registerMobileDelete',
+        'as' => 'admin.registerMobileDelete'
+    ]);
+
 });

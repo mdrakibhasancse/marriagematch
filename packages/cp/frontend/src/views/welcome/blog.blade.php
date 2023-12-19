@@ -113,37 +113,37 @@
 
                         <div class="col-lg-6">
                             @foreach ($category->latest2Posts() as $post)
-                            <article class="thumb-info thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-1">
-                                <div class="row align-items-center pb-1">
-                                    <div class="col-sm-4">
-                                        <a href="{{ route('singlePost', ['id' => $post->id])}}">
-                                            <img src="{{ route('imagecache', [ 'template'=>'pplg','filename' => $post->fi() ]) }}" class="img-fluid border-radius-0" alt="post">
-                                        </a>
-                                    </div>
-                                    <div class="col-sm-8 ps-sm-0">
-                                        <div class="thumb-info-caption-text">
-                                            <div class="d-inline-block text-default text-1 float-none">
-                                                <a href="blog-post.html" class="text-decoration-none text-color-default">							
-                                                    {{-- @if($post->blogCategories)
-                                                    <?php $i = 1; $len = count($post->blogCategories); ?>
-                                                    @foreach ($post->blogCategories as $category)
-                                                
-                                                            {{ $category->name }}
-                                                            <?php if($i < $len) {echo ',';} $i++;?>
-                                                    @endforeach
-                                                    @endif --}}
-                                                </a>
+                                <article class="thumb-info thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-1">
+                                    <div class="row align-items-center pb-1">
+                                        <div class="col-sm-4">
+                                            <a href="{{ route('singlePost', ['id' => $post->id])}}">
+                                                <img src="{{ route('imagecache', [ 'template'=>'pplg','filename' => $post->fi() ]) }}" class="img-fluid border-radius-0" alt="post">
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-8 ps-sm-0">
+                                            <div class="thumb-info-caption-text">
+                                                <div class="d-inline-block text-default text-1 float-none">
+                                                    <a href="blog-post.html" class="text-decoration-none text-color-default">							
+                                                        {{-- @if($post->blogCategories)
+                                                        <?php $i = 1; $len = count($post->blogCategories); ?>
+                                                        @foreach ($post->blogCategories as $category)
+                                                    
+                                                                {{ $category->name }}
+                                                                <?php if($i < $len) {echo ',';} $i++;?>
+                                                        @endforeach
+                                                        @endif --}}
+                                                    </a>
+                                                </div>
+                                                <h4 class="d-block pb-2 line-height-2 text-3 text-dark font-weight-bold mb-0">
+                                                    <a href="{{ route('singlePost', ['id' => $post->id])}}" class="text-decoration-none text-color-dark text-color-hover-primary">
+                                                        {{ Str::limit($post->title, 20) }}
+                                                    </a>
+                                                </h4>
                                             </div>
-                                            <h4 class="d-block pb-2 line-height-2 text-3 text-dark font-weight-bold mb-0">
-                                                <a href="{{ route('singlePost', ['id' => $post->id])}}" class="text-decoration-none text-color-dark text-color-hover-primary">
-                                                    {{ Str::limit($post->title, 20) }}
-                                                </a>
-                                            </h4>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                        @endforeach	
+                                </article>
+                            @endforeach	
                         </div>
                     </div>
 

@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\RegisterMobile;
 use Cp\Membership\Models\ProfileParameter;
 use Cp\Membership\Models\UserProfile;
 use Cp\Membership\Models\UserSearchTerm;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -45,8 +48,14 @@ class RegisterController extends Controller
     }
 
 
-    public function showRegistrationForm()
+    public function showRegistrationForm(Request $request)
     {
+        $cookie = $request->cookie('usermobile');
+        if($cookie)
+        {
+            return redirect()->route('registerstep2');            
+        }
+        
         $professions = ProfileParameter::where('field_name', 'profession')->where('active', 1)->select('field_value', 'gender')->get();
         return view('auth.register', compact('professions'));
     }
@@ -82,7 +91,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+     
+
         $data['mobile'] = $data['valid_mobile'];
+
         $dob = $data['year'] . '-' . $data['month'] . '-' . $data['day'];
         
         $user =  User::create([
@@ -107,18 +119,104 @@ class RegisterController extends Controller
         $us->user_id = $user->id;
         $us->save();
 
+        $rm = RegisterMobile::where('mobile', $user->mobile)->first();
+        if($rm)
+        {
+            $rm->user_id = $user->id;
+            $rm->save();
+        }
 
-        // $user->welcomeEmailSend();
+        cookie()->queue(cookie()->forget('usermobile'));
 
-        // $admins = User::whereHas('roles', function ($q) {
-        //     $q->where('name', 'admin');
-        // })->where('active', 1)->get();
 
-        // foreach ($admins as $admin) {
-        //     $admin->welcomeNewUserToAdmin($user);
-        // }
+        $user->welcomeEmailSend();
+
+        $admins = User::whereHas('roles', function ($q) {
+            $q->where('name', 'admin');
+        })->where('active', 1)->get();
+
+        foreach ($admins as $admin) {
+            $admin->welcomeNewUserToAdmin($user);
+        }
 
         return $user;
+    }
+
+
+    
+
+    public function registerstep2(Request $request){
+
+        $cookie = $request->cookie('usermobile');
+        if(!$cookie)
+        {
+            return redirect()->route('register');            
+        }
+            
+        $professions = ProfileParameter::where('field_name', 'profession')->where('active', 1)->select('field_value', 'gender')->get();
+        return view('auth.registerstep2', compact('professions'));
+    }
+
+
+    public function unsaveMobile(){
+        cookie()->queue(cookie()->forget('usermobile'));
+        return redirect()->route('register');
+    }
+
+
+
+
+    public function registerstep1(Request $request)
+    {
+         
+
+        // return Validator::make($request->all(), [
+        //     'valid_mobile' => ['required', 'string',  'max:20', 'unique:users'],
+ 
+        // ]);
+
+       $user =  User::where('mobile', $request->valid_mobile)->count();
+  
+       if(!$user)
+        {
+            $cookie = $request->cookie('usermobile');
+            if($cookie)
+            {
+ 
+                return redirect()->route('registerstep2')->cookie($cookie);
+                
+            }  
+
+            $name = 'usermobile';
+            $value = $request->valid_mobile;
+            $min = 60 * 24 * 60; //2 month;
+            $cookie = cookie($name, $value, $min);
+
+
+            $registerMobile = RegisterMobile::where('mobile', $request->valid_mobile)
+                ->where('user_id', null)
+                ->first();
+            if($registerMobile)
+            {
+                $registerMobile->created_at = now();
+                $registerMobile->save();
+
+            }
+            else
+            {
+                $registerMobile = new RegisterMobile();
+                $registerMobile->mobile = $request->valid_mobile;
+                $registerMobile->save();
+            }
+
+            return redirect()->route('registerstep2')->cookie($cookie);
+             
+
+        }
+
+        toast('This mobile number already used', 'error');
+        return redirect()->route('register');
+        
     }
 
    

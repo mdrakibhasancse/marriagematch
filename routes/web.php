@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test', function () {
     return view('frontend::emails.approvedProfileToAdmin');
 });
+
+
+Route::post('/register/step1', [RegisterController::class, 'registerstep1'])->name('registerstep1');
+
+Route::get('/register/step2', [RegisterController::class, 'registerstep2'])->name('registerstep2');
+
+Route::get('/unsave/mobile', [RegisterController::class, 'unsaveMobile'])->name('unsaveMobile');

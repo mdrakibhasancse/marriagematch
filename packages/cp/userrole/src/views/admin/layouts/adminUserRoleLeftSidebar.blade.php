@@ -77,7 +77,15 @@
           <i class="far fa-circle nav-icon"></i>
           <p>User Cv Pictures</p>
         </a>
-      </li>   
+      </li>  
+      
+      
+      <li class="nav-item">
+        <a href="{{ route('admin.registerMobile') }}" class="nav-link {{ session('lsbsm') == 'registerMobiles' ? ' active ' : '' }}">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Registered Mobiles</p>
+        </a>
+      </li>
 
  
 
