@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('link')->nullable();
             $table->boolean('active')->default(1);
             $table->integer('drag_id')->default(0);
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
             $table->unsignedBigInteger('addedby_id')->nullable();
             $table->unsignedBigInteger('editedby_id')->nullable();
             $table->timestamps();

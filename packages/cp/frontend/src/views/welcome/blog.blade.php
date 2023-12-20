@@ -1,7 +1,6 @@
 @extends('frontend::layouts.frontendMaster')
 @section('title', $ws->website_title)
 
-
 @section('content')
 
 <div role="main" class="main pt-3 mt-3">

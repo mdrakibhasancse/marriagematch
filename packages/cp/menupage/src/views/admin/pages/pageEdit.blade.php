@@ -103,6 +103,25 @@
                   </div>
                 </div>
 
+                <br>
+
+                <div class="card">
+                  <div class="card-header">
+                      <h3 class="card-title w3-xlarge">SEO PART</h3>
+                  </div>
+                    <div class="card-body">
+                        <div class="form-group ">
+                            <label for="meta_title" class="  control-label">Meta Title</label>
+                            <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title') ?: $page->meta_title ?? ''}}" id="meta_title" placeholder="Meta Title" autocomplete="off">
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="meta_description" class="control-label">Meta Description </label>
+                            <textarea name="meta_description" class="form-control" rows="4" id="meta_description" placeholder="Meta Description for SEO">{{ old('meta_description') ?: $page->meta_description ?? ''  }}</textarea>
+                        </div>
+                  </div>
+                </div>
+
               </div>
 
             </div>

@@ -185,6 +185,8 @@ class AdminBlogPostController extends Controller
         $blogPost->editor = $request->editor ?? 0;
         $blogPost->featured_slider = $request->featured_slider ?? 0;
         $blogPost->status = $request->status ?? 'pending';
+        $blogPost->meta_title = $request->meta_title ?? '';
+        $blogPost->meta_description = $request->meta_description ?? '';
         $blogPost->addedby_id = Auth::id();
         if ($request->hasFile('featured_image')) {
             $file = $request->featured_image;
@@ -290,6 +292,8 @@ class AdminBlogPostController extends Controller
         $blogPost->editor = $request->editor ?? 0;
         $blogPost->status = $request->status ?? 'pending';
         $blogPost->featured_slider = $request->featured_slider ?? 0;
+        $blogPost->meta_title = $request->meta_title ?? '';
+        $blogPost->meta_description = $request->meta_description ?? '';
         $blogPost->editedby_id = Auth::id();
         if ($request->hasFile('featured_image')) {
             $old_file = 'blog_post_images/' . $blogPost->featured_image;

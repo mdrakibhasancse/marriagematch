@@ -1,6 +1,12 @@
 @extends('frontend::layouts.frontendMaster')
 @section('title', $post->title)
 
+@section('meta_tag')
+   <meta name="title" content="{{ $post->meta_title ?: $post->title ?? '' }}"> 
+   <meta name="description" content="{{ $post->meta_description ?: $post->excerpt ?? '' }}">
+@endsection
+
+
 @push('css')
   <style>
     .style-li{

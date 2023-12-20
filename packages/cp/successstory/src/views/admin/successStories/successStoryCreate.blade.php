@@ -37,76 +37,96 @@
               <div class="card-body" style="background-color: rgba(128, 128, 128, 0.37)">
                 <div class="row" style="margin-bottom: 20px;">
                     <div class="col-sm-7">
-                        <div class="card card-default" style="margin-bottom: 5px;">
+                      <div class="card card-default" style="margin-bottom: 5px;">
+                          <div class="card-body">
+                            @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
+                              <div class="form-group">
+                                  <label for="name">Title {{$language->title}}</label>
+                                <input type="text" name="title[{{$language->language_code}}]" value="" class="form-control" placeholder="Enter title {{$language->title}}">
+                                  @error('title')
+                                  <span style="color:red">{{ $message }}</span>
+                                  @enderror
+                              </div>
+
+                              <div class="form-group">
+                                <label for="">Excerpt {{$language->title}}</label>
+                                <textarea name="excerpt[{{$language->language_code}}]" id="excerpt" class="form-control" rows="3" placeholder="Enter Excerpt {{$language->title}}">{{old('excerpt')}}</textarea>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="">Description {{$language->title}}</label>
+                                <textarea name="description[{{$language->language_code}}]" class="summernote form-control"  rows="5" placeholder="Enter Description {{$language->title}}">{{old('description')}}</textarea>
+                              </div>
+
+                            @endforeach
+
+                              <div class="form-group">
+                                <label for="male_user_id">Male User Email</label>
+                                <input type="email" name="male_user_id" value="{{old('male_user_id')}}" class="form-control" placeholder="Male User Email">
+                                
+                              </div>
+
+                              <div class="form-group">
+                                <label for="female_user_id">Female User Email</label>
+                                <input type="email" name="female_user_id" value="{{old('female_user_id')}}" class="form-control" placeholder="Female User Email">
+                              </div>
+
+
+                              <div class="form-group">
+                                <label for="story_type">Select Story</label>
+                                  <select name="story_type" id="story_type" class="form-control">
+                                  <option value="">Select Story</option>
+                                      @foreach (config('su_parameter.story_type') as $item)
+                                        <option value="{{ $item }}" {{ old('story_type') == $item  ? 'selected' : ' '}}>{{ Str::ucfirst($item) }}</option>
+                                      @endforeach
+                                  </select>
+                                  @error('story_type')
+                                  <span style="color:red">{{ $message }}</span>
+                                  @enderror
+                              </div>
+
+
+                              <div class="form-group">
+                                <label class="mr-3"><input type="checkbox"  name="active" value="1" {{  old('active') == 1 ? 'checked' : '' }} checked> Active</label>
+                              </div>
+
+                                <div class="form-group">
+                                  <label class="mr-3"><input type="checkbox"  name="featured" value="1" {{  old('featured') == 1 ? 'checked' : '' }}checked> Featured</label>
+                                </div>
+
+
+                              <div class="form-group">
+                                <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"  name="editor" value="1" {{  old('editor') == 1 ? 'checked' : '' }} checked> Editor
+                                    </label>
+                                </div>
+                              </div>
+
+
+                          </div>
+                      </div>
+
+                      <br>
+                    
+                      <div class="card card-default" style="margin-bottom: 20px;">
+                          <div class="card-header">
+                              <h3 class="card-title w3-xlarge">SEO PART</h3>
+                          </div>
                             <div class="card-body">
-                              @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
-                                <div class="form-group">
-                                    <label for="name">Title {{$language->title}}</label>
-                                  <input type="text" name="title[{{$language->language_code}}]" value="" class="form-control" placeholder="Enter title {{$language->title}}">
-                                    @error('title')
-                                    <span style="color:red">{{ $message }}</span>
-                                    @enderror
+                                <div class="form-group ">
+                                    <label for="meta_title" class="  control-label">Meta Title</label>
+                                    <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title') }}" id="meta_title" placeholder="Meta Title" autocomplete="off">
                                 </div>
 
-                                <div class="form-group">
-                                  <label for="">Excerpt {{$language->title}}</label>
-                                  <textarea name="excerpt[{{$language->language_code}}]" id="excerpt" class="form-control" rows="3" placeholder="Enter Excerpt {{$language->title}}">{{old('excerpt')}}</textarea>
+                                <div class="form-group ">
+                                    <label for="meta_description" class="control-label">Meta Description </label>
+                                    <textarea name="meta_description" class="form-control" rows="4" id="meta_description" placeholder="Meta Description for SEO">{{ old('meta_description')}}</textarea>
                                 </div>
-
-                                <div class="form-group">
-                                  <label for="">Description {{$language->title}}</label>
-                                  <textarea name="description[{{$language->language_code}}]" class="summernote form-control"  rows="5" placeholder="Enter Description {{$language->title}}">{{old('description')}}</textarea>
-                                </div>
-
-                              @endforeach
-
-                                <div class="form-group">
-                                  <label for="male_user_id">Male User Email</label>
-                                  <input type="email" name="male_user_id" value="{{old('male_user_id')}}" class="form-control" placeholder="Male User Email">
-                                 
-                                </div>
-
-                                <div class="form-group">
-                                  <label for="female_user_id">Female User Email</label>
-                                  <input type="email" name="female_user_id" value="{{old('female_user_id')}}" class="form-control" placeholder="Female User Email">
-                                </div>
-
-
-                                <div class="form-group">
-                                  <label for="story_type">Select Story</label>
-                                   <select name="story_type" id="story_type" class="form-control">
-                                    <option value="">Select Story</option>
-                                       @foreach (config('su_parameter.story_type') as $item)
-                                          <option value="{{ $item }}" {{ old('story_type') == $item  ? 'selected' : ' '}}>{{ Str::ucfirst($item) }}</option>
-                                        @endforeach
-                                   </select>
-                                    @error('story_type')
-                                    <span style="color:red">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="form-group">
-                                  <label class="mr-3"><input type="checkbox"  name="active" value="1" {{  old('active') == 1 ? 'checked' : '' }} checked> Active</label>
-                                </div>
-
-                                 <div class="form-group">
-                                    <label class="mr-3"><input type="checkbox"  name="featured" value="1" {{  old('featured') == 1 ? 'checked' : '' }}checked> Featured</label>
-                                  </div>
-
-
-                                <div class="form-group">
-                                  <div class="checkbox">
-                                  <label>
-                                      <input type="checkbox"  name="editor" value="1" {{  old('editor') == 1 ? 'checked' : '' }} checked> Editor
-                                      </label>
-                                  </div>
-                                </div>
-
-
-                            </div>
-                        </div>
+                          </div>
+                      </div>
                     </div>
+                      
                     <div class="col-sm-5">
                         <div class="card card-default" style="margin-bottom: 20px;">
                             <div class="card-header">

@@ -1,7 +1,12 @@
 @extends('frontend::layouts.frontendMaster')
 @section('title', $ws->website_title)
-@section('content')
 
+@section('meta_tag')
+   <meta name="title" content="{{ $story->meta_title ?: $story->title ?? '' }}"> 
+   <meta name="description" content="{{ $story->meta_description ?: $story->excerpt ?? '' }}">
+@endsection
+
+@section('content')
 <section class="page-header page-header-modern bg-color-light-scale-1 page-header-sm mb-0">
     <div class="container">
         <div class="row">

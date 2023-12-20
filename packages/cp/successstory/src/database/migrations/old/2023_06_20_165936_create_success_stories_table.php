@@ -23,6 +23,8 @@ return new class extends Migration
             $table->boolean('editor')->default(1);
             $table->boolean('featured')->default(1);
             $table->string('story_type')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
             $table->unsignedBigInteger('addedby_id')->nullable();
             $table->unsignedBigInteger('editedby_id')->nullable();
             $table->timestamps();

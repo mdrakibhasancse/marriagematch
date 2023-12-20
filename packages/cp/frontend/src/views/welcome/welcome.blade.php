@@ -8,10 +8,11 @@
 
 		<title>{{$ws->website_title}}</title>	
 
+		
 		<meta name="author" content="{{ $ws->meta_author }}">
 		<meta name="title" content="{{ $ws->meta_title }}">
 		<meta name="description" content="{{ $ws->meta_description }}">
-
+       
 	    {{-- @dd($ws->meta_description); --}}
 		
 		<!-- Favicon -->

@@ -2,9 +2,8 @@
 @section('title',$page->name)
 
 @section('meta_tag')
-    <meta name="author" content="{{ $ws->meta_author }}">
-    <meta name="title" content="{{ $page->name }} | {{ $ws->meta_title }}">
-	<meta name="description" content="{{ $page->excerpt }} | {{ $ws->meta_description }}">
+   <meta name="title" content="{{ $page->meta_title ?: $page->name ?? '' }}"> 
+   <meta name="description" content="{{ $page->meta_description ?: $page->excerpt ?? '' }}">
 @endsection
 
 @section('content')

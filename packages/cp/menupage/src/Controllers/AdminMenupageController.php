@@ -126,6 +126,8 @@ class AdminMenupageController extends Controller
         $page->name = $request->name;
         $page->excerpt = $request->excerpt;
         $page->link  = $request->link ?: null;
+        $page->meta_title = $request->meta_title ?? '';
+        $page->meta_description = $request->meta_description ?? '';
         $page->addedby_id = Auth::id();
         $page->save();
         $page->menus()->attach($request->menus_id, ['addedby_id' => Auth::id()]);
@@ -157,6 +159,8 @@ class AdminMenupageController extends Controller
         $page->excerpt     = $request->excerpt;
         $page->active      = $request->active ?? 0;
         $page->link        = $request->link ?: null;
+        $page->meta_title = $request->meta_title ?? '';
+        $page->meta_description = $request->meta_description ?? '';
         $page->editedby_id = Auth::id();
         $page->save();
         $page->menus()->detach($page->menus_id);

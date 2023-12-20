@@ -108,7 +108,7 @@
 
                                             <div class="form-group ">
                                                 <label for="meta_author" class="  control-label">Meta Title</label>
-                                                <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title') ?: $ws->meta_title ?? '' }}" id="meta_author" placeholder="Meta Title" autocomplete="off">
+                                                <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title') ?? $ws->meta_title ?? '' }}" id="meta_author" placeholder="Meta Title" autocomplete="off">
                                             </div>
 
                                             <div class="form-group ">

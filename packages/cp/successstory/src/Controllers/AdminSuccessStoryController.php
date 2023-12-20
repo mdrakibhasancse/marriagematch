@@ -81,6 +81,8 @@ class AdminSuccessStoryController extends Controller
         $story->editor = $request->editor ?? 0;
         $story->featured = $request->featured ?? 0;
         $story->story_type = $request->story_type;
+        $story->meta_title = $request->meta_title ?? '';
+        $story->meta_description = $request->meta_description ?? '';
         $story->addedby_id = Auth::id();
         if ($request->hasFile('featured_image')) {
             $file = $request->featured_image;
@@ -141,6 +143,8 @@ class AdminSuccessStoryController extends Controller
         $story->editor = $request->editor ?? 0;
         $story->featured = $request->featured ?? 0;
         $story->story_type = $request->story_type;
+        $story->meta_title = $request->meta_title ?? '';
+        $story->meta_description = $request->meta_description ?? '';
         $story->editedby_id = Auth::id();
         if ($request->hasFile('featured_image')) {
             $old_file = 'success_story_images/' . $story->featured_image;
