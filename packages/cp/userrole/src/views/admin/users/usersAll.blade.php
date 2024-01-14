@@ -107,6 +107,30 @@
             
     });
 
+
+    $(document).on('click', ".activeUserProfile", function(e){
+        e.preventDefault();
+        var that = $( this );
+        var url = that.attr('data-url');
+        $.ajax({
+            url: url,
+            method: "get",
+            success: function(res)
+            {
+               if(res.active == true)
+               {
+                  that.removeClass('btn-primary').addClass('btn-success');
+                  that.text('Active');
+               }
+               else
+               {
+                  that.removeClass('btn-success').addClass('btn-primary');
+                  that.text('Active Now');
+               }
+            }
+        });
+    });
+
   });
 </script>
 @endpush

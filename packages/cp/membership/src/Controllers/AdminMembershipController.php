@@ -1644,4 +1644,27 @@ class AdminMembershipController extends Controller
         $mobile->delete();
         return back()->with('success', "Successfully deleted");
     }
+
+
+    public function userProfileActive(Request $request){
+
+        $user = User::find($request->user);
+        $up = $user->profile;
+        if(($up->checked == 0) and ($up->submit_by_user == 1)){
+          $up->checked =  1 ;
+          $active = true;
+        }else{
+          $up->checked =  0 ;
+          $active = false;
+        }
+
+        $up->save();
+        if ($up->checked == 1) {
+            $user->adminApprovedProfile();
+        }
+        return response()->json([
+            'success' => true,
+            'active' => $active
+        ]);
+    }
 }

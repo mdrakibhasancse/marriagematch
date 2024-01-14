@@ -76,8 +76,8 @@
                               </form>
                           </div>
                     </td>
-                    <td>{{$story->title}}</td>
-                    <td>{{ Str::limit($story->excerpt, 70) }}</td>
+                    <td>{{$story->localeTitleShow()}}</td>
+                    <td>{{ Str::limit($story->localeExcerptShow(), 70) }}</td>
                     <td>
                         <img  src="{{ route('imagecache', ['template' => 'ppsm', 'filename' => $story->fi()]) }}" alt="story">
                     </td>

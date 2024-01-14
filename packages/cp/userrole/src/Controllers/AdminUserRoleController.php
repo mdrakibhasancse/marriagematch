@@ -130,6 +130,7 @@ class AdminUserRoleController extends Controller
                 }
             }elseif ($type == 'activeUsers') {
                 $data['users'] = User::whereHas('profile', function ($q) {
+                    $q->where('submit_by_user', 1);
                     $q->where('checked', 1);
                 })->paginate(100);
                 if (request()->ajax()) {
@@ -141,6 +142,7 @@ class AdminUserRoleController extends Controller
                 }
             } elseif ($type == 'inactiveUsers') {
                 $data['users'] = User::whereHas('profile', function ($q) {
+                    $q->where('submit_by_user', 0);
                     $q->where('checked', 0);
                 })->paginate(100);
                 if (request()->ajax()) {

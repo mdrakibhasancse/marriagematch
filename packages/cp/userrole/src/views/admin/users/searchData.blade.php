@@ -33,17 +33,30 @@
         <p class="m-0 p-0"> {{$user->name}}</p>
         <p class="m-0 p-0">{{$user->email}}</p>
         <p class="m-0 p-0"> {{$user->mobile}}</p>
-         <p class="m-0 p-0"> {{$user->mobile}}</p>
+        <p class="m-0 p-0"> {{$user->mobile}}</p>
+
+     
        
-        @if(($user->profile && $user->profile->submit_by_user) && (!$user->profile->checked))
-            <span class="badge badge-primary">Pending
-        </span>
+        @if($user->profile && $user->profile->submit_by_user == 1 && $user->profile->checked == 0)
+            <span class="badge badge-primary">Pending</span>
+        &nbsp;
+
+        <button class="btn btn-primary btn-xs activeUserProfile" data-url="{{route("admin.userProfileActive",['user'=>$user->id])}}" >
+            Active Now
+        </button>
+
+
+
+        @elseif($user->profile && $user->profile->submit_by_user == 1 && $user->profile->checked == 1)
+        <span class="badge badge-primary">Active</span>
+
+         @elseif($user->profile && $user->profile->submit_by_user == 0 && $user->profile->checked == 0)
+          <span class="badge badge-primary">Inactive</span>
+        
         @endif
 
-         @if(($user->profile && $user->profile->checked))
-            <span class="badge badge-primary">Active
-        </span>
-        @endif
+
+        
           
       
       </td>
@@ -67,7 +80,7 @@
 
       <td>
           @if($user->profile)
-            {!!$user->profile->submit_by_user == 1 ? '<span class="badge badge-primary">Yes</span>' : '<span class="badge badge-danger">No</span>'!!}
+            {!!$user->profile->submit_by_user == 1 &&  $user->profile->checked == 0 ? '<span class="badge badge-primary">Yes</span>' : '<span class="badge badge-danger">No</span>'!!}
           @else
           <span class="badge badge-danger">No</span>
           @endif

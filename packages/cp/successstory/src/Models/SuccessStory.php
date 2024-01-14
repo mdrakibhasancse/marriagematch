@@ -46,6 +46,34 @@ class SuccessStory extends Model
         }
     }
 
+    function localeTitleShow() 
+    {
+
+        $a = json_decode(json_encode($this->getTranslations('title')), true);
+        $code = app()->getLocale();
+
+        if($a)
+        {
+            if(array_key_exists($code, $a))
+            {
+                return $a[$code];
+            }
+            
+            else
+            {
+                foreach($a as $k => $item)
+                {
+                    if(array_key_exists($k, $a))
+                    {
+                        return $a[$k];
+                    }
+                }
+
+            }
+            
+        }
+    }
+
     function localeExcerpt($code) 
     {
         $a = json_decode(json_encode($this->getTranslations('excerpt')), true);
@@ -56,6 +84,34 @@ class SuccessStory extends Model
                 return $a[$code];
             }
             return null;
+            
+        }
+    }
+
+     function localeExcerptShow() 
+    {
+
+        $a = json_decode(json_encode($this->getTranslations('excerpt')), true);
+        $code = app()->getLocale();
+
+        if($a)
+        {
+            if(array_key_exists($code, $a))
+            {
+                return $a[$code];
+            }
+            
+            else
+            {
+                foreach($a as $k => $item)
+                {
+                    if(array_key_exists($k, $a))
+                    {
+                        return $a[$k];
+                    }
+                }
+
+            }
             
         }
     }

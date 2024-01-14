@@ -1,6 +1,5 @@
 @extends('frontend::layouts.frontendMaster')
 @section('title', $ws->website_title)
-
 @section('content')
 
 <div role="main" class="main pt-3 mt-3">
@@ -9,7 +8,7 @@
             @foreach ($latest_posts->take(1) as $post)
 
             <div class="col-lg-7 mb-4 pb-2">
-                <a href="{{ route('singlePost', ['id' => $post->id])}}">
+                <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">
                     <article class="thumb-info thumb-info-no-borders thumb-info-bottom-info thumb-info-bottom-info-dark thumb-info-bottom-info-show-more thumb-info-no-zoom border-radius-0">
                         <div class="thumb-info-wrapper thumb-info-wrapper-opacity-6">
                             <img style="height:480px;" src="{{ route('imagecache', [ 'template'=>'original','filename' => $post->fi()]) }}" class="img-fluid" alt="How To Take Better Concert Pictures in 30 Seconds">
@@ -34,7 +33,7 @@
                     <div class="row align-items-center pb-1">
                         <div class="col-sm-5">
 
-                            <a href="{{ route('singlePost', ['id' => $post->id])}}">
+                            <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">
                                 <img style="height:120px;" src="{{ route('imagecache', [ 'template'=>'original','filename' => $post->fi() ]) }}" class="img-fluid border-radius-0" alt="Simple Ways to Have a Pretty Face">
                             </a>
                         </div>
@@ -52,7 +51,7 @@
                                     </div>
                                 </div>
                                 <h2 class="d-block line-height-2 text-4 text-dark font-weight-bold mt-1 mb-0">
-                                    <a href="{{ route('singlePost', ['id' => $post->id])}}" class="text-decoration-none text-color-dark text-color-hover-primary">{{ $post->title }}</a>
+                                    <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}" class="text-decoration-none text-color-dark text-color-hover-primary">{{ $post->title }}</a>
                                 </h2>
                             </div>
                         </div>
@@ -82,7 +81,7 @@
                             <article class="thumb-info thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-2">
                                 <div class="row">
                                     <div class="col">
-                                        <a href="{{ route('singlePost', ['id' => $category->latestFirstPost()->id])}}">
+                                        <a href="{{ route('singlePost', ['slug' => $category->latestFirstPost()->slug ?? \Str::slug($category->latestFirstPost()->localeTitleShow())])}}">
                                             <img src="{{ route('imagecache', [ 'template'=>'original','filename' => $category->latestFirstPost()->fi() ]) }}" class="img-fluid border-radius-0" alt="Category post">
                                         </a>
                                     </div>
@@ -102,7 +101,7 @@
                                             </a>
                                             </div>
                                             <h4 class="d-block line-height-2 text-4 text-dark font-weight-bold mb-0">
-                                                <a href="{{ route('singlePost', ['id' => $category->latestFirstPost()->id])}}" class="text-decoration-none text-color-dark text-color-hover-primary">   {{$category->latestFirstPost()->title}}</a>
+                                                <a href="{{ route('singlePost', ['slug' => $category->latestFirstPost()->slug ?? \Str::slug($category->latestFirstPost()->localeTitleShow()) ])}}" class="text-decoration-none text-color-dark text-color-hover-primary">   {{$category->latestFirstPost()->title}}</a>
                                             </h4>
                                         </div>
                                     </div>
@@ -115,7 +114,7 @@
                                 <article class="thumb-info thumb-info-no-zoom bg-transparent border-radius-0 pb-4 mb-1">
                                     <div class="row align-items-center pb-1">
                                         <div class="col-sm-4">
-                                            <a href="{{ route('singlePost', ['id' => $post->id])}}">
+                                            <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">
                                                 <img src="{{ route('imagecache', [ 'template'=>'pplg','filename' => $post->fi() ]) }}" class="img-fluid border-radius-0" alt="post">
                                             </a>
                                         </div>
@@ -134,7 +133,7 @@
                                                     </a>
                                                 </div>
                                                 <h4 class="d-block pb-2 line-height-2 text-3 text-dark font-weight-bold mb-0">
-                                                    <a href="{{ route('singlePost', ['id' => $post->id])}}" class="text-decoration-none text-color-dark text-color-hover-primary">
+                                                    <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}" class="text-decoration-none text-color-dark text-color-hover-primary">
                                                         {{ Str::limit($post->title, 20) }}
                                                     </a>
                                                 </h4>
@@ -163,7 +162,7 @@
                         <article class="thumb-info thumb-info-no-zoom bg-transparent border-radius-0 pb-2 mb-2">
                             <div class="row">
                                 <div class="col">
-                                    <a href="{{ route('singlePost', ['id' => $post->id])}}">
+                                    <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">
                                         <img src="{{ route('imagecache', ['template' => 'cpmd', 'filename' => $post->fi()]) }}" class="img-fluid border-radius-0" alt="Main Reasons To Stop Texting And Driving">
                                     </a>
                                 </div>
@@ -183,7 +182,7 @@
                                             </div>
                                         </div>
                                         <h4 class="d-block line-height-2 text-4 text-dark font-weight-bold mb-0">
-                                            <a href="{{ route('singlePost', ['id' => $post->id])}}" class="text-decoration-none text-color-dark text-color-hover-primary">{{ $post->title }}</a>
+                                            <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}" class="text-decoration-none text-color-dark text-color-hover-primary">{{ $post->title }}</a>
                                         </h4>
                                     </div>
                                 </div>
@@ -212,7 +211,7 @@
                             <article>
                                 <div class="post-image">
                                     <div class="img-thumbnail img-thumbnail-no-borders d-block">
-                                        <a href="{{ route('singlePost', ['id' => $post->id])}}">
+                                        <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">
                                             <img src="{{ route('imagecache', [ 'template'=>'original','filename' => $post->fi() ]) }}" class="border-radius-0" width="50" height="50" alt="How to Become a Professional Photographer">
                                         </a>
                                     </div>
@@ -227,7 +226,7 @@
                                                 @endforeach
                                         @endif --}}
                                     </div>
-                                    <h4 class="font-weight-normal text-3 mb-0"><a href="{{ route('singlePost', ['id' => $post->id])}}" class="text-dark">{{ $post->title }}</a></h4>
+                                    <h4 class="font-weight-normal text-3 mb-0"><a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow())])}}" class="text-dark">{{ $post->title }}</a></h4>
                                 </div>
                             </article>
                         </li>
@@ -251,7 +250,7 @@
                             <article>
                                 <div class="post-image">
                                     <div class="img-thumbnail img-thumbnail-no-borders d-block">
-                                        <a href="{{ route('singlePost', ['id' => $post->id])}}">
+                                        <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">
                                             <img src="{{ route('imagecache', [ 'template'=>'original','filename' => $post->fi() ]) }}" class="border-radius-0" width="50" height="50" alt="12 Healthiest Foods to Eat for Breakfast">
                                         </a>
                                     </div>
@@ -266,7 +265,7 @@
                                             @endforeach
                                         @endif --}}
                                     </div>
-                                    <h4 class="font-weight-normal text-3 mb-0"><a href="{{ route('singlePost', ['id' => $post->id])}}" class="text-dark">{{ $post->title }}</a></h4>
+                                    <h4 class="font-weight-normal text-3 mb-0"><a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}" class="text-dark">{{ $post->title }}</a></h4>
                                 </div>
                             </article>
                         </li>

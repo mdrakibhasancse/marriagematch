@@ -42,7 +42,7 @@
                     <div class="col-sm-7">
                         <div class="card card-default" style="margin-bottom: 5px;">
                             <div class="card-body">
-                                  @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
+                                @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
                                 <div class="form-group">
                                     <label for="name">Title {{$language->title}}</label>
                                   <input type="text" name="title[{{$language->language_code}}]" value="{{ $blogPost->localeTitle($language->language_code) }}" class="form-control" placeholder="Enter title {{$language->title}}">
@@ -71,6 +71,11 @@
                                 </div>
 
                               @endforeach
+
+                                <div class="form-group">
+                                  <label for="">Slug</label>
+                                  <input name="slug" id="slug" value="{{ $blogPost->slug ?? old('slug')}}" class="form-control" placeholder="Enter slug">
+                                </div>
 
                                 <div class="form-group">
                                   <label>Tags (For Search)</label>

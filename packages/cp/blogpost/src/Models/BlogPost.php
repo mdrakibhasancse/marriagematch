@@ -32,6 +32,7 @@ class BlogPost extends Model
 
 
 
+
     function localeTitle($code) 
     {
         $a = json_decode(json_encode($this->getTranslations('title')), true);
@@ -42,6 +43,34 @@ class BlogPost extends Model
                 return $a[$code];
             }
             return null;
+            
+        }
+    }
+
+    function localeTitleShow() 
+    {
+
+        $a = json_decode(json_encode($this->getTranslations('title')), true);
+        $code = app()->getLocale();
+
+        if($a)
+        {
+            if(array_key_exists($code, $a))
+            {
+                return $a[$code];
+            }
+            
+            else
+            {
+                foreach($a as $k => $item)
+                {
+                    if(array_key_exists($k, $a))
+                    {
+                        return $a[$k];
+                    }
+                }
+
+            }
             
         }
     }
@@ -62,6 +91,34 @@ class BlogPost extends Model
         }
     }
 
+    function localeExcerptShow() 
+    {
+
+        $a = json_decode(json_encode($this->getTranslations('excerpt')), true);
+        $code = app()->getLocale();
+
+        if($a)
+        {
+            if(array_key_exists($code, $a))
+            {
+                return $a[$code];
+            }
+            
+            else
+            {
+                foreach($a as $k => $item)
+                {
+                    if(array_key_exists($k, $a))
+                    {
+                        return $a[$k];
+                    }
+                }
+
+            }
+            
+        }
+    }
+
     function localeDescription($code) 
     {
         $a = json_decode(json_encode($this->getTranslations('description')), true);
@@ -72,6 +129,35 @@ class BlogPost extends Model
                 return $a[$code];
             }
             return null;
+            
+        }
+    }
+
+    function localeDescriptionShow() 
+    {
+
+        $a = json_decode(json_encode($this->getTranslations('description')), true);
+
+        $code = app()->getLocale();
+
+        if($a)
+        {
+            if(array_key_exists($code, $a))
+            {
+                return $a[$code];
+            }
+            
+            else
+            {
+                foreach($a as $k => $item)
+                {
+                    if(array_key_exists($k, $a))
+                    {
+                        return $a[$k];
+                    }
+                }
+
+            }
             
         }
     }

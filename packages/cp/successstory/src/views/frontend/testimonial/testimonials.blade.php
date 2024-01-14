@@ -7,9 +7,9 @@
                 
                 <img height="200" class="card-img-top" src="{{ route('imagecache', ['template' => 'cpmd', 'filename' => $testimonial->fi()]) }}" alt="Card Image">
                 <div class="card-body" style="padding:10px;min-height:180px;">
-                    <h4 class="card-title text-4 font-weight-bold text-center"> {{ $testimonial->title }}</h4>
+                    <h4 class="card-title text-4 font-weight-bold text-center"> {{ $testimonial->localeTitleShow() }}</h4>
                     <p class="card-text text-center">  
-                    {{ Str::limit($testimonial->excerpt, 130, '...') }}
+                    {{ Str::limit($testimonial->localeExcerptShow(), 130, '...') }}
                     </p>
                     
                 </div>

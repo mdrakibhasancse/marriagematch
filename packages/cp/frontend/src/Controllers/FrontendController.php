@@ -22,9 +22,12 @@ use Config;
 
 class FrontendController extends Controller
 {
-    public function welcome()
-    {
+    public function welcome(Request $request)
+    {       
+        if (strpos($request->fullUrl(), '?signup') !== false) 
+        { abort(404); }
 
+ 
         if(Session::has('locale')){
             $locale = Session::get('locale',Config::get('app.locale'));
         }
@@ -73,16 +76,21 @@ class FrontendController extends Controller
     }
 
 
-    public function singlePost($id)
+    public function singlePost($slug)
     {
+
         if(Session::has('locale')){
             $locale = Session::get('locale',Config::get('app.locale'));
         }
         else{
             $locale = env('DEFAULT_LANGUAGE');
         }
-        BlogPost::find($id)->increment('view_count');
-        $post = BlogPost::with('files')->find($id);
+
+
+        BlogPost::where('slug' ,$slug)->first()->increment('view_count');
+
+        $post = BlogPost::with('files')->where('slug' , $slug)->first();
+    
         $postCategories = $post->blogCategories->pluck('id');
         $postIds = DB::table('blog_category_posts')->whereIn('blog_category_id', $postCategories)->take(8)->pluck('blog_post_id');
 

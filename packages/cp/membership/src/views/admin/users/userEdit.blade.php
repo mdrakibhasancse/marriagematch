@@ -56,10 +56,6 @@
                                 <div class="fb-profile">
 
                                     <div class="profile-image">
-                                        {{-- <img align="left" class="fb-image-profile w3-animate-zoom img-thumbnail"
-                                        src="{{ route('imagecache', ['template' => 'pplg', 'filename' => $user->fi()]) }}"
-                                        alt="Profile image example" /> --}}
-
                                          @includeif('membership::admin.partials.userProfilePic')
                                       
                                     </div>

@@ -638,6 +638,25 @@
 
              <br>
 
+             <div class="row">
+                <div class="col-sm-12">
+                    <div class="card card-default" style="margin-bottom: 5px;">
+                        <div class="card-header">
+                           <h6> User Profile Status:</h6>
+                        </div>
+                        <div class="card-body">
+                           <b> Pending : প্রোফাইল ইনফো চেক করা হয়েছে এবং এপ্রুভ এর জন্য সাবমিট করা হয় নাই।</b>
+                           <p></p>
+                            <b>Active : প্রোফাইল ইনফো চেক করা হয়েছে এবং এপ্রুভ এর জন্য সাবমিট করা হয়েছে।</b>
+                            <p></p>
+                           <b> Inactive : প্রোফাইল ইনফো চেক করা হয় নাই এবং এপ্রুভ এর জন্য সাবমিট করা হয় নাই।</b>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
 
             {{-- add category subcategory --}}
             <div class="row">

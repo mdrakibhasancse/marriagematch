@@ -39,7 +39,7 @@
                             <article class="post post-large blog-single-post border-0 m-0 p-0">
                                 <div class="post-content ms-0">
 
-                                    <h2 class="font-weight-semi-bold"><a href="{{ route('singlePost', ['id' => $post->id])}}">{{ $post->title }}</a></h2>
+                                    <h2 class="font-weight-semi-bold"><a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">{{ $post->localeTitleShow() }}</a></h2>
 
                                      <br>
                                     <img class="w-100" src="{{ route('imagecache', ['template' => 'original', 'filename' => $post->fi()]) }}" alt="">
@@ -95,14 +95,14 @@
                                <li>
                                 <div class="post-image">
                                     <div class="img-thumbnail img-thumbnail-no-borders d-block">
-                                        <a href="{{ route('singlePost', ['id' => $post->id])}}">
+                                        <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">
                                             <img src="{{ route('imagecache', ['template' => 'sbixs', 'filename' => $post->fi()]) }}" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="post-info">
-                                    <a href="{{ route('singlePost', ['id' => $post->id])}}">{!! Str::limit($post->title,15) !!}</a>
-                                    <a style="text-decoration:none" href="{{ route('singlePost', ['id' => $post->id])}}">
+                                    <a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">{!! Str::limit($post->title,15) !!}</a>
+                                    <a style="text-decoration:none" href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">
                                         <div class="post-meta">
                                             {!! Str::limit($post->excerpt,15) !!}
                                         </div>
@@ -132,14 +132,14 @@
 
                                                 <article class="post post-medium border-0 pb-0 mb-5">
                                                     <div class="post-image">
-                                                        <a href="{{ route('singlePost', ['id' => $post->id])}}">
+                                                        <a href="{{ route('singlePost',['slug' => $post->slug ?? \Str::slug($post->localeTitleShow()) ])}}">
                                                             <img src="{{  route('imagecache', ['template' => 'cpmd', 'filename' => $post->fi()]) }}" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content">
 
-                                                        <h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"><a href="{{ route('singlePost', ['id' => $post->id])}}"> {!! Str::limit($post->title,20) !!}</a></h2>
-                                                        <a style="text-decoration:none" href="{{ route('singlePost', ['id' => $post->id])}}"><p >{!! Str::limit($post->excerpt,50) !!}</p></a>
+                                                        <h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"><a href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow())])}}"> {!! Str::limit($post->title,20) !!}</a></h2>
+                                                        <a style="text-decoration:none" href="{{ route('singlePost', ['slug' => $post->slug ?? \Str::slug($post->localeTitleShow())])}}"><p >{!! Str::limit($post->excerpt,50) !!}</p></a>
 
                                                     </div>
                                                 </article>

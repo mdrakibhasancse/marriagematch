@@ -656,4 +656,9 @@ Route::group(['middleware' => ['web', 'auth', 'role:admin|user_manage'], 'prefix
         'as' => 'admin.registerMobileDelete'
     ]);
 
+     Route::get('user/profile/active/{user}', [
+        'uses' => 'Cp\Membership\Controllers\AdminMembershipController@userProfileActive',
+        'as' => 'admin.userProfileActive'
+    ]);
+
 });

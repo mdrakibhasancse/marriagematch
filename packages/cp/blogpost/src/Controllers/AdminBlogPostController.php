@@ -107,8 +107,9 @@ class AdminBlogPostController extends Controller
 
     public function blogPostsAll()
     {
+    
         menuSubmenu('blogPost', 'blogPostsAll');
-        $data['bolgPosts'] = $bolgPosts = BlogPost::latest()->paginate(30);
+        $data['bolgPosts'] = BlogPost::latest()->paginate(30);
     //    dd( $data['bolgPosts']);
      
         return view('blogpost::admin.blogPosts.blogPostsAll', $data);
@@ -179,6 +180,8 @@ class AdminBlogPostController extends Controller
 
         $blogPost = new BlogPost();
         $blogPost->title = $request->title;
+        $blogPost->slug = Str::slug($blogPost->localeTitleShow());
+
         $blogPost->excerpt = $request->excerpt;
         $blogPost->description = $request->description;
         $blogPost->active = $request->active ?? 0;
@@ -262,7 +265,7 @@ class AdminBlogPostController extends Controller
     public function blogPostUpdate(Request $request, BlogPost $blogPost)
     {
 
-        // dd($request->all());
+        
         menuSubmenu('blogPost', 'blogPostsAll');
         // $this->validate($request, [
         //     'title' => 'required|string',
@@ -286,6 +289,7 @@ class AdminBlogPostController extends Controller
         }
 
         $blogPost->title = $request->title;
+        $blogPost->slug =  $request->slug ? Str::slug($request->slug) : Str::slug($blogPost->localeTitleShow());
         $blogPost->excerpt = $request->excerpt;
         $blogPost->description = $request->description;
         $blogPost->active = $request->active ?? 0;

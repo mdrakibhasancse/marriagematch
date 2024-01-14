@@ -20,10 +20,10 @@
 				<img  class="card-img-top" src="{{ route('imagecache', ['template' => 'cpmd', 'filename' => $story->fi()]) }}" alt="Card Image">
 				<div class="card-body" style="padding:10px; min-height:180px;">
 					<h4 class="card-title text-4 font-weight-bold text-center">
-						 {{ Str::limit($story->title, 45, '...') }}
+						 {{ Str::limit($story->localeTitleShow(), 45, '...') }}
 					</h4>
 					<p class="card-text text-center">
-					  {{ Str::limit($story->excerpt, 120, '...') }}
+					  {{ Str::limit($story->localeExcerptShow(), 120, '...') }}
 					</p>
 					
 				</div>
