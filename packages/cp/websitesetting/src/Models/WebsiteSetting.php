@@ -29,4 +29,9 @@ class WebsiteSetting extends Model
     {
         return $this->footer_image ?: 'footer_img.png';
     }
+
+    public function homePageImg()
+    {
+        return $this->home_page_img ?: 'home_page_img.png';
+    }
 }

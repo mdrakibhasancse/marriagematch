@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Library\SslCommerz;
+namespace Cp\Library\SslCommerz;
 
 class SslCommerzNotification extends AbstractSslCommerz
 {

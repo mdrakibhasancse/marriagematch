@@ -13,18 +13,6 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web', 'auth', 'role:admin|menu_&_page_manage|story_&_blog_manage'], 'prefix' => 'admin'], function () {
 
 
-
-    // Route::post('smart/shop/product/details/update/single/{product?}', [
-    //     'uses' =>'Cp\Smartshop\Controllers\ProductController@productDetailsUpdateSingle',
-    //     'as' => 'productDetailsUpdateSingle'
-    // ]);
-
-
-    // Route::any('smartbazar/home/members/auto/{bazar?}',[
-    // 'uses' =>'Cp\Smartshop\Controllers\BazarController@bazarHomeMembersAll',
-    // 'as' => 'bazarHomeMembersAll'
-    // ]);
-
     // menu route
 
     Route::get('menus/all', [

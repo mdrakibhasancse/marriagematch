@@ -322,6 +322,36 @@
 
                                 </div>
 
+                                <div class="col-sm-6">
+                                    <div class="card card-widget">
+                                        <div class="card-header with-border">
+                                            <h3 class="card-title">Home Page Image
+                                                 <span class="text-danger">(better size: 1920 * 1080 px)</span>
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="form-group ">
+                                                        <label for="logo_alt" class="col-sm-5 control-label">Home Image</label>
+                                                        <div class="col-sm-7">
+                                                            <input type="file" name="home_page_img" class="" id="home_page_img">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="w3-display-container" style="height:110px;">
+                                                        <img class="img-responsive" style="max-width: 100%;" src="{{ route('imagecache', ['template' => 'cpmd', 'filename' => $ws->homePageImg()]) }}" alt="" id="home_page_img">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
 
                         </div>

@@ -74,7 +74,7 @@
 		<div class="body">
 			<div role="main" class="main">
 				<div class="p-relative">
-					<section class="section border-0 m-0" style="background-image: url({{ route('imagecache', ['template' => 'original', 'filename' => 'mmbdhome.png']) }}); background-size: cover; background-position: center; height: 100vh;">
+					<section class="section border-0 m-0" style="background-image: url({{ route('imagecache', ['template' => 'original', 'filename' => $ws->homePageImg()]) }}); background-size: cover; background-position: center; height: 100vh;">
 						<div class="container h-100">
 							<div class="d-flex flex-column align-items-start justify-content-center text-center h-100 pb-5">
 								<h3 class="position-relative text-color-white text-5 line-height-5 font-weight-semibold mb-2 appear-animation" data-appear-animation="fadeInDownShorter" data-plugin-options="{'minWindowWidth': 0}">
@@ -167,6 +167,10 @@
 						<div class="call-to-action-btn">
 							<a href="https://nilofamarriagemedia.com/" target="_blank" 
 							class="btn text-2 text-white" style="background-color: #FD017C;">Nilofa Marrige Media</a>
+
+
+							{{-- <a  href="" class="btn btn-primary font-weight-bold text-3" >Join Now</a>
+							<a href="" class="btn text-3 font-weight-bold text-white" style="background-color: #FD017C;">Call Now</a> --}}
 						</div>
 					</div>
 				</section>

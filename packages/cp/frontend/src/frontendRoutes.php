@@ -35,6 +35,11 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'singlePost'
     ]);
 
+    Route::get('/blog/view-post/{id}/{slug?}', [
+        'uses' => 'Cp\Frontend\Controllers\FrontendController@singlePostWithId',
+        'as' => 'singlePostWithId'
+    ]);
+
     Route::get('/blog', [
         'uses' => 'Cp\Frontend\Controllers\FrontendController@blog',
         'as' => 'blog'
@@ -47,11 +52,19 @@ Route::group(['middleware' => ['web']], function () {
     ]);
 
 
-
     Route::get('/NilofaMarriageMedia', [
         'uses' => 'Cp\Frontend\Controllers\FrontendController@NilofaMarriageMedia',
         'as' => 'NilofaMarriageMedia'
     ]);
+
+
+    Route::get('/sitemap.xml', [
+        'uses' => 'Cp\Frontend\Controllers\FrontendController@sitemap',
+        'as' => 'sitemap'
+    ]);
+
+
+
 
 });
 

@@ -48,7 +48,6 @@ return [
         public_path('storage/galleries'),
         public_path('storage/gallery_items'),
         public_path('storage/directors_teams'),
-        public_path('storage/footer_image'),
         public_path('storage/product_extra_images'),
         public_path('storage/blog_post_images'),
         public_path('storage/post_files'),

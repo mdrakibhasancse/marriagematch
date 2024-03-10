@@ -28,7 +28,7 @@
 				<li class="mb-1"><a class="text-4 text-color-light" href="{{asset('/')}}page/4/privacy-policy">{{ translate('privacy_policies') }}</a></li>
 				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/5/terms-regulation">{{ translate('terms_and_conditions') }}</a></li>
 				<li class="mb-1"><a class="text-4 text-color-light" href="">{{ translate('payment_option') }}</a></li>
-				<li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/2/contact-us">{{ translate('contact_us') }}</a></li>
+				{{-- <li class="mb-1"><a class="text-4 text-color-light"  href="{{asset('/')}}page/2/contact-us">{{ translate('contact_us') }}</a></li> --}}
 				
 				</ul>
 			</div>
@@ -64,17 +64,22 @@
 		<div class="bg-color-scale-overlay-wrapper">
 			<div class="container py-2">
 				<div class="row">
-					<div class="col-sm-12">
-						<div class="text-center">
+					<div class="d-flex justify-content-between">
+						<div class="py-2">
+							
 							<p class="text-white py-1">
-
+								<img alt="mmbd" src="{{ route('imagecache', ['template' => 'ppxs', 'filename' => $ws->logo()]) }}">&nbsp;
 								&copy; Copyright {{ date('Y')}} | Marriage Match BD | Developed By : <a class="text-white" href="https://a2sys.co/" title="a2sys">a2sys</a>
-
-								{{-- <br>
-								<a href="{{ route('userrole.dashboard')}}">
-									<img width="290" class="rounded" src="{{ route('imagecache', ['template' => 'original', 'filename' => 'sslecommerce.png']) }}" alt="sslecommerce" alt="Pay">
-								</a> --}}
 							</p>
+
+						</div>
+						<div class="py-2">
+							<nav id="sub-menu">
+                            <ul>
+                                <li class="border-0"><i class="fas fa-angle-right text-color-light"></i><a href="{{ route('sitemap') }}" class="ms-1 text-decoration-none text-color-light"> Sitemap</a></li>
+                                <li class="border-0"><i class="fas fa-angle-right text-color-light"></i><a href="{{asset('/')}}page/2/contact-us" class="ms-1 text-decoration-none text-color-light"> {{ translate('contact_us') }}</a></li>
+                            </ul>
+                        </nav>
 						</div>
 					</div>
 				</div>

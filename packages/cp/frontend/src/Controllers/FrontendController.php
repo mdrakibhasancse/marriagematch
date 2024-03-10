@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Agent;
+use App\Models\User;
 use Cp\Membership\Models\MembershipPackage;
 use Cp\SuccessStory\Models\SuccessStory;
 use Cp\Admin\Models\Language;
@@ -65,9 +66,9 @@ class FrontendController extends Controller
 
         $data['cats'] = $cats = BlogCategory::whereActive(true)->orderBy('name')->get();
 
-        $data['recent_posts'] = BlogPost::latest()->whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->latest()->take(6)->get();
-
         $data['featured_posts'] = BlogPost::latest()->whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->where('featured_slider', 1)->take(3)->get();
+
+        $data['recent_posts'] = BlogPost::latest()->whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->latest()->take(6)->get();
 
         $data['popular_posts'] =  BlogPost::orderBy('view_count', 'DESC')->whereActive(true)->whereStatus('published')->whereLocale('title', $locale)->take(6)->get();
        
@@ -76,6 +77,12 @@ class FrontendController extends Controller
     }
 
 
+    function singlePostWithId(BlogPost $id)
+    {
+        return redirect()->route('singlePost', $id->slug);
+    }
+
+    
     public function singlePost($slug)
     {
 
@@ -86,10 +93,14 @@ class FrontendController extends Controller
             $locale = env('DEFAULT_LANGUAGE');
         }
 
-
-        BlogPost::where('slug' ,$slug)->first()->increment('view_count');
-
         $post = BlogPost::with('files')->where('slug' , $slug)->first();
+
+        if(!$post)
+        {
+            abort(404);
+        }
+
+        $post->increment('view_count');
     
         $postCategories = $post->blogCategories->pluck('id');
         $postIds = DB::table('blog_category_posts')->whereIn('blog_category_id', $postCategories)->take(8)->pluck('blog_post_id');
@@ -168,5 +179,27 @@ class FrontendController extends Controller
     public function NilofaMarriageMedia(){
         $data['page'] = Page::whereActive(true)->where('id' , 7)->first();
         return view('frontend::welcome.NilofaMarriageMedia',$data);
+    }
+
+
+
+    public function sitemap()
+    {
+        if(Session::has('locale')){
+            $locale = Session::get('locale',Config::get('app.locale'));
+        }
+        else{
+            $locale = env('DEFAULT_LANGUAGE');
+        }
+        
+        $data['blogs'] = BlogPost::whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->take(4)->latest()->get();
+
+        $data['users'] = User::whereHas('profile', function ($q) {
+            $q->where('submit_by_user', 1)->where('checked', 1);
+        })->get();
+
+        $data['pages'] = Page::whereLocale('name', $locale)->where('active', true)->get();
+
+        return response()->view('frontend::welcome.sitemap', $data)->header('Content-Type', 'text/xml');
     }
 }

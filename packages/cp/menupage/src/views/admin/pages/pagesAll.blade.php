@@ -154,7 +154,7 @@
                         <div class="card-body">
                             <i title="Drag up or down" class="fas fa-arrows-alt-v" style="cursor: pointer"></i>
                             Page ID: <b>{{ $page->id }}</b>,
-                            Page Name: <b> {{ $page->name }}</b>,
+                            Page Name: <b> {{ $page->localeNameShow() }}</b>,
                             Active:
                             @if($page->active == 1)
                             <b>

@@ -102,15 +102,27 @@ class AdminWebsiteSettingController extends Controller
         }
 
         if ($request->hasFile('footer_image')) {
-            $old_file = 'footer_image/' . $ws->footer_image;
+            $old_file = 'ws/' . $ws->footer_image;
             if (Storage::disk('public')->exists($old_file)) {
                 Storage::disk('public')->delete($old_file);
             }
             $file = $request->footer_image;
             $ext = "." . $file->getClientOriginalExtension();
             $imageName = "footer_image" . time() . $ext;
-            Storage::disk('public')->put('footer_image/' . $imageName, File::get($file));
+            Storage::disk('public')->put('ws/' . $imageName, File::get($file));
             $ws->footer_image = $imageName;
+        }
+
+        if ($request->hasFile('home_page_img')) {
+            $old_file = 'ws/' . $ws->home_page_img;
+            if (Storage::disk('public')->exists($old_file)) {
+                Storage::disk('public')->delete($old_file);
+            }
+            $file = $request->home_page_img;
+            $ext = "." . $file->getClientOriginalExtension();
+            $imageName = "home_page_img" . time() . $ext;
+            Storage::disk('public')->put('ws/' . $imageName, File::get($file));
+            $ws->home_page_img = $imageName;
         }
 
 

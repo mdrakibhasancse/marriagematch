@@ -28,7 +28,7 @@
      <!-- Default box -->
       <div class="card">
         <div class="card-header bg-info">
-            <h4 class="card-title">Edit Page</h4>
+            <h4 class="card-title">Edit Page {{ $page->localeNameShow() }}</h4>
             <div class="card-tools">
                 <a class="btn btn-primary btn-xs" href="{{ route('admin.pagesAll') }}"> Back</a>
             </div>

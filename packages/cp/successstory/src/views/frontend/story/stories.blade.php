@@ -1,5 +1,6 @@
 <div class="container mb-5 mt-5">
-	<h2 class="font-weight-normal text-8 text-center">{{ translate('success_story') }}</h2>
+	<h2 class="font-weight-normal text-8 text-center">{{ translate('success_story') }}
+	</h2>
 	<div class="row pb-2">
 		@foreach ($stories->take(4) as $story)
 			<div class="col-md-3 col-12 mb-5 mb-lg-0">
