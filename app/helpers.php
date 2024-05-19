@@ -311,50 +311,50 @@ function page_slug($text)
 
 function translate($key, $lang = null, $addslashes = false)
 {
-    if ($lang == null) {
-        $lang = App::getLocale();
-    }
+  if ($lang == null) {
+    $lang = App::getLocale();
+  }
 
-    $lang_key = preg_replace('/[^A-Za-z0-9\_]/', '', str_replace(' ', '_', strtolower($key)));
+  $lang_key = preg_replace('/[^A-Za-z0-9\_]/', '', str_replace(' ', '_', strtolower($key)));
 
-    $translations_en = Cache::rememberForever('translations-en', function () {
-        return LanguageTranslation::where('lang', 'en')->pluck('lang_value', 'lang_key')->toArray();
-    });
+  $translations_en = Cache::rememberForever('translations-en', function () {
+    return LanguageTranslation::where('lang', 'en')->pluck('lang_value', 'lang_key')->toArray();
+  });
 
-    if (!isset($translations_en[$lang_key])) {
-        $translation_def = new LanguageTranslation;
-        $translation_def->lang = 'en';
-        $translation_def->lang_key = $lang_key;
-        $translation_def->lang_value = str_replace(array("\r", "\n", "\r\n"), "", $key);
-        $translation_def->save();
-        Cache::forget('translations-en');
-    }
+  if (!isset($translations_en[$lang_key])) {
+    $translation_def = new LanguageTranslation;
+    $translation_def->lang = 'en';
+    $translation_def->lang_key = $lang_key;
+    $translation_def->lang_value = str_replace(array("\r", "\n", "\r\n"), "", $key);
+    $translation_def->save();
+    Cache::forget('translations-en');
+  }
 
-    // return user session lang
-    $translation_locale = Cache::rememberForever("translations-{$lang}", function () use ($lang) {
-        return LanguageTranslation::where('lang', $lang)->pluck('lang_value', 'lang_key')->toArray();
-    });
+  // return user session lang
+  $translation_locale = Cache::rememberForever("translations-{$lang}", function () use ($lang) {
+    return LanguageTranslation::where('lang', $lang)->pluck('lang_value', 'lang_key')->toArray();
+  });
 
-    
-    if (isset($translation_locale[$lang_key])) {
-        return $addslashes ? addslashes(trim($translation_locale[$lang_key])) : trim($translation_locale[$lang_key]);
-    }
 
-    
+  if (isset($translation_locale[$lang_key])) {
+    return $addslashes ? addslashes(trim($translation_locale[$lang_key])) : trim($translation_locale[$lang_key]);
+  }
 
-    // return default lang if session lang not found
-    $translations_default = Cache::rememberForever('translations-' . env('DEFAULT_LANGUAGE', 'en'), function () {
-        return LanguageTranslation::where('lang', env('DEFAULT_LANGUAGE', 'en'))->pluck('lang_value', 'lang_key')->toArray();
-    });
-    if (isset($translations_default[$lang_key])) {
-        return $addslashes ? addslashes(trim($translations_default[$lang_key])) : trim($translations_default[$lang_key]);
-    }
 
-    // fallback to en lang
-    if (!isset($translations_en[$lang_key])) {
-        return trim($key);
-    }
-    return $addslashes ? addslashes(trim($translations_en[$lang_key])) : trim($translations_en[$lang_key]);
+
+  // return default lang if session lang not found
+  $translations_default = Cache::rememberForever('translations-' . env('DEFAULT_LANGUAGE', 'en'), function () {
+    return LanguageTranslation::where('lang', env('DEFAULT_LANGUAGE', 'en'))->pluck('lang_value', 'lang_key')->toArray();
+  });
+  if (isset($translations_default[$lang_key])) {
+    return $addslashes ? addslashes(trim($translations_default[$lang_key])) : trim($translations_default[$lang_key]);
+  }
+
+  // fallback to en lang
+  if (!isset($translations_en[$lang_key])) {
+    return trim($key);
+  }
+  return $addslashes ? addslashes(trim($translations_en[$lang_key])) : trim($translations_en[$lang_key]);
 }
 
 function blog_slug($text)
@@ -362,6 +362,38 @@ function blog_slug($text)
   $slug = Str::slug($text);
   return $slug;
 }
+
+
+function getSlug($title = Null, $model = Null, $edit = false)
+{
+  if (!is_null($title)) {
+    $slug = "";
+    if (!preg_match('/[^\x20-\x7e]/', $title)) {
+      $slug = Str::slug($title);
+    }
+    $slug = empty($slug) ? generateSlug($title) : $slug;
+    if (!$model == Null) {
+      $exixts = $model->where('slug', $slug)->get();
+      if (count($exixts) > 0 && !$edit) {
+        $slug = $slug . '-' . time();
+      }
+    }
+    return $slug;
+  } else {
+    return time();
+  }
+}
+/**
+ * Generate Slug NUmber For All Language
+ */
+function generateSlug($title, $seperator = '-')
+{
+  $title = str_replace(['- ', ' -', ' '], $seperator, $title);
+  $title = str_replace('@', 'AT', $title);
+  $title = strip_tags($title);
+  return trim($title);
+}
+
 
 
 

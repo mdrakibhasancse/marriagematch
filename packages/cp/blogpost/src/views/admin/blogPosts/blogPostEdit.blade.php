@@ -74,7 +74,7 @@
 
                                 <div class="form-group">
                                   <label for="">Slug</label>
-                                  <input name="slug" id="slug" value="{{ $blogPost->slug ?? old('slug')}}" class="form-control" placeholder="Enter slug">
+                                  <input name="slug" id="slug" value="{{ $blogPost->slug ?? old('slug')}}" class="form-control" placeholder="Url" required>
                                 </div>
 
                                 <div class="form-group">

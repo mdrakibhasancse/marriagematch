@@ -31,15 +31,13 @@
 
    <button type="button" class="btn btn-primary">Connected</button> 
 
- 
-
    @elseif($a = $user->hasPendingProposalToMe())
 
       <a onclick="return confirm('Are you sure to accept proposal?')" href="{{ route('membership.proposalAccept', $a)}}" class="btn btn-primary">Accept Proposal</a>
 
       <a onclick="return confirm('Are you sure to croposal cancel?')" href="{{ route('membership.proposalDelete', $a)}}" class="btn btn-danger">Cancel Proposal</a> 
 
-   @elseif($a =$user->hasPendingProposalFromMe())
+   @elseif($a = $user->hasPendingProposalFromMe())
       <a onclick="return confirm('Are you sure to croposal cancel?')" href="{{ route('membership.proposalDelete', $a)}}" class="btn btn-danger">Cancel Proposal</a> 
 
    @else

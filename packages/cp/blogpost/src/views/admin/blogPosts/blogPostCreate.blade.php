@@ -42,7 +42,7 @@
                                  @foreach (Cp\Admin\Models\Language::where('active', 1)->get() as $key => $language)
                                 <div class="form-group">
                                   <label for="title">Title {{$language->title}}</label>
-                                  <input type="text" name="title[{{$language->language_code}}]" value="" class="form-control" placeholder="Enter title {{$language->title}}">
+                                  <input type="text" name="title [{{$language->language_code}}]" id="title" value="" class="form-control" placeholder="Enter title {{$language->title}}" onkeyup="makeSlug(this.value)">
                                     @error('title')
                                     <span style="color:red">{{ $message }}</span>
                                     @enderror
@@ -58,6 +58,13 @@
                                   <textarea name="description[{{$language->language_code}}]" class="summernote form-control"  rows="5" placeholder="Enter Description {{$language->title}}">{{old('description')}}</textarea>
                                 </div>
                               @endforeach
+
+                                
+                              <div class="form-group"> 
+                                  <label>Slug <span class="text-danger">*</span></label>
+                                  <input type="text" placeholder="URL" id="slug" name="slug" value="{{ old('slug')}}" class="form-control" required >
+                              </div>
+             
 
                                 <div class="form-group">
                                   <label>Tags (For Search)</label>
@@ -213,13 +220,12 @@
 
 @endsection
 
-@push('js')
-<script>
-    $(document).ready(function(){
-     
-    //  $('.select2').select2({});
 
-     $('.select2bs4').select2({
+
+@push('js')
+  <script>
+    $(document).ready(function () {
+    $('.select2bs4').select2({
             minimumInputLength: 1,
             tags:true,
             tokenSeparators: [','],
@@ -249,10 +255,38 @@
             }
             },
         });
+    });
 
-     });
 
-</script>
+
+    // $('#title').change(function(){
+    //   $('#slug').val(slug($('#title').val()));
+    // });
+    // $('#title').keyup(function(){
+    //   $('#slug').val(slug($('#title').val()));
+    // });
+    // function slug(text){
+    //   return text.toString().toLowerCase()
+    //     .replace(/\s+/g, '-')           // Replace spaces with -
+    //     .replace(/[^\u0100-\uFFFF\w\-]/g,'-') // Remove all non-word chars ( fix for UTF-8 chars )
+    //     .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    //     .replace(/^-+/, '')             // Trim - from start of text
+    //     .replace(/-+$/, '');            // Trim - from end of text
+    // }
+
+
+
+
+    function makeSlug(val) {
+        let str = val;
+        let output = str.replace(/\s+/g, '-').toLowerCase();
+        $('#slug').val(output);
+    }
+
+
+
+
+  </script>
 @endpush
 
 

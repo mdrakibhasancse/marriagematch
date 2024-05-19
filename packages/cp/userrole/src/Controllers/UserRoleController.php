@@ -17,11 +17,9 @@ class UserRoleController extends Controller
     {
         menuSubmenu('dashboard', 'dashboard');
         $user = Auth::user();
-
         if ($user->profile && $user->profile->religion_id && (($user->profile->submit_by_user == 0))) {
             return redirect()->route('user.newProfileNextStep');
         }
-
         $data['userProfiles'] = User::whereHas('profile', function ($q) {
             $q->where('checked', 1);
             $q->where('gender', Auth::user()->altGender());

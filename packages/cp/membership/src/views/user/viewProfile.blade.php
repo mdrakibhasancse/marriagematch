@@ -99,7 +99,7 @@
                             </div>
                             
                             </div>
-                        </div>
+                      </div>
                         
                         <div>
                             <i class="fas fa-user bg-primary"></i>

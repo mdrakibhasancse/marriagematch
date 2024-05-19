@@ -19,24 +19,11 @@ class BlogCategory extends Model
 
     public function latestFirstPost()
     {
-
-        if(Session::has('locale')){
-            $locale = Session::get('locale',Config::get('app.locale'));
-        }
-        else{
-            $locale = env('DEFAULT_LANGUAGE');
-        }
-        return $this->posts()->whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->latest()->first();
+        return $this->posts()->whereActive(true)->whereStatus('published')->latest()->first();
     }
 
     public function latest2Posts()
     {
-        if(Session::has('locale')){
-            $locale = Session::get('locale',Config::get('app.locale'));
-        }
-        else{
-            $locale = env('DEFAULT_LANGUAGE');
-        }
-        return $this->posts()->whereLocale('title', $locale)->whereActive(true)->whereStatus('published')->latest()->skip(1)->take(2)->get();
+        return $this->posts()->whereActive(true)->whereStatus('published')->latest()->skip(1)->take(2)->get();
     }
 }

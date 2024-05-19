@@ -53,6 +53,7 @@
                     <th>Tilte</th>
                     <th>Except</th>
                     <th>Image</th>
+                    <th>Status</th>
                     <th>Active</th>
                   </tr>
                 </thead>
@@ -82,10 +83,20 @@
                     <td>
                         <img  src="{{ route('imagecache', ['template' => 'ppsm', 'filename' => $post->fi()]) }}" alt="post">
                     </td>
+                    
+                    <td>
+                       @if($post->status == 'published')
+                         <span class="badge badge-primary">published</span>
+                       @else
+                         <span class="badge badge-warning">unpublished</span>
+                       @endif
+                    </td>
 
                     <td>
                         <input type="checkbox" name="toogle" data-url="{{route('admin.blogPostActive')}}" value="{{$post->id}}" data-toggle="toggle" data-size="sm" {{$post->active==1 ? 'checked' : '' }} data-on="On"  data-off="Off" data-onstyle="success" data-offstyle="danger">
                     </td>
+
+                    
                   </tr>  
                   @endforeach
                 </tbody>

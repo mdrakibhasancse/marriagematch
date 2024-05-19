@@ -31,7 +31,6 @@ class AdminBlogPostController extends Controller
     {
         menuSubmenu('blogPost', 'blogCategoriesAll');
         return view('blogpost::admin.blogCategories.blogCategoryCreate');
-      
     }
 
 
@@ -40,8 +39,7 @@ class AdminBlogPostController extends Controller
 
         menuSubmenu('blogPost', 'blogCategoriesAll');
         $request->validate([
-            'name' => 'string|required',
-
+            'name' => 'string|required|unique:blog_categories,name',
         ]);
 
         $category =  new BlogCategory();
@@ -69,7 +67,7 @@ class AdminBlogPostController extends Controller
     {
         menuSubmenu('blogPost', 'blogCategoriesAll');
         $request->validate([
-            'name' => 'string|required',
+            'name' => 'string|required|unique:blog_categories,name,' . $category->id,
         ]);
         $category->name        = $request->name;
         $category->slug = Str::slug($request->name);
@@ -107,41 +105,19 @@ class AdminBlogPostController extends Controller
 
     public function blogPostsAll()
     {
-    
+
         menuSubmenu('blogPost', 'blogPostsAll');
         $data['bolgPosts'] = BlogPost::latest()->paginate(30);
-    //    dd( $data['bolgPosts']);
-     
+        //    dd( $data['bolgPosts']);
+
         return view('blogpost::admin.blogPosts.blogPostsAll', $data);
     }
 
 
-   
+
 
     public function  blogPostCreate()
     {
-
-        // $string = 'dfsfskd';
-        
-        //     if (ctype_alnum($string))
-        //         dd("Yes");
-        //     else
-        //         dd("no");
- 
-
-
-    //    $posts = BlogPost::get();
-    //    foreach ($posts as $post) {
-    //       $post->title = $post->oldtitle;
-    //       $post->oldtitle = null;
-    //       $post->excerpt = $post->oldexcerpt;
-    //       $post->oldexcerpt = null;
-    //       $post->description = $post->olddescription;
-    //       $post->olddescription = null;
-    //       $post->save();
-    //    }
-    //    return back();
-         
         menuSubmenu('blogPost', 'blogPostsAll');
         $data['categories'] = BlogCategory::latest()->get();
         $data['medias'] = Media::latest()->paginate(20);
@@ -154,7 +130,7 @@ class AdminBlogPostController extends Controller
     public function blogPostStore(Request $request)
     {
 
-    //    dd($request->all());
+        //    dd($request->all());
         menuSubmenu('blogPost', 'blogPostsAll');
 
         // $this->validate($request, [
@@ -180,8 +156,7 @@ class AdminBlogPostController extends Controller
 
         $blogPost = new BlogPost();
         $blogPost->title = $request->title;
-        $blogPost->slug = Str::slug($blogPost->localeTitleShow());
-
+        $blogPost->slug = getSlug($request->slug,  $blogPost,  boolval($request->slug));
         $blogPost->excerpt = $request->excerpt;
         $blogPost->description = $request->description;
         $blogPost->active = $request->active ?? 0;
@@ -252,7 +227,7 @@ class AdminBlogPostController extends Controller
 
     public function blogPostEdit(BlogPost $blogPost)
     {
-   
+
         menuSubmenu('blogPost', 'blogPostsAll');
         $data['blogPost'] =  $blogPost;
         $data['categories'] = BlogCategory::latest()->get();
@@ -265,7 +240,7 @@ class AdminBlogPostController extends Controller
     public function blogPostUpdate(Request $request, BlogPost $blogPost)
     {
 
-        
+
         menuSubmenu('blogPost', 'blogPostsAll');
         // $this->validate($request, [
         //     'title' => 'required|string',
@@ -289,7 +264,7 @@ class AdminBlogPostController extends Controller
         }
 
         $blogPost->title = $request->title;
-        $blogPost->slug =  $request->slug ? Str::slug($request->slug) : Str::slug($blogPost->localeTitleShow());
+        $blogPost->slug = getSlug($request->slug,  $blogPost,  boolval($request->slug));
         $blogPost->excerpt = $request->excerpt;
         $blogPost->description = $request->description;
         $blogPost->active = $request->active ?? 0;

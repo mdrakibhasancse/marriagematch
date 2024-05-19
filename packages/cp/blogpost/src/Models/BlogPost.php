@@ -49,29 +49,17 @@ class BlogPost extends Model
 
     function localeTitleShow() 
     {
-
         $a = json_decode(json_encode($this->getTranslations('title')), true);
         $code = app()->getLocale();
 
-        if($a)
-        {
-            if(array_key_exists($code, $a))
-            {
-                return $a[$code];
-            }
-            
-            else
-            {
-                foreach($a as $k => $item)
-                {
-                    if(array_key_exists($k, $a))
-                    {
-                        return $a[$k];
-                    }
+        if ($a && $code !== null && array_key_exists($code, $a) && $a[$code] !== null) {
+            return $a[$code];
+        } else {
+            foreach ($a as $k => $item) {
+                if ($item !== null) {
+                    return $item;
                 }
-
             }
-            
         }
     }
 
@@ -91,31 +79,19 @@ class BlogPost extends Model
         }
     }
 
-    function localeExcerptShow() 
+   function localeExcerptShow() 
     {
-
         $a = json_decode(json_encode($this->getTranslations('excerpt')), true);
         $code = app()->getLocale();
 
-        if($a)
-        {
-            if(array_key_exists($code, $a))
-            {
-                return $a[$code];
-            }
-            
-            else
-            {
-                foreach($a as $k => $item)
-                {
-                    if(array_key_exists($k, $a))
-                    {
-                        return $a[$k];
-                    }
+        if ($a && $code !== null && array_key_exists($code, $a) && $a[$code] !== null) {
+            return $a[$code];
+        } else {
+            foreach ($a as $k => $item) {
+                if ($item !== null) {
+                    return $item;
                 }
-
             }
-            
         }
     }
 
@@ -135,30 +111,20 @@ class BlogPost extends Model
 
     function localeDescriptionShow() 
     {
-
         $a = json_decode(json_encode($this->getTranslations('description')), true);
-
         $code = app()->getLocale();
 
-        if($a)
-        {
-            if(array_key_exists($code, $a))
-            {
-                return $a[$code];
-            }
-            
-            else
-            {
-                foreach($a as $k => $item)
-                {
-                    if(array_key_exists($k, $a))
-                    {
-                        return $a[$k];
-                    }
+        // dd($a, $code , array_key_exists($code, $a), $a[$code]);
+        if ($a && $code !== null && array_key_exists($code, $a) && $a[$code] !== "<p><br></p>" ) { 
+            return $a[$code];
+        } else {
+          
+            foreach ($a as $k => $item) {
+                
+                if ($item !== null) {
+                    return $item;
                 }
-
             }
-            
         }
     }
 

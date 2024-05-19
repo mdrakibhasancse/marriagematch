@@ -125,37 +125,8 @@
 				</div>
 
 
-				{{-- <section class="call-to-action call-to-action-default with-button-arrow call-to-action-in-footer">
-					<div class="container">
-						<div class="row">
-							<div class="col-sm-9 col-lg-9">
-								<div class="call-to-action-content">
-									<h3>Porto is <strong class="font-weight-extra-bold">everything</strong> you need to create a <strong class="font-weight-extra-bold">website!</strong></h3>
-									<p class="mb-0">The Best HTML Site Template on ThemeForest</p>
-								</div>
-							</div>
-							<div class="col-sm-3 col-lg-3">
-								<div class="call-to-action-btn">
-									<a href="http://themeforest.net/item/porto-responsive-html5-template/4106987" target="_blank" class="btn btn-modern text-2 btn-primary">Buy Now</a><span class="arrow hlb d-none d-md-block appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft" style="left: 110%; top: -40px; animation-delay: 100ms;"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section> --}}
 
-				{{-- <section class="call-to-action with-borders with-button-arrow mb-5">
-					<div class="col-12">
-						<div class="call-to-action-content text-center">
-							<h3 class="">Porto is <strong class="font-weight-extra-bold">everything</strong> you need to create a <strong class="font-weight-extra-bold">website!</strong></h3>
-							<a href="{{ asset('/NilofaMarriageMedia') }}" target="_blank" 
-							class="btn text-2 text-white" style="background-color: #FD017C;">Nilofa Marrige Media</a>
-						</div>
-					</div>
-				
-				</section> --}}
-
-
-				<section class="call-to-action with-borders button-centered mb-5">
+				{{-- <section class="call-to-action with-borders button-centered mb-5">
 					<div class="col-12">
 						<div class="call-to-action-content">
 							<h3>MarrigeMatchBd.Com পরিচালিত হচ্ছে Nilofa Marriage Media দ্বারা.</h3>
@@ -167,13 +138,9 @@
 						<div class="call-to-action-btn">
 							<a href="https://nilofamarriagemedia.com/" target="_blank" 
 							class="btn text-2 text-white" style="background-color: #FD017C;">Nilofa Marrige Media</a>
-
-
-							{{-- <a  href="" class="btn btn-primary font-weight-bold text-3" >Join Now</a>
-							<a href="" class="btn text-3 font-weight-bold text-white" style="background-color: #FD017C;">Call Now</a> --}}
 						</div>
 					</div>
-				</section>
+				</section> --}}
 				
 
 				@includeIf('successstory::frontend.story.stories')

@@ -45,6 +45,16 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'blog'
     ]);
 
+    Route::get('/blog/category/{slug}', [
+        'uses' => 'Cp\Frontend\Controllers\FrontendController@blogCategory',
+        'as' => 'blogCategory'
+    ]);
+
+    Route::get('/blog/tag/{tag}', [
+        'uses' => 'Cp\Frontend\Controllers\FrontendController@blogTag',
+        'as' => 'blogTag'
+    ]);
+
 
     Route::post('/languages/update/status/{language}', [
         'uses' => 'Cp\Frontend\Controllers\FrontendController@languageUpdateStatus',

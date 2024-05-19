@@ -161,7 +161,7 @@ class User extends Authenticatable
     }
 
 
-    
+
 
 
     public function cvPic()
@@ -538,7 +538,7 @@ class User extends Authenticatable
             $message->to($this->email, $this->name)
                 ->subject('A new order is placed. | Marriage Match BD.');
         });
-        return true; 
+        return true;
     }
 
 
@@ -553,7 +553,7 @@ class User extends Authenticatable
     }
 
 
-     public function orderPaidEmailToAdminSent($order)
+    public function orderPaidEmailToAdminSent($order)
     {
         Mail::send('frontend::emails.orders.orderPaidEmailToAdminSent', ['user' => $this, 'order' => $order], function ($message) {
 
@@ -566,66 +566,60 @@ class User extends Authenticatable
     public function myMatchedUsers()
     {
         $searchTerm = Auth::user()->partnerPreference;
-      
+
         $users = User::whereHas('profile', function ($q) use ($searchTerm) {
             $q->where('checked', 1);
             $q->where('gender', Auth::user()->altGender());
             $minAgeDate = Carbon::now()->subYear($searchTerm->min_age)->toDateString();
             $q->where('dob', '<=', $minAgeDate);
-    
+
             $maxAgeDate = Carbon::now()->subYear($searchTerm->max_age)->toDateString();
             $q->where('dob', '>=', $maxAgeDate);
-    
-            
-            if($searchTerm->marital_status){
-            $q->whereIn('marital_status',explode(',', $searchTerm->marital_status));
-            }
-            
-            if($searchTerm->education_level){
-            $q->whereIn('education_level', explode(',', $searchTerm->education_level));
+
+
+            if ($searchTerm->marital_status) {
+                $q->whereIn('marital_status', explode(',', $searchTerm->marital_status));
             }
 
-            if($searchTerm->profession){
-            $q->whereIn('profession', explode(',', $searchTerm->profession));
+            if ($searchTerm->education_level) {
+                $q->whereIn('education_level', explode(',', $searchTerm->education_level));
             }
 
-     
-            if($searchTerm->language){
-            $q->whereIn('language_one', explode(',', $searchTerm->language));
+            if ($searchTerm->profession) {
+                $q->whereIn('profession', explode(',', $searchTerm->profession));
             }
 
-            if($searchTerm->present_country){
-            $q->whereIn('present_country', explode(',', $searchTerm->present_country));
+
+            if ($searchTerm->language) {
+                $q->whereIn('language_one', explode(',', $searchTerm->language));
             }
 
-            if($searchTerm->birth_country){
-            $q->whereIn('birth_country', explode(',', $searchTerm->birth_country));
+            if ($searchTerm->present_country) {
+                $q->whereIn('present_country', explode(',', $searchTerm->present_country));
             }
 
-    
+            if ($searchTerm->birth_country) {
+                $q->whereIn('birth_country', explode(',', $searchTerm->birth_country));
+            }
         })->orderBy('updated_at', 'desc')->paginate(20);
         return $users;
-
-
     }
 
 
     //match fuction
     public function ageMatched($user)
     {
-   
-      if ( in_array($this->age(), range($user->partnerPreference->min_age,$user->partnerPreference->max_age)))
-      {
-        return true;
-      } 
-      return false;
+
+        if (in_array($this->age(), range($user->partnerPreference->min_age, $user->partnerPreference->max_age))) {
+            return true;
+        }
+        return false;
     }
 
     public function religionMatched($user)
     {
-        
-        if(($user->partnerPreference->religion_id == $this->profile->religion_id) && ($this->profile->cast_id == $user->partnerPreference->cast_id) )
-        {
+
+        if (($user->partnerPreference->religion_id == $this->profile->religion_id) && ($this->profile->cast_id == $user->partnerPreference->cast_id)) {
             return true;
         }
         return false;
@@ -634,8 +628,7 @@ class User extends Authenticatable
     public function maritalStatusMatched($user)
     {
         $marital_statuses = $user->partnerPreference->marital_status;
-        if ( str_contains($marital_statuses, $this->profile->marital_status))
-        {
+        if (str_contains($marital_statuses, $this->profile->marital_status)) {
             return true;
         }
         return false;
@@ -644,20 +637,18 @@ class User extends Authenticatable
     public function professionMatched($user)
     {
         $professions = $user->partnerPreference->profession;
-        if ( str_contains($professions, $this->profile->profession))
-        {
+        if (str_contains($professions, $this->profile->profession)) {
             return true;
         }
         return false;
     }
-  
-   
+
+
 
     public function languageMatched($user)
     {
         $languages = $user->partnerPreference->language;
-        if ( str_contains($languages, $this->profile->language_one))
-        {
+        if (str_contains($languages, $this->profile->language_one)) {
             return true;
         }
         return false;
@@ -666,8 +657,7 @@ class User extends Authenticatable
     public function presentCountryMatched($user)
     {
         $countries = $user->partnerPreference->present_country;
-        if ( str_contains($countries, $this->profile->present_country))
-        {
+        if (str_contains($countries, $this->profile->present_country)) {
             return true;
         }
         return false;
@@ -675,8 +665,7 @@ class User extends Authenticatable
     public function birthCountryMatched($user)
     {
         $countries = $user->partnerPreference->birth_country;
-        if ( str_contains($countries, $this->profile->birth_country))
-        {
+        if (str_contains($countries, $this->profile->birth_country)) {
             return true;
         }
         return false;
@@ -685,42 +674,28 @@ class User extends Authenticatable
     public function matchRate($user)
     {
         $a = 0;
-        if($this->ageMatched($user))
-        {
+        if ($this->ageMatched($user)) {
             $a = $a + 1;
         }
-        if($this->religionMatched($user))
-        {
+        if ($this->religionMatched($user)) {
             $a = $a + 1;
         }
-        if($this->maritalStatusMatched($user))
-        {
+        if ($this->maritalStatusMatched($user)) {
             $a = $a + 1;
         }
-        if($this->professionMatched($user))
-        {
+        if ($this->professionMatched($user)) {
             $a = $a + 1;
         }
-        if($this->languageMatched($user))
-        {
+        if ($this->languageMatched($user)) {
             $a = $a + 1;
         }
-        if($this->presentCountryMatched($user))
-        {
+        if ($this->presentCountryMatched($user)) {
             $a = $a + 1;
         }
-        if($this->birthCountryMatched($user))
-        {
+        if ($this->birthCountryMatched($user)) {
             $a = $a + 1;
         }
 
         return $a;
     }
-
-
-
-    
-  
- 
-
 }

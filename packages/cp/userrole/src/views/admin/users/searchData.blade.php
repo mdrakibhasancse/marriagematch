@@ -33,10 +33,7 @@
         <p class="m-0 p-0"> {{$user->name}}</p>
         <p class="m-0 p-0">{{$user->email}}</p>
         <p class="m-0 p-0"> {{$user->mobile}}</p>
-        <p class="m-0 p-0"> {{$user->mobile}}</p>
 
-     
-       
         @if($user->profile && $user->profile->submit_by_user == 1 && $user->profile->checked == 0)
             <span class="badge badge-primary">Pending</span>
         &nbsp;
@@ -55,9 +52,6 @@
         
         @endif
 
-
-        
-          
       
       </td>
       <td>
