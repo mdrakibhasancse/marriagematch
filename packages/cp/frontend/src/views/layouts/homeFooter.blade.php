@@ -69,7 +69,7 @@
 							
 							<p class="text-white py-1">
 								<img alt="mmbd" src="{{ route('imagecache', ['template' => 'ppxs', 'filename' => $ws->logo()]) }}">&nbsp;
-								&copy; Copyright {{ date('Y')}} | Marriage Match BD | Developed By : <a class="text-white" href="https://a2sys.co/" title="a2sys">a2sys</a>
+								&copy; Copyright 2017 - {{ date('Y')}} | Marriage Match BD | Developed By : <a class="text-white" href="https://a2sys.co/" title="a2sys">a2sys</a>
 							</p>
 
 						</div>

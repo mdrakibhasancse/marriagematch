@@ -108,7 +108,14 @@
 									 <i class="fas fa-arrow-right ms-2"></i></a>
 								@endif
 
-								<a  href="https://api.whatsapp.com/send?phone={{$ws->contact_mobile}}" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-modern font-weight-bold text-3 btn-py-3 px-5 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1500" data-plugin-options="{'minWindowWidth': 0}" style="margin-left: 5px;"><i class="fab fa-whatsapp "></i>  {{ translate('call_now')}}</a>
+								<a href="https://api.whatsapp.com/send?phone={{ $ws->contact_mobile }}" 
+									class="btn btn-primary btn-modern font-weight-bold text-3 btn-py-3 px-5 appear-animation" 
+									data-appear-animation="fadeInUpShorter" 
+									data-appear-animation-delay="1500" 
+									data-plugin-options='{"minWindowWidth": 0}' 
+									style="margin-left: 5px;">
+									<i class="fab fa-whatsapp"></i> {{ translate('call_now') }}
+								 </a>
 
 								</div>
 
